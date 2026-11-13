@@ -1,6 +1,6 @@
-"""Prova AEDI — Grupo 3. Executa todo o trabalho com um único comando:
+"""Prova AEDI — Grupo 4. Executa todo o trabalho com um único comando:
 
-    python main.py --grupo 3
+    python main.py --grupo 4
 
 Etapas já implementadas: Parte A (gerador + bases) e Q1-b (inversas).
 As análises das Partes B e C entram em src/qNN_*.py e são chamadas aqui, em ordem.
@@ -19,7 +19,7 @@ import inversa  # noqa: E402
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--grupo", type=int, default=3)
+    ap.add_argument("--grupo", type=int, default=4)
     args = ap.parse_args()
 
     print(f"Grupo {args.grupo} — semente {gerador.semente(args.grupo)}")

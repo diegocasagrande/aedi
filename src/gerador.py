@@ -1,6 +1,6 @@
 """Parte A — Modelo gerador (Simulação de Monte Carlo dos dados).
 
-Prova AEDI — Estudo de caso ANDI. Grupo 3, semente = 202600 + 3 = 202603.
+Prova AEDI — Estudo de caso ANDI. Grupo 4, semente = 202600 + 4 = 202604.
 
 Organização pelos quatro passos da Seção 12.2 do livro (Questão 1-a):
   PASSO 1 — MODELAR  : constantes e equações das etapas A1 a A5 (bloco PARAMETROS).
@@ -46,7 +46,7 @@ except ImportError:  # execução direta
 # --------------------------------------------------------------------------
 # PASSO 1 — MODELAR: parâmetros "verdadeiros" do gerador (enunciado, Parte A)
 # --------------------------------------------------------------------------
-GRUPO = 3
+GRUPO = 4
 SEMENTE_BASE = 202600
 N_UNIDADES = 24
 N_MESES = 36

@@ -31,7 +31,7 @@ def triangular_inversa(u, a, c, b):
     return np.where(u < fc, esquerda, direita)
 
 
-def comparar_com_biblioteca(n: int = 100_000, semente: int = 202603) -> "pd.DataFrame":
+def comparar_com_biblioteca(n: int = 100_000, semente: int = 202604) -> "pd.DataFrame":
     """Compara a inversa do grupo com numpy (quantis e teste KS de duas amostras)."""
     import pandas as pd
     from scipy import stats

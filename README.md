@@ -1,4 +1,4 @@
-# Prova AEDI — Grupo 3
+# Prova AEDI — Grupo 4
 
 Estudo de caso **ANDI: Risco Cibernético por Simulação de Monte Carlo**
 Análise Estatística de Dados e Informações (PPCA/UnB), Prof. João Carlos Félix Souza. Entrega: 09/12/2026.
@@ -8,10 +8,10 @@ Análise Estatística de Dados e Informações (PPCA/UnB), Prof. João Carlos F�
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python main.py --grupo 3
+python main.py --grupo 4
 ```
 
-Semente do gerador: **202603** (= 202600 + 3). Rodar o comando acima recria exatamente as bases de `dados/`;
+Semente do gerador: **202604** (= 202600 + 4). Rodar o comando acima recria exatamente as bases de `dados/`;
 os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.13 e as versões de `requirements.txt`.
 
 ## Estrutura
