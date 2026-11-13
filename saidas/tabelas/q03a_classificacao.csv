@@ -1,0 +1,17 @@
+base,coluna,tipo_de_variavel,papel
+ataques,id_ataque,Qualitativa nominal (identificador),Chave primária
+ataques,unidade,Qualitativa nominal,Chave estrangeira para unidades
+ataques,data,Quantitativa (tempo); tratada como data,Carimbo temporal
+ataques,ano,Quantitativa discreta (ou ordinal),Derivada de data
+ataques,mes,Qualitativa ordinal (cíclica),Derivada de data
+ataques,trimestre,Quantitativa discreta (índice de tempo q = 1..12),Derivada de data
+ataques,tipo,Qualitativa nominal,Categoria
+ataques,fora_expediente,Qualitativa nominal dicotômica (0/1),Indicador
+ataques,cvss,Quantitativa contínua (registrada com 1 casa),Escore 0–10
+ataques,tempo_deteccao_h,Quantitativa contínua,Horas
+ataques,materializou,Qualitativa nominal dicotômica (0/1),Variável-resposta da Q13
+perdas,id_perda / id_ataque,Qualitativa nominal (identificadores),Chaves
+perdas,"unidade, tipo",Qualitativa nominal,Categorias
+perdas,data,Quantitativa (tempo),Carimbo temporal
+perdas,tempo_deteccao_h,Quantitativa contínua,Horas
+perdas,perda_rs,Quantitativa contínua,Reais; assimétrica à direita

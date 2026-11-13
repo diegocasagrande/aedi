@@ -1,0 +1,6 @@
+tipo,coeficiente,p_valor
+DDoS,-0.1782,0.3788
+Exploração de vulnerabilidade,-0.3118,0.1196
+Força bruta,-0.188,0.2237
+Malware,-0.2459,0.1604
+Ransomware,-0.1325,0.6365

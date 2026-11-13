@@ -1,0 +1,6 @@
+tipo,coef,razao_medianas_estimada,razao_programada
+DDoS,0.409,1.5054,1.6667
+Exploração de vulnerabilidade,1.0931,2.9834,3.0
+Força bruta,-0.4242,0.6543,0.6667
+Malware,0.6248,1.8679,2.0
+Ransomware,2.2933,9.9073,10.0

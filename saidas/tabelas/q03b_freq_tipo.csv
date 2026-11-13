@@ -1,0 +1,7 @@
+tipo,freq_absoluta,freq_relativa,freq_abs_acumulada,freq_rel_acumulada
+Phishing,1005,0.339,1005,0.339
+Força bruta,658,0.2219,1663,0.5609
+Exploração de vulnerabilidade,444,0.1497,2107,0.7106
+Malware,422,0.1423,2529,0.853
+DDoS,279,0.0941,2808,0.947
+Ransomware,157,0.053,2965,1.0

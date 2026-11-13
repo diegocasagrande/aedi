@@ -1,0 +1,8 @@
+tipo,nao_materializou,materializou,total
+Phishing,0.2094,0.1295,0.339
+Força bruta,0.1548,0.0671,0.2219
+Malware,0.0776,0.0648,0.1423
+Exploração de vulnerabilidade,0.0641,0.0857,0.1497
+DDoS,0.0543,0.0398,0.0941
+Ransomware,0.0189,0.0341,0.053
+Total,0.5791,0.4209,1.0

@@ -1,0 +1,8 @@
+tipo,nao_materializou,materializou,total
+Phishing,621,384,1005
+Força bruta,459,199,658
+Malware,230,192,422
+Exploração de vulnerabilidade,190,254,444
+DDoS,161,118,279
+Ransomware,56,101,157
+Total,1717,1248,2965

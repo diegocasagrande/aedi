@@ -1,0 +1,7 @@
+tipo,ataques,freq_observada,prob_programada,erro_simulacao,z
+Phishing,1005,0.339,0.35,0.0088,-1.261
+Força bruta,658,0.2219,0.2,0.0073,2.9843
+Malware,422,0.1423,0.15,0.0066,-1.1701
+Exploração de vulnerabilidade,444,0.1497,0.15,0.0066,-0.0386
+DDoS,279,0.0941,0.1,0.0055,-1.0713
+Ransomware,157,0.053,0.05,0.004,0.7373

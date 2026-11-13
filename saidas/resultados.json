@@ -1,0 +1,2508 @@
+{
+ "q01": {
+  "inversa": [
+   {
+    "distribuicao": "Exponencial(θ=4)",
+    "media_grupo": 4.0111,
+    "media_numpy": 3.9845,
+    "q5_grupo": 0.2083,
+    "q5_numpy": 0.2053,
+    "q50_grupo": 2.768,
+    "q50_numpy": 2.7535,
+    "q95_grupo": 12.0747,
+    "q95_numpy": 11.9527,
+    "ks_estatistica": 0.0041,
+    "ks_p_valor": 0.3631
+   },
+   {
+    "distribuicao": "Exponencial(θ=12)",
+    "media_grupo": 11.9394,
+    "media_numpy": 11.9538,
+    "q5_grupo": 0.6142,
+    "q5_numpy": 0.6236,
+    "q50_grupo": 8.3262,
+    "q50_numpy": 8.3056,
+    "q95_grupo": 35.6735,
+    "q95_numpy": 35.6569,
+    "ks_estatistica": 0.0021,
+    "ks_p_valor": 0.9808
+   },
+   {
+    "distribuicao": "Triangular(60;80;95)",
+    "media_grupo": 78.355,
+    "media_numpy": 78.3295,
+    "q5_grupo": 65.9985,
+    "q5_numpy": 65.8851,
+    "q50_grupo": 78.7333,
+    "q50_numpy": 78.6746,
+    "q95_grupo": 89.8729,
+    "q95_numpy": 89.9006,
+    "ks_estatistica": 0.0037,
+    "ks_p_valor": 0.5027
+   },
+   {
+    "distribuicao": "Triangular(5;7,5;10)",
+    "media_grupo": 7.5008,
+    "media_numpy": 7.5016,
+    "q5_grupo": 5.7897,
+    "q5_numpy": 5.7953,
+    "q50_grupo": 7.5025,
+    "q50_numpy": 7.4979,
+    "q95_grupo": 9.2074,
+    "q95_numpy": 9.2112,
+    "ks_estatistica": 0.0039,
+    "ks_p_valor": 0.4248
+   }
+  ],
+  "semente": 202604,
+  "grupo": 4,
+  "hashes": {
+   "unidades": "d25c2828164291e35d130429717e06c586825e7cf628f737e9bdd8c62de29381",
+   "ataques": "f72f013c7c2e3b683febddf4501c7335a23ceec5c73efa61b0cce5eccd2d6470",
+   "perdas": "2c73b241bd05982cf32074e2e42da2f1c97e4b4546a3e6d5e6333770c086bd0e",
+   "painel_trimestral": "2ec36b12821aa894cb219c1afd777b30d2762af37ca53044cf93d54dc2c8fe00",
+   "serie_mensal": "166dda27a19a7e2f58e2ae271b4ef4f99e638c69e76323342db094a9d356d641"
+  }
+ },
+ "q02": {
+  "a": {
+   "z_min": -2.999498792758639,
+   "z_max": 1.9640234205012526,
+   "fora_ic95": 3,
+   "corr_obs_teo": 0.9221316475422269,
+   "tabela": [
+    {
+     "unidade": 1,
+     "media_observada": 3.694,
+     "media_teorica": 3.867,
+     "var_observada": 4.847,
+     "soc": 0,
+     "erro_padrao": 0.328,
+     "z": -0.526,
+     "indice_dispersao": 1.312,
+     "dispersao_vs_lambda": 0.883
+    },
+    {
+     "unidade": 2,
+     "media_observada": 3.306,
+     "media_teorica": 3.394,
+     "var_observada": 3.818,
+     "soc": 0,
+     "erro_padrao": 0.307,
+     "z": -0.289,
+     "indice_dispersao": 1.155,
+     "dispersao_vs_lambda": 1.181
+    },
+    {
+     "unidade": 3,
+     "media_observada": 2.111,
+     "media_teorica": 2.276,
+     "var_observada": 2.273,
+     "soc": 0,
+     "erro_padrao": 0.251,
+     "z": -0.654,
+     "indice_dispersao": 1.077,
+     "dispersao_vs_lambda": 0.983
+    },
+    {
+     "unidade": 4,
+     "media_observada": 3.417,
+     "media_teorica": 3.77,
+     "var_observada": 5.736,
+     "soc": 1,
+     "erro_padrao": 0.324,
+     "z": -1.093,
+     "indice_dispersao": 1.679,
+     "dispersao_vs_lambda": 1.067
+    },
+    {
+     "unidade": 5,
+     "media_observada": 4.528,
+     "media_teorica": 3.883,
+     "var_observada": 6.542,
+     "soc": 1,
+     "erro_padrao": 0.328,
+     "z": 1.964,
+     "indice_dispersao": 1.445,
+     "dispersao_vs_lambda": 1.335
+    },
+    {
+     "unidade": 6,
+     "media_observada": 4.111,
+     "media_teorica": 4.195,
+     "var_observada": 3.473,
+     "soc": 0,
+     "erro_padrao": 0.341,
+     "z": -0.247,
+     "indice_dispersao": 0.845,
+     "dispersao_vs_lambda": 0.788
+    },
+    {
+     "unidade": 7,
+     "media_observada": 1.472,
+     "media_teorica": 1.748,
+     "var_observada": 1.571,
+     "soc": 1,
+     "erro_padrao": 0.22,
+     "z": -1.252,
+     "indice_dispersao": 1.067,
+     "dispersao_vs_lambda": 0.777
+    },
+    {
+     "unidade": 8,
+     "media_observada": 3.139,
+     "media_teorica": 3.045,
+     "var_observada": 2.409,
+     "soc": 1,
+     "erro_padrao": 0.291,
+     "z": 0.325,
+     "indice_dispersao": 0.767,
+     "dispersao_vs_lambda": 0.697
+    },
+    {
+     "unidade": 9,
+     "media_observada": 2.667,
+     "media_teorica": 3.313,
+     "var_observada": 2.343,
+     "soc": 1,
+     "erro_padrao": 0.303,
+     "z": -2.131,
+     "indice_dispersao": 0.879,
+     "dispersao_vs_lambda": 0.866
+    },
+    {
+     "unidade": 10,
+     "media_observada": 3.333,
+     "media_teorica": 2.93,
+     "var_observada": 2.8,
+     "soc": 1,
+     "erro_padrao": 0.285,
+     "z": 1.414,
+     "indice_dispersao": 0.84,
+     "dispersao_vs_lambda": 1.048
+    },
+    {
+     "unidade": 11,
+     "media_observada": 4.333,
+     "media_teorica": 3.915,
+     "var_observada": 6.8,
+     "soc": 0,
+     "erro_padrao": 0.33,
+     "z": 1.269,
+     "indice_dispersao": 1.569,
+     "dispersao_vs_lambda": 1.39
+    },
+    {
+     "unidade": 12,
+     "media_observada": 2.889,
+     "media_teorica": 3.252,
+     "var_observada": 2.787,
+     "soc": 0,
+     "erro_padrao": 0.301,
+     "z": -1.208,
+     "indice_dispersao": 0.965,
+     "dispersao_vs_lambda": 0.936
+    },
+    {
+     "unidade": 13,
+     "media_observada": 2.361,
+     "media_teorica": 3.264,
+     "var_observada": 3.266,
+     "soc": 0,
+     "erro_padrao": 0.301,
+     "z": -2.999,
+     "indice_dispersao": 1.383,
+     "dispersao_vs_lambda": 1.269
+    },
+    {
+     "unidade": 14,
+     "media_observada": 5.0,
+     "media_teorica": 4.531,
+     "var_observada": 6.229,
+     "soc": 0,
+     "erro_padrao": 0.355,
+     "z": 1.323,
+     "indice_dispersao": 1.246,
+     "dispersao_vs_lambda": 1.254
+    },
+    {
+     "unidade": 15,
+     "media_observada": 4.25,
+     "media_teorica": 4.302,
+     "var_observada": 4.707,
+     "soc": 0,
+     "erro_padrao": 0.346,
+     "z": -0.15,
+     "indice_dispersao": 1.108,
+     "dispersao_vs_lambda": 0.862
+    },
+    {
+     "unidade": 16,
+     "media_observada": 3.083,
+     "media_teorica": 2.929,
+     "var_observada": 4.021,
+     "soc": 0,
+     "erro_padrao": 0.285,
+     "z": 0.54,
+     "indice_dispersao": 1.304,
+     "dispersao_vs_lambda": 1.355
+    },
+    {
+     "unidade": 17,
+     "media_observada": 3.333,
+     "media_teorica": 3.333,
+     "var_observada": 3.314,
+     "soc": 0,
+     "erro_padrao": 0.304,
+     "z": 0.001,
+     "indice_dispersao": 0.994,
+     "dispersao_vs_lambda": 1.135
+    },
+    {
+     "unidade": 18,
+     "media_observada": 5.556,
+     "media_teorica": 5.584,
+     "var_observada": 8.768,
+     "soc": 0,
+     "erro_padrao": 0.394,
+     "z": -0.072,
+     "indice_dispersao": 1.578,
+     "dispersao_vs_lambda": 1.163
+    },
+    {
+     "unidade": 19,
+     "media_observada": 3.333,
+     "media_teorica": 2.887,
+     "var_observada": 3.2,
+     "soc": 0,
+     "erro_padrao": 0.283,
+     "z": 1.576,
+     "indice_dispersao": 0.96,
+     "dispersao_vs_lambda": 0.927
+    },
+    {
+     "unidade": 20,
+     "media_observada": 1.917,
+     "media_teorica": 2.301,
+     "var_observada": 2.479,
+     "soc": 1,
+     "erro_padrao": 0.253,
+     "z": -1.521,
+     "indice_dispersao": 1.293,
+     "dispersao_vs_lambda": 0.98
+    },
+    {
+     "unidade": 21,
+     "media_observada": 3.389,
+     "media_teorica": 2.946,
+     "var_observada": 5.616,
+     "soc": 0,
+     "erro_padrao": 0.286,
+     "z": 1.546,
+     "indice_dispersao": 1.657,
+     "dispersao_vs_lambda": 1.686
+    },
+    {
+     "unidade": 22,
+     "media_observada": 3.167,
+     "media_teorica": 2.865,
+     "var_observada": 3.0,
+     "soc": 0,
+     "erro_padrao": 0.282,
+     "z": 1.07,
+     "indice_dispersao": 0.947,
+     "dispersao_vs_lambda": 0.584
+    },
+    {
+     "unidade": 23,
+     "media_observada": 3.333,
+     "media_teorica": 3.28,
+     "var_observada": 3.771,
+     "soc": 0,
+     "erro_padrao": 0.302,
+     "z": 0.175,
+     "indice_dispersao": 1.131,
+     "dispersao_vs_lambda": 1.235
+    },
+    {
+     "unidade": 24,
+     "media_observada": 4.639,
+     "media_teorica": 4.306,
+     "var_observada": 8.409,
+     "soc": 1,
+     "erro_padrao": 0.346,
+     "z": 0.964,
+     "indice_dispersao": 1.813,
+     "dispersao_vs_lambda": 1.16
+    }
+   ]
+  },
+  "b": {
+   "unidade_escolhida": 23,
+   "indice_unidade": 1.1314285714285717,
+   "dispersao_vs_lambda_unidade": 1.235174212094658,
+   "indice_medio_sem_soc": 1.2019874364670915,
+   "indice_min_sem_soc": 0.8447876447876449,
+   "indice_max_sem_soc": 1.657142857142857,
+   "dispersao_vs_lambda_media": 1.0650793704041197,
+   "indice_todas": 1.4735338313542117,
+   "media_todas": 3.431712962962963,
+   "var_todas": 5.056745150422729,
+   "var_dentro": 4.257440476190475,
+   "var_entre": 0.9513539430130613
+  },
+  "c": {
+   "n_ataques": 2965,
+   "qui2": 10.872641130651248,
+   "qui2_p": 0.05396443254650036,
+   "qui2_critico": 11.070497693516351,
+   "taxa_materializacao": 0.4209106239460371,
+   "p_medio": 0.4310776697310441,
+   "erro_padrao_taxa": 0.007969444035420324,
+   "z_taxa": -1.275753457809527,
+   "tipos": [
+    {
+     "tipo": "Phishing",
+     "ataques": 1005,
+     "freq_observada": 0.339,
+     "prob_programada": 0.35,
+     "erro_simulacao": 0.0088,
+     "z": -1.261
+    },
+    {
+     "tipo": "Força bruta",
+     "ataques": 658,
+     "freq_observada": 0.2219,
+     "prob_programada": 0.2,
+     "erro_simulacao": 0.0073,
+     "z": 2.9843
+    },
+    {
+     "tipo": "Malware",
+     "ataques": 422,
+     "freq_observada": 0.1423,
+     "prob_programada": 0.15,
+     "erro_simulacao": 0.0066,
+     "z": -1.1701
+    },
+    {
+     "tipo": "Exploração de vulnerabilidade",
+     "ataques": 444,
+     "freq_observada": 0.1497,
+     "prob_programada": 0.15,
+     "erro_simulacao": 0.0066,
+     "z": -0.0386
+    },
+    {
+     "tipo": "DDoS",
+     "ataques": 279,
+     "freq_observada": 0.0941,
+     "prob_programada": 0.1,
+     "erro_simulacao": 0.0055,
+     "z": -1.0713
+    },
+    {
+     "tipo": "Ransomware",
+     "ataques": 157,
+     "freq_observada": 0.053,
+     "prob_programada": 0.05,
+     "erro_simulacao": 0.004,
+     "z": 0.7373
+    }
+   ]
+  }
+ },
+ "q03": {
+  "n_ataques": 2965,
+  "n_perdas": 1248,
+  "k_sturges": 11,
+  "amplitude_classe": 131012.28727272729,
+  "primeira_classe_freq": 0.8693910256410257,
+  "duas_primeiras_freq": 0.951923076923077,
+  "freq_tipo": [
+   {
+    "tipo": "Phishing",
+    "freq_absoluta": 1005,
+    "freq_relativa": 0.339,
+    "freq_abs_acumulada": 1005,
+    "freq_rel_acumulada": 0.339
+   },
+   {
+    "tipo": "Força bruta",
+    "freq_absoluta": 658,
+    "freq_relativa": 0.2219,
+    "freq_abs_acumulada": 1663,
+    "freq_rel_acumulada": 0.5609
+   },
+   {
+    "tipo": "Exploração de vulnerabilidade",
+    "freq_absoluta": 444,
+    "freq_relativa": 0.1497,
+    "freq_abs_acumulada": 2107,
+    "freq_rel_acumulada": 0.7106
+   },
+   {
+    "tipo": "Malware",
+    "freq_absoluta": 422,
+    "freq_relativa": 0.1423,
+    "freq_abs_acumulada": 2529,
+    "freq_rel_acumulada": 0.853
+   },
+   {
+    "tipo": "DDoS",
+    "freq_absoluta": 279,
+    "freq_relativa": 0.0941,
+    "freq_abs_acumulada": 2808,
+    "freq_rel_acumulada": 0.947
+   },
+   {
+    "tipo": "Ransomware",
+    "freq_absoluta": 157,
+    "freq_relativa": 0.053,
+    "freq_abs_acumulada": 2965,
+    "freq_rel_acumulada": 1.0
+   }
+  ],
+  "classes": [
+   {
+    "classe": "944 |– 131,957",
+    "lim_inf": 944.44,
+    "lim_sup": 131956.73,
+    "ponto_medio": 66450.58,
+    "freq_absoluta": 1085,
+    "freq_relativa": 0.87,
+    "freq_rel_acumulada": 0.87
+   },
+   {
+    "classe": "131,957 |– 262,969",
+    "lim_inf": 131956.73,
+    "lim_sup": 262969.01,
+    "ponto_medio": 197462.87,
+    "freq_absoluta": 103,
+    "freq_relativa": 0.08,
+    "freq_rel_acumulada": 0.95
+   },
+   {
+    "classe": "262,969 |– 393,981",
+    "lim_inf": 262969.01,
+    "lim_sup": 393981.3,
+    "ponto_medio": 328475.16,
+    "freq_absoluta": 28,
+    "freq_relativa": 0.02,
+    "freq_rel_acumulada": 0.97
+   },
+   {
+    "classe": "393,981 |– 524,994",
+    "lim_inf": 393981.3,
+    "lim_sup": 524993.59,
+    "ponto_medio": 459487.45,
+    "freq_absoluta": 9,
+    "freq_relativa": 0.01,
+    "freq_rel_acumulada": 0.98
+   },
+   {
+    "classe": "524,994 |– 656,006",
+    "lim_inf": 524993.59,
+    "lim_sup": 656005.88,
+    "ponto_medio": 590499.73,
+    "freq_absoluta": 10,
+    "freq_relativa": 0.01,
+    "freq_rel_acumulada": 0.99
+   },
+   {
+    "classe": "656,006 |– 787,018",
+    "lim_inf": 656005.88,
+    "lim_sup": 787018.16,
+    "ponto_medio": 721512.02,
+    "freq_absoluta": 8,
+    "freq_relativa": 0.01,
+    "freq_rel_acumulada": 1.0
+   },
+   {
+    "classe": "787,018 |– 918,030",
+    "lim_inf": 787018.16,
+    "lim_sup": 918030.45,
+    "ponto_medio": 852524.31,
+    "freq_absoluta": 1,
+    "freq_relativa": 0.0,
+    "freq_rel_acumulada": 1.0
+   },
+   {
+    "classe": "918,030 |– 1,049,043",
+    "lim_inf": 918030.45,
+    "lim_sup": 1049042.74,
+    "ponto_medio": 983536.59,
+    "freq_absoluta": 1,
+    "freq_relativa": 0.0,
+    "freq_rel_acumulada": 1.0
+   },
+   {
+    "classe": "1,049,043 |– 1,180,055",
+    "lim_inf": 1049042.74,
+    "lim_sup": 1180055.03,
+    "ponto_medio": 1114548.88,
+    "freq_absoluta": 1,
+    "freq_relativa": 0.0,
+    "freq_rel_acumulada": 1.0
+   },
+   {
+    "classe": "1,180,055 |– 1,311,067",
+    "lim_inf": 1180055.03,
+    "lim_sup": 1311067.31,
+    "ponto_medio": 1245561.17,
+    "freq_absoluta": 0,
+    "freq_relativa": 0.0,
+    "freq_rel_acumulada": 1.0
+   },
+   {
+    "classe": "1,311,067 |– 1,442,080",
+    "lim_inf": 1311067.31,
+    "lim_sup": 1442079.6,
+    "ponto_medio": 1376573.46,
+    "freq_absoluta": 2,
+    "freq_relativa": 0.0,
+    "freq_rel_acumulada": 1.0
+   }
+  ],
+  "centrais": [
+   {
+    "tipo": "Phishing",
+    "n": 384,
+    "media": 34080.75,
+    "mediana": 20300.79,
+    "moda_classe_modal": 17531.06,
+    "media_sobre_mediana": 1.68
+   },
+   {
+    "tipo": "Força bruta",
+    "n": 199,
+    "media": 22502.14,
+    "mediana": 15416.9,
+    "moda_classe_modal": 11264.1,
+    "media_sobre_mediana": 1.46
+   },
+   {
+    "tipo": "Malware",
+    "n": 192,
+    "media": 59771.15,
+    "mediana": 35751.8,
+    "moda_classe_modal": 54945.15,
+    "media_sobre_mediana": 1.67
+   },
+   {
+    "tipo": "Exploração de vulnerabilidade",
+    "n": 254,
+    "media": 95613.57,
+    "mediana": 56109.68,
+    "moda_classe_modal": 76807.5,
+    "media_sobre_mediana": 1.7
+   },
+   {
+    "tipo": "DDoS",
+    "n": 118,
+    "media": 62302.84,
+    "mediana": 29911.98,
+    "moda_classe_modal": 93801.94,
+    "media_sobre_mediana": 2.08
+   },
+   {
+    "tipo": "Ransomware",
+    "n": 101,
+    "media": 264801.83,
+    "mediana": 187553.43,
+    "moda_classe_modal": 89236.97,
+    "media_sobre_mediana": 1.41
+   },
+   {
+    "tipo": "Geral",
+    "n": 1248,
+    "media": 70050.93,
+    "mediana": 29733.88,
+    "moda_classe_modal": 66450.58,
+    "media_sobre_mediana": 2.36
+   }
+  ],
+  "valores_repetidos": 0
+ },
+ "q04": {
+  "dispersao": [
+   {
+    "tipo": "Phishing",
+    "n": 384,
+    "media": 34080.7523,
+    "desvio_padrao": 42409.7731,
+    "cv": 1.2444,
+    "q1": 11215.08,
+    "mediana": 20300.795,
+    "q3": 40516.3325,
+    "aiq": 29301.2525,
+    "limite_outlier_sup": 84468.2112,
+    "n_outliers": 31,
+    "pct_outliers": 0.0807,
+    "maximo": 332676.83,
+    "soma_outliers_pct": 0.3435
+   },
+   {
+    "tipo": "Força bruta",
+    "n": 199,
+    "media": 22502.1361,
+    "desvio_padrao": 24936.1476,
+    "cv": 1.1082,
+    "q1": 7444.08,
+    "mediana": 15416.9,
+    "q3": 27593.905,
+    "aiq": 20149.825,
+    "limite_outlier_sup": 57818.6425,
+    "n_outliers": 18,
+    "pct_outliers": 0.0905,
+    "maximo": 182474.31,
+    "soma_outliers_pct": 0.3468
+   },
+   {
+    "tipo": "Malware",
+    "n": 192,
+    "media": 59771.1472,
+    "desvio_padrao": 94090.449,
+    "cv": 1.5742,
+    "q1": 19848.8225,
+    "mediana": 35751.8,
+    "q3": 67523.9825,
+    "aiq": 47675.16,
+    "limite_outlier_sup": 139036.7225,
+    "n_outliers": 12,
+    "pct_outliers": 0.0625,
+    "maximo": 939190.25,
+    "soma_outliers_pct": 0.3321
+   },
+   {
+    "tipo": "Exploração de vulnerabilidade",
+    "n": 254,
+    "media": 95613.5674,
+    "desvio_padrao": 128339.703,
+    "cv": 1.3423,
+    "q1": 28889.9725,
+    "mediana": 56109.685,
+    "q3": 111289.7075,
+    "aiq": 82399.735,
+    "limite_outlier_sup": 234889.31,
+    "n_outliers": 16,
+    "pct_outliers": 0.063,
+    "maximo": 1324366.79,
+    "soma_outliers_pct": 0.3055
+   },
+   {
+    "tipo": "DDoS",
+    "n": 118,
+    "media": 62302.8431,
+    "desvio_padrao": 141371.9037,
+    "cv": 2.2691,
+    "q1": 14754.765,
+    "mediana": 29911.975,
+    "q3": 57597.4225,
+    "aiq": 42842.6575,
+    "limite_outlier_sup": 121861.4088,
+    "n_outliers": 11,
+    "pct_outliers": 0.0932,
+    "maximo": 1442079.6,
+    "soma_outliers_pct": 0.4932
+   },
+   {
+    "tipo": "Ransomware",
+    "n": 101,
+    "media": 264801.8298,
+    "desvio_padrao": 225344.8181,
+    "cv": 0.851,
+    "q1": 110867.12,
+    "mediana": 187553.43,
+    "q3": 329043.26,
+    "aiq": 218176.14,
+    "limite_outlier_sup": 656307.47,
+    "n_outliers": 9,
+    "pct_outliers": 0.0891,
+    "maximo": 1174958.65,
+    "soma_outliers_pct": 0.2623
+   }
+  ],
+  "forma": [
+   {
+    "variavel": "perda_rs",
+    "assimetria": 5.0335,
+    "curtose": 38.3347
+   },
+   {
+    "variavel": "ln(perda)",
+    "assimetria": 0.2407,
+    "curtose": 2.9961
+   }
+  ],
+  "cor": [
+   {
+    "n_ataques": 1.0,
+    "perda_total": 0.409,
+    "servicos": 0.503,
+    "patch": 0.003,
+    "treino": -0.092,
+    "soc": -0.141
+   },
+   {
+    "n_ataques": 0.409,
+    "perda_total": 1.0,
+    "servicos": 0.074,
+    "patch": -0.149,
+    "treino": -0.14,
+    "soc": -0.319
+   },
+   {
+    "n_ataques": 0.503,
+    "perda_total": 0.074,
+    "servicos": 1.0,
+    "patch": 0.3,
+    "treino": 0.224,
+    "soc": 0.065
+   },
+   {
+    "n_ataques": 0.003,
+    "perda_total": -0.149,
+    "servicos": 0.3,
+    "patch": 1.0,
+    "treino": -0.171,
+    "soc": 0.16
+   },
+   {
+    "n_ataques": -0.092,
+    "perda_total": -0.14,
+    "servicos": 0.224,
+    "patch": -0.171,
+    "treino": 1.0,
+    "soc": -0.055
+   },
+   {
+    "n_ataques": -0.141,
+    "perda_total": -0.319,
+    "servicos": 0.065,
+    "patch": 0.16,
+    "treino": -0.055,
+    "soc": 1.0
+   }
+  ],
+  "cov": [
+   {
+    "n_ataques": 19.51,
+    "perda_total": 605567.7,
+    "servicos": 11.15,
+    "patch": 0.09,
+    "treino": -1.55,
+    "soc": -0.29
+   },
+   {
+    "n_ataques": 605567.7,
+    "perda_total": 112299301278.85,
+    "servicos": 124894.26,
+    "patch": -317121.7,
+    "treino": -178116.66,
+    "soc": -50458.33
+   },
+   {
+    "n_ataques": 11.15,
+    "perda_total": 124894.26,
+    "servicos": 25.14,
+    "patch": 9.55,
+    "treino": 4.27,
+    "soc": 0.15
+   },
+   {
+    "n_ataques": 0.09,
+    "perda_total": -317121.7,
+    "servicos": 9.55,
+    "patch": 40.35,
+    "treino": -4.14,
+    "soc": 0.48
+   },
+   {
+    "n_ataques": -1.55,
+    "perda_total": -178116.66,
+    "servicos": 4.27,
+    "patch": -4.14,
+    "treino": 14.48,
+    "soc": -0.1
+   },
+   {
+    "n_ataques": -0.29,
+    "perda_total": -50458.33,
+    "servicos": 0.15,
+    "patch": 0.48,
+    "treino": -0.1,
+    "soc": 0.22
+   }
+  ],
+  "var95_mensal": 4480711.6825,
+  "media_mensal": 2428432.2375,
+  "maior_mes": 5562639.79,
+  "segundo_maior": 5103436.84,
+  "terceiro_maior": 4273136.63,
+  "posicao_quantil": 34.25,
+  "mes_maior": "2024-09",
+  "var95_sem_maior": 4266185.924
+ },
+ "q05": {
+  "contingencia": [
+   {
+    "tipo": "Phishing",
+    "nao_materializou": 621,
+    "materializou": 384,
+    "total": 1005
+   },
+   {
+    "tipo": "Força bruta",
+    "nao_materializou": 459,
+    "materializou": 199,
+    "total": 658
+   },
+   {
+    "tipo": "Malware",
+    "nao_materializou": 230,
+    "materializou": 192,
+    "total": 422
+   },
+   {
+    "tipo": "Exploração de vulnerabilidade",
+    "nao_materializou": 190,
+    "materializou": 254,
+    "total": 444
+   },
+   {
+    "tipo": "DDoS",
+    "nao_materializou": 161,
+    "materializou": 118,
+    "total": 279
+   },
+   {
+    "tipo": "Ransomware",
+    "nao_materializou": 56,
+    "materializou": 101,
+    "total": 157
+   },
+   {
+    "tipo": "Total",
+    "nao_materializou": 1717,
+    "materializou": 1248,
+    "total": 2965
+   }
+  ],
+  "p_mat_ransom": 0.643312101910828,
+  "p_ransom_mat": 0.08092948717948718,
+  "p_ransom": 0.052951096121416526,
+  "p_mat": 0.4209106239460371,
+  "p_mat_tipo": {
+   "Phishing": 0.3821,
+   "Força bruta": 0.3024,
+   "Malware": 0.455,
+   "Exploração de vulnerabilidade": 0.5721,
+   "DDoS": 0.4229,
+   "Ransomware": 0.6433
+  },
+  "pA_soc": 0.3048903878583474,
+  "pB_mat": 0.4209106239460371,
+  "pAB": 0.07284991568296796,
+  "pA_x_pB": 0.12833160338860625,
+  "p_mat_dado_soc": 0.23893805309734514,
+  "p_mat_dado_sem_soc": 0.5007278020378457,
+  "qui2_indep": 176.68167696097015,
+  "qui2_indep_p": 2.570285769437177e-40,
+  "sens": 0.3293269230769231,
+  "espec": 0.8567268491555038,
+  "prev": 0.4209106239460371,
+  "vpp_bayes": 0.6255707762557078,
+  "vpp_direto": 0.6255707762557078,
+  "vpn": 0.6373483535528596,
+  "n_alarmes": 657,
+  "vp": 411,
+  "vpp_prev_metade": 0.37992063351061856,
+  "taxa_alarme": 0.22158516020236088
+ },
+ "q06": {
+  "a": {
+   "unidade": 23,
+   "lambda_hat": 3.3333333333333335,
+   "p_teorica": 0.12116701437132282,
+   "p_empirica": 0.1388888888888889,
+   "meses_ge6": 5,
+   "var": 3.7714285714285714
+  },
+  "b": {
+   "n": 591,
+   "p_teorica_theta4": 0.1353352832366127,
+   "theta_hat": 3.905482741116751,
+   "p_teorica_theta_hat": 0.12894074210942486,
+   "p_observada": 0.12013536379018612,
+   "erro_padrao": 0.014071346144364272,
+   "z": -1.0802036486405613
+  },
+  "c": {
+   "Ransomware": {
+    "n": 101,
+    "media_ln": 12.122636577562918,
+    "dp_ln": 0.9124151545134791,
+    "r_qq": 0.9919925954510881,
+    "shapiro_w": 0.9812674781419006,
+    "shapiro_p": 0.16197951290682017,
+    "maior_perda": 1174958.6499999994,
+    "z_max_ln": 2.0320869581320506,
+    "p_cauda_normal": 0.021072426726447713,
+    "z_max_bruto": 4.038951629154042,
+    "assimetria_ln": -0.3681453054256423
+   },
+   "Phishing": {
+    "n": 384,
+    "media_ln": 9.950972112201349,
+    "dp_ln": 0.9783160768109448,
+    "r_qq": 0.9987607219128131,
+    "shapiro_w": 0.997495965274784,
+    "shapiro_p": 0.8340348445163093,
+    "maior_perda": 332676.82999999984,
+    "z_max_ln": 2.8252164822533046,
+    "p_cauda_normal": 0.0023624340813174216,
+    "z_max_bruto": 7.04073745746055,
+    "assimetria_ln": 0.053715001332738606
+   }
+  }
+ },
+ "q07": {
+  "a": [
+   {
+    "n": 904,
+    "media": 4.6996,
+    "dp": 4.7322,
+    "t": 1.9626,
+    "margem": 0.3089,
+    "li": 4.3907,
+    "ls": 5.0085,
+    "soc": 1,
+    "subconjunto": "todos",
+    "theta_programado": 4.0,
+    "media_verdadeira": 4.7,
+    "contem_theta": false,
+    "contem_media_verdadeira": true
+   },
+   {
+    "n": 591,
+    "media": 3.9055,
+    "dp": 3.8752,
+    "t": 1.964,
+    "margem": 0.3131,
+    "li": 3.5924,
+    "ls": 4.2185,
+    "soc": 1,
+    "subconjunto": "só no expediente",
+    "theta_programado": 4.0,
+    "media_verdadeira": 4.0,
+    "contem_theta": true,
+    "contem_media_verdadeira": true
+   },
+   {
+    "n": 2061,
+    "media": 13.8891,
+    "dp": 14.3919,
+    "t": 1.9611,
+    "margem": 0.6217,
+    "li": 13.2674,
+    "ls": 14.5108,
+    "soc": 0,
+    "subconjunto": "todos",
+    "theta_programado": 12.0,
+    "media_verdadeira": 14.1,
+    "contem_theta": false,
+    "contem_media_verdadeira": true
+   },
+   {
+    "n": 1341,
+    "media": 11.5312,
+    "dp": 11.6819,
+    "t": 1.9617,
+    "margem": 0.6258,
+    "li": 10.9054,
+    "ls": 12.1571,
+    "soc": 0,
+    "subconjunto": "só no expediente",
+    "theta_programado": 12.0,
+    "media_verdadeira": 12.0,
+    "contem_theta": true,
+    "contem_media_verdadeira": true
+   }
+  ],
+  "b": {
+   "n": 2965,
+   "p": 0.4209106239460371,
+   "ep": 0.009066828345941629,
+   "li": 0.4031399669339847,
+   "ls": 0.43868128095808956,
+   "n_para_2pp": 2341,
+   "n_pior_caso": 2401
+  },
+  "c": {
+   "sigma": 123572.95685716103,
+   "media": 70050.93001602564,
+   "assimetria_perda": 5.02743468372003,
+   "tabela": [
+    {
+     "n": 5,
+     "dp_medias": 54542.579,
+     "sigma_sobre_raiz_n": 55263.506,
+     "assimetria_medias": 2.222,
+     "media_das_medias": 69623.595
+    },
+    {
+     "n": 30,
+     "dp_medias": 22932.017,
+     "sigma_sobre_raiz_n": 22561.232,
+     "assimetria_medias": 0.995,
+     "media_das_medias": 69485.426
+    },
+    {
+     "n": 100,
+     "dp_medias": 12249.86,
+     "sigma_sobre_raiz_n": 12357.296,
+     "assimetria_medias": 0.461,
+     "media_das_medias": 70083.624
+    }
+   ]
+  }
+ },
+ "q08": {
+  "a": {
+   "n": 904,
+   "media": 4.699597345132744,
+   "dp": 4.732155503096421,
+   "t": 4.445016326290024,
+   "t_critico": 1.6465428219841118,
+   "p": 4.9404409028230845e-06,
+   "n_expediente": 591,
+   "media_expediente": 3.905482741116751,
+   "t_expediente": -0.5929453795618205,
+   "p_expediente": 0.7232775446664987
+  },
+  "b": {
+   "n": 2965,
+   "p_hat": 0.4209106239460371,
+   "z": 2.3242011931112128,
+   "z_critico": 1.6448536269514722,
+   "p": 0.010057356699776587,
+   "ep_h0": 0.008996907844301467
+  },
+  "d": {
+   "var95": 346554.69999999995,
+   "T_treino": 576,
+   "T": 288,
+   "N": 25,
+   "esperado": 14.4,
+   "taxa": 0.08680555555555555,
+   "lr": 6.7984621361604525,
+   "p": 0.009123642571003954,
+   "critico": 3.841458820694124,
+   "excecoes_abril": 2,
+   "excecoes_por_mes": {
+    "1": 0,
+    "2": 2,
+    "3": 4,
+    "4": 2,
+    "5": 1,
+    "6": 3,
+    "7": 1,
+    "8": 2,
+    "9": 4,
+    "10": 1,
+    "11": 3,
+    "12": 2
+   },
+   "zeros_treino": 0.3159722222222222,
+   "taxa_treino_por_ano": {
+    "2023": 0.052083333333333336,
+    "2024": 0.04861111111111111
+   },
+   "media_treino": 92831.8463888889,
+   "media_teste": 117890.33729166667
+  }
+ },
+ "q09": {
+  "n": 1248,
+  "r_perda": 0.21701685622895966,
+  "t_perda": 7.847439677817071,
+  "p_perda": 9.103828801926284e-15,
+  "r_ln": 0.2281801008957577,
+  "t_ln": 8.272709516107204,
+  "p_ln": 2.220446049250313e-16,
+  "spearman": 0.16219816962476666,
+  "b0": 10.136401157871472,
+  "b1": 0.01661257664523918,
+  "ep_b1": 0.0020081179706472165,
+  "pct_por_hora": 1.675133279748664,
+  "r2": 0.052066158444798116,
+  "s": 1.1591039900484563,
+  "tempo_medio_por_tipo": [
+   {
+    "tipo": "Phishing",
+    "todos_ataques": 11.114,
+    "so_materializados": 17.007
+   },
+   {
+    "tipo": "Força bruta",
+    "todos_ataques": 11.428,
+    "so_materializados": 19.145
+   },
+   {
+    "tipo": "Malware",
+    "todos_ataques": 10.775,
+    "so_materializados": 14.177
+   },
+   {
+    "tipo": "Exploração de vulnerabilidade",
+    "todos_ataques": 10.735,
+    "so_materializados": 13.689
+   },
+   {
+    "tipo": "DDoS",
+    "todos_ataques": 11.657,
+    "so_materializados": 16.819
+   },
+   {
+    "tipo": "Ransomware",
+    "todos_ataques": 10.316,
+    "so_materializados": 11.611
+   }
+  ],
+  "breusch_pagan_p": 0.7827801728337463,
+  "jarque_bera_p": 0.003947455262170975,
+  "durbin_watson": 1.9441675930288524
+ },
+ "q10": {
+  "anova": [
+   {
+    "fonte": "Regressão",
+    "SQ": 91.9476,
+    "gl": 1,
+    "QM": 91.9476,
+    "F": 68.4377,
+    "p_valor": 0.0
+   },
+   {
+    "fonte": "Resíduos",
+    "SQ": 1674.0285,
+    "gl": 1246,
+    "QM": 1.3435,
+    "F": NaN,
+    "p_valor": NaN
+   },
+   {
+    "fonte": "Total",
+    "SQ": 1765.9761,
+    "gl": 1247,
+    "QM": NaN,
+    "F": NaN,
+    "p_valor": NaN
+   }
+  ],
+  "F": 68.4377227378906,
+  "t_b1": 8.272709516107236,
+  "t2": 68.43772273789122,
+  "n": 1248,
+  "b1": 0.01661257664523918,
+  "ep_b1": 0.0020081179706472165,
+  "ic_b1": [
+   0.012672910817747613,
+   0.020552242472730742
+  ],
+  "contem_002": true,
+  "t_crit": 1.9618697133723726,
+  "c_ln": {
+   "mean": 10.535102997357212,
+   "mean_ci_lower": 10.463050640468037,
+   "mean_ci_upper": 10.607155354246387,
+   "obs_ci_lower": 8.259950776487475,
+   "obs_ci_upper": 12.81025521822695,
+   "fator_smearing": 1.9576818229823405,
+   "media_reais_lognormal": 73634.1378916268
+  },
+  "c_reais": {
+   "mean": 37612.92413669767,
+   "mean_ci_lower": 34998.15554847874,
+   "mean_ci_upper": 40423.04629892042,
+   "obs_ci_lower": 3865.9038024332835,
+   "obs_ci_upper": 365951.18099485856
+  },
+  "d": {
+   "r2_simples": 0.052066158444798116,
+   "r2_dummies": 0.43237432831599376,
+   "r2aj_dummies": 0.42962996568093814,
+   "b1": 0.022537157575457503,
+   "ep_b1": 0.0015720320377190953,
+   "ic_b1": [
+    0.01945302345025348,
+    0.025621291700661526
+   ],
+   "contem_002": true,
+   "s": 0.8987471612556506,
+   "tipos": [
+    {
+     "tipo": "DDoS",
+     "coef": 0.409,
+     "razao_medianas_estimada": 1.5054,
+     "razao_programada": 1.6667
+    },
+    {
+     "tipo": "Exploração de vulnerabilidade",
+     "coef": 1.0931,
+     "razao_medianas_estimada": 2.9834,
+     "razao_programada": 3.0
+    },
+    {
+     "tipo": "Força bruta",
+     "coef": -0.4242,
+     "razao_medianas_estimada": 0.6543,
+     "razao_programada": 0.6667
+    },
+    {
+     "tipo": "Malware",
+     "coef": 0.6248,
+     "razao_medianas_estimada": 1.8679,
+     "razao_programada": 2.0
+    },
+    {
+     "tipo": "Ransomware",
+     "coef": 2.2933,
+     "razao_medianas_estimada": 9.9073,
+     "razao_programada": 10.0
+    }
+   ],
+   "mediana_phishing_tempo0": 14295.193757571984,
+   "largura_ic_simples": 0.007879331654983128,
+   "largura_ic_dummies": 0.006168268250408046
+  }
+ },
+ "q11": {
+  "a": [
+   {
+    "termo": "Intercept",
+    "coeficiente": 12.75726,
+    "erro_padrao": 2.77638,
+    "t": 4.59492,
+    "p_valor": 1e-05,
+    "ic95_inf": 7.29219,
+    "ic95_sup": 18.22232
+   },
+   {
+    "termo": "servicos",
+    "coeficiente": 0.56367,
+    "erro_padrao": 0.04407,
+    "t": 12.78966,
+    "p_valor": 0.0,
+    "ic95_inf": 0.47692,
+    "ic95_sup": 0.65043
+   },
+   {
+    "termo": "patch",
+    "coeficiente": -0.14633,
+    "erro_padrao": 0.03472,
+    "t": -4.21485,
+    "p_valor": 3e-05,
+    "ic95_inf": -0.21467,
+    "ic95_sup": -0.07799
+   },
+   {
+    "termo": "treino",
+    "coeficiente": -0.32539,
+    "erro_padrao": 0.05625,
+    "t": -5.78441,
+    "p_valor": 0.0,
+    "ic95_inf": -0.43612,
+    "ic95_sup": -0.21466
+   },
+   {
+    "termo": "soc",
+    "coeficiente": -1.53379,
+    "erro_padrao": 0.43261,
+    "t": -3.54541,
+    "p_valor": 0.00046,
+    "ic95_inf": -2.38535,
+    "ic95_sup": -0.68223
+   },
+   {
+    "termo": "trimestre",
+    "coeficiente": 0.26471,
+    "erro_padrao": 0.05827,
+    "t": 4.54304,
+    "p_valor": 1e-05,
+    "ic95_inf": 0.15002,
+    "ic95_sup": 0.37941
+   }
+  ],
+  "b": {
+   "F": 39.717315097357044,
+   "F_p": 7.798831442221453e-31,
+   "gl1": 5,
+   "gl2": 282,
+   "r2": 0.41321706767534494,
+   "r2aj": 0.4028131149745532,
+   "s": 3.4135386918428114,
+   "n": 288
+  },
+  "c": [
+   {
+    "termo": "servicos",
+    "coeficiente": 0.56367,
+    "erro_padrao": 0.04407,
+    "t": 12.78966,
+    "p_valor": 0.0,
+    "ic95_inf": 0.47692,
+    "ic95_sup": 0.65043,
+    "verdadeiro": 0.5,
+    "contem": true,
+    "z_vs_verdadeiro": 1.44474
+   },
+   {
+    "termo": "patch",
+    "coeficiente": -0.14633,
+    "erro_padrao": 0.03472,
+    "t": -4.21485,
+    "p_valor": 3e-05,
+    "ic95_inf": -0.21467,
+    "ic95_sup": -0.07799,
+    "verdadeiro": -0.08,
+    "contem": true,
+    "z_vs_verdadeiro": -1.91056
+   },
+   {
+    "termo": "treino",
+    "coeficiente": -0.32539,
+    "erro_padrao": 0.05625,
+    "t": -5.78441,
+    "p_valor": 0.0,
+    "ic95_inf": -0.43612,
+    "ic95_sup": -0.21466,
+    "verdadeiro": -0.2,
+    "contem": false,
+    "z_vs_verdadeiro": -2.22903
+   },
+   {
+    "termo": "soc",
+    "coeficiente": -1.53379,
+    "erro_padrao": 0.43261,
+    "t": -3.54541,
+    "p_valor": 0.00046,
+    "ic95_inf": -2.38535,
+    "ic95_sup": -0.68223,
+    "verdadeiro": -1.4,
+    "contem": true,
+    "z_vs_verdadeiro": -0.30925
+   },
+   {
+    "termo": "trimestre",
+    "coeficiente": 0.26471,
+    "erro_padrao": 0.05827,
+    "t": 4.54304,
+    "p_valor": 1e-05,
+    "ic95_inf": 0.15002,
+    "ic95_sup": 0.37941,
+    "verdadeiro": 0.15,
+    "contem": false,
+    "z_vs_verdadeiro": 1.96873
+   }
+  ],
+  "n_contem": 3,
+  "p_todos_5": 0.7737809374999998,
+  "d": {
+   "coef": [
+    {
+     "termo": "Intercept",
+     "coeficiente": 13.05616,
+     "erro_padrao": 2.72566,
+     "t": 4.7901,
+     "p_valor": 0.0,
+     "ic95_inf": 7.69061,
+     "ic95_sup": 18.42171
+    },
+    {
+     "termo": "servicos",
+     "coeficiente": 0.56367,
+     "erro_padrao": 0.043,
+     "t": 13.10741,
+     "p_valor": 0.0,
+     "ic95_inf": 0.47902,
+     "ic95_sup": 0.64833
+    },
+    {
+     "termo": "patch",
+     "coeficiente": -0.14633,
+     "erro_padrao": 0.03388,
+     "t": -4.31956,
+     "p_valor": 2e-05,
+     "ic95_inf": -0.21302,
+     "ic95_sup": -0.07964
+    },
+    {
+     "termo": "treino",
+     "coeficiente": -0.32539,
+     "erro_padrao": 0.05489,
+     "t": -5.92812,
+     "p_valor": 0.0,
+     "ic95_inf": -0.43344,
+     "ic95_sup": -0.21734
+    },
+    {
+     "termo": "soc",
+     "coeficiente": -1.53379,
+     "erro_padrao": 0.42212,
+     "t": -3.63349,
+     "p_valor": 0.00033,
+     "ic95_inf": -2.36475,
+     "ic95_sup": -0.70282
+    },
+    {
+     "termo": "trimestre",
+     "coeficiente": 0.15865,
+     "erro_padrao": 0.06667,
+     "t": 2.37972,
+     "p_valor": 0.018,
+     "ic95_inf": 0.02741,
+     "ic95_sup": 0.28989
+    },
+    {
+     "termo": "Q2",
+     "coeficiente": -0.17468,
+     "erro_padrao": 0.62423,
+     "t": -0.27983,
+     "p_valor": 0.77981,
+     "ic95_inf": -1.40349,
+     "ic95_sup": 1.05413
+    },
+    {
+     "termo": "Q3",
+     "coeficiente": -0.27564,
+     "erro_padrao": 0.57092,
+     "t": -0.4828,
+     "p_valor": 0.62962,
+     "ic95_inf": -1.39952,
+     "ic95_sup": 0.84823
+    },
+    {
+     "termo": "Q4",
+     "coeficiente": 0.96848,
+     "erro_padrao": 0.59006,
+     "t": 1.64132,
+     "p_valor": 0.10186,
+     "ic95_inf": -0.19307,
+     "ic95_sup": 2.13004
+    },
+    {
+     "termo": "campanha",
+     "coeficiente": 3.13141,
+     "erro_padrao": 0.92379,
+     "t": 3.38973,
+     "p_valor": 0.0008,
+     "ic95_inf": 1.31289,
+     "ic95_sup": 4.94993
+    }
+   ],
+   "r2": 0.4492463630532786,
+   "r2aj": 0.4314162093391761,
+   "F_parcial": 4.5465628563949405,
+   "F_parcial_p": 0.0014256652066084725,
+   "s_trimestral_programado": [
+    0.9500000000000001,
+    1.0166666666666666,
+    0.9500000000000001,
+    1.0833333333333333
+   ],
+   "lambda_medio": 10.29513888888889
+  },
+  "e": {
+   "vif": {
+    "servicos": 1.2028849875685768,
+    "patch": 1.197956961208005,
+    "treino": 1.1283675727517708,
+    "soc": 1.0279402556074002,
+    "trimestre": 1.0000000000000002
+   },
+   "bp_p": 0.015714437434418655,
+   "bp_stat": 13.983520213650028,
+   "var_por_faixa": {
+    "1º quartil": 5.652,
+    "2º": 11.517,
+    "3º": 12.691,
+    "4º": 15.984
+   },
+   "ajustado_por_faixa": {
+    "1º quartil": 6.817,
+    "2º": 9.316,
+    "3º": 11.135,
+    "4º": 13.912
+   }
+  },
+  "f": {
+   "sem_ruido": {
+    "r2_treino": 0.3975630658728594,
+    "r2aj_treino": 0.3813685246328825,
+    "rmse_treino": 3.1779936133363855,
+    "rmse_teste": 3.791288689819183,
+    "mae_teste": 2.929379323036405
+   },
+   "com_ruido": {
+    "r2_treino": 0.4069160451099695,
+    "r2aj_treino": 0.3741489757790285,
+    "rmse_treino": 3.1532275524696076,
+    "rmse_teste": 3.8441443784859524,
+    "mae_teste": 2.965929914968219
+   }
+  }
+ },
+ "q12": {
+  "anual": [
+   902.0,
+   964.0,
+   1099.0
+  ],
+  "alpha_ses": 0.10698276585106195,
+  "mm12_inicio": 75.16666666666667,
+  "mm12_fim": 91.58333333333333,
+  "maximo": 165.0,
+  "mes_maximo": "2025-04",
+  "indices": [
+   {
+    "mes": "jan",
+    "S_programado": 0.9,
+    "indice_estimado": 0.9021,
+    "indice_sem_abril_2025": 0.9322,
+    "erro": 0.0021,
+    "erro_sem_abril_2025": 0.0322
+   },
+   {
+    "mes": "fev",
+    "S_programado": 0.85,
+    "indice_estimado": 0.8395,
+    "indice_sem_abril_2025": 0.8675,
+    "erro": -0.0105,
+    "erro_sem_abril_2025": 0.0175
+   },
+   {
+    "mes": "mar",
+    "S_programado": 1.1,
+    "indice_estimado": 1.1369,
+    "indice_sem_abril_2025": 1.1747,
+    "erro": 0.0369,
+    "erro_sem_abril_2025": 0.0747
+   },
+   {
+    "mes": "abr",
+    "S_programado": 1.1,
+    "indice_estimado": 1.3808,
+    "indice_sem_abril_2025": 1.0273,
+    "erro": 0.2808,
+    "erro_sem_abril_2025": -0.0727
+   },
+   {
+    "mes": "mai",
+    "S_programado": 1.0,
+    "indice_estimado": 0.8917,
+    "indice_sem_abril_2025": 0.9214,
+    "erro": -0.1083,
+    "erro_sem_abril_2025": -0.0786
+   },
+   {
+    "mes": "jun",
+    "S_programado": 0.95,
+    "indice_estimado": 0.84,
+    "indice_sem_abril_2025": 0.868,
+    "erro": -0.11,
+    "erro_sem_abril_2025": -0.082
+   },
+   {
+    "mes": "jul",
+    "S_programado": 0.9,
+    "indice_estimado": 0.9169,
+    "indice_sem_abril_2025": 0.9474,
+    "erro": 0.0169,
+    "erro_sem_abril_2025": 0.0474
+   },
+   {
+    "mes": "ago",
+    "S_programado": 0.95,
+    "indice_estimado": 0.9638,
+    "indice_sem_abril_2025": 0.9959,
+    "erro": 0.0138,
+    "erro_sem_abril_2025": 0.0459
+   },
+   {
+    "mes": "set",
+    "S_programado": 1.0,
+    "indice_estimado": 1.0226,
+    "indice_sem_abril_2025": 1.0566,
+    "erro": 0.0226,
+    "erro_sem_abril_2025": 0.0566
+   },
+   {
+    "mes": "out",
+    "S_programado": 1.05,
+    "indice_estimado": 0.9639,
+    "indice_sem_abril_2025": 0.996,
+    "erro": -0.0861,
+    "erro_sem_abril_2025": -0.054
+   },
+   {
+    "mes": "nov",
+    "S_programado": 1.15,
+    "indice_estimado": 1.1189,
+    "indice_sem_abril_2025": 1.1562,
+    "erro": -0.0311,
+    "erro_sem_abril_2025": 0.0062
+   },
+   {
+    "mes": "dez",
+    "S_programado": 1.05,
+    "indice_estimado": 1.0229,
+    "indice_sem_abril_2025": 1.0569,
+    "erro": -0.0271,
+    "erro_sem_abril_2025": 0.0069
+   }
+  ],
+  "mae_indices": 0.06218423317183581,
+  "mae_indices_sem": 0.04789783621264374,
+  "corr_indices": 0.7678040296027622,
+  "corr_indices_sem": 0.8289119572248596,
+  "acf": [
+   1.0,
+   0.20996185956444485,
+   -0.09281407322247698,
+   -0.11299747634672686,
+   0.0927563329770846,
+   0.2453236530769911,
+   0.16990159149769368,
+   0.2671795005701696,
+   -0.13340546573330972,
+   -0.09490344874762512,
+   -0.058497733664720684,
+   0.04388411888262941,
+   0.11468242497261937
+  ],
+  "banda_acf": 0.32666666666666666,
+  "d": {
+   "indices_todos": {
+    "b0": 71.44902728146843,
+    "b1": 0.5899863994332384,
+    "sigma": 12.537941634301832,
+    "z_abril_2025": 3.472299006040776,
+    "residuo_abril_2025": 43.535482274583515,
+    "alarmes_t": [
+     28
+    ],
+    "falsos_alarmes": [],
+    "z_max_outros": 2.766713108474958,
+    "z_abril_2025_sigma_sem_ele": 4.293739879613373
+   },
+   "indices_sem_abril_2025": {
+    "b0": 71.62262009068186,
+    "b1": 0.5738563974223967,
+    "sigma": 15.596414305954564,
+    "z_abril_2025": 4.80343552938532,
+    "residuo_abril_2025": 74.91637060823564,
+    "alarmes_t": [
+     28
+    ],
+    "falsos_alarmes": [],
+    "z_max_outros": 1.8936387423832786,
+    "z_abril_2025_sigma_sem_ele": 8.59904641951628
+   }
+  },
+  "previsao": [
+   {
+    "mes_ref": "2026-01",
+    "previsao": 86.6,
+    "li95": 69.5,
+    "ls95": 103.6
+   },
+   {
+    "mes_ref": "2026-02",
+    "previsao": 81.0,
+    "li95": 64.0,
+    "ls95": 98.1
+   },
+   {
+    "mes_ref": "2026-03",
+    "previsao": 110.4,
+    "li95": 93.4,
+    "ls95": 127.5
+   },
+   {
+    "mes_ref": "2026-04",
+    "previsao": 97.2,
+    "li95": 80.1,
+    "ls95": 114.2
+   },
+   {
+    "mes_ref": "2026-05",
+    "previsao": 87.7,
+    "li95": 70.6,
+    "ls95": 104.7
+   },
+   {
+    "mes_ref": "2026-06",
+    "previsao": 83.1,
+    "li95": 66.0,
+    "ls95": 100.2
+   },
+   {
+    "mes_ref": "2026-07",
+    "previsao": 91.2,
+    "li95": 74.2,
+    "ls95": 108.3
+   },
+   {
+    "mes_ref": "2026-08",
+    "previsao": 96.5,
+    "li95": 79.4,
+    "ls95": 113.6
+   },
+   {
+    "mes_ref": "2026-09",
+    "previsao": 103.0,
+    "li95": 85.9,
+    "ls95": 120.0
+   },
+   {
+    "mes_ref": "2026-10",
+    "previsao": 97.6,
+    "li95": 80.5,
+    "ls95": 114.7
+   },
+   {
+    "mes_ref": "2026-11",
+    "previsao": 114.0,
+    "li95": 96.9,
+    "ls95": 131.1
+   },
+   {
+    "mes_ref": "2026-12",
+    "previsao": 104.8,
+    "li95": 87.7,
+    "ls95": 121.9
+   }
+  ],
+  "total_2026": 1153.0473891367526,
+  "sigma_prev": 8.712171902945709
+ },
+ "q13": {
+  "n_treino": 1866,
+  "n_teste": 1099,
+  "a": [
+   {
+    "termo": "Intercept",
+    "coeficiente": -2.9473,
+    "erro_padrao": 0.244,
+    "z": -12.077,
+    "p_valor": 0.0,
+    "ic95_inf": -3.4256,
+    "ic95_sup": -2.469,
+    "razao_chances": 0.0525,
+    "programado": -2.8,
+    "contem_programado": true
+   },
+   {
+    "termo": "cvss",
+    "coeficiente": 0.4853,
+    "erro_padrao": 0.0357,
+    "z": 13.5906,
+    "p_valor": 0.0,
+    "ic95_inf": 0.4153,
+    "ic95_sup": 0.5553,
+    "razao_chances": 1.6246,
+    "programado": 0.45,
+    "contem_programado": true
+   },
+   {
+    "termo": "tempo_deteccao_h",
+    "coeficiente": 0.0564,
+    "erro_padrao": 0.0055,
+    "z": 10.2977,
+    "p_valor": 0.0,
+    "ic95_inf": 0.0457,
+    "ic95_sup": 0.0671,
+    "razao_chances": 1.058,
+    "programado": 0.06,
+    "contem_programado": true
+   },
+   {
+    "termo": "soc",
+    "coeficiente": -0.8633,
+    "erro_padrao": 0.1299,
+    "z": -6.6442,
+    "p_valor": 0.0,
+    "ic95_inf": -1.118,
+    "ic95_sup": -0.6086,
+    "razao_chances": 0.4218,
+    "programado": -0.8,
+    "contem_programado": true
+   },
+   {
+    "termo": "treino",
+    "coeficiente": -0.0847,
+    "erro_padrao": 0.0135,
+    "z": -6.2892,
+    "p_valor": 0.0,
+    "ic95_inf": -0.1111,
+    "ic95_sup": -0.0583,
+    "razao_chances": 0.9188,
+    "programado": -0.08,
+    "contem_programado": true
+   },
+   {
+    "termo": "fora_expediente",
+    "coeficiente": 0.3589,
+    "erro_padrao": 0.1142,
+    "z": 3.144,
+    "p_valor": 0.0017,
+    "ic95_inf": 0.1352,
+    "ic95_sup": 0.5827,
+    "razao_chances": 1.4318,
+    "programado": 0.5,
+    "contem_programado": true
+   }
+  ],
+  "pseudo_r2": 0.1846915811201515,
+  "llr_p": 4.034380647526952e-99,
+  "b": {
+   "dummies": [
+    {
+     "tipo": "DDoS",
+     "coeficiente": -0.1782,
+     "p_valor": 0.3788
+    },
+    {
+     "tipo": "Exploração de vulnerabilidade",
+     "coeficiente": -0.3118,
+     "p_valor": 0.1196
+    },
+    {
+     "tipo": "Força bruta",
+     "coeficiente": -0.188,
+     "p_valor": 0.2237
+    },
+    {
+     "tipo": "Malware",
+     "coeficiente": -0.2459,
+     "p_valor": 0.1604
+    },
+    {
+     "tipo": "Ransomware",
+     "coeficiente": -0.1325,
+     "p_valor": 0.6365
+    }
+   ],
+   "lr": 4.002269569902182,
+   "gl": 5,
+   "p": 0.5490892343318879,
+   "p_dummies_sem_cvss": {
+    "C(tipo, Treatment(reference='Phishing'))[T.DDoS]": 0.72812,
+    "C(tipo, Treatment(reference='Phishing'))[T.Exploração de vulnerabilidade]": 0.0,
+    "C(tipo, Treatment(reference='Phishing'))[T.Força bruta]": 0.000184,
+    "C(tipo, Treatment(reference='Phishing'))[T.Malware]": 0.024418,
+    "C(tipo, Treatment(reference='Phishing'))[T.Ransomware]": 0.0
+   }
+  },
+  "c": {
+   "regras": "|--- tempo_deteccao_h <= 15.14\n|   |--- cvss <= 6.25\n|   |   |--- cvss <= 4.85\n|   |   |   |--- weights: [399.00, 78.00] class: 0\n|   |   |--- cvss >  4.85\n|   |   |   |--- weights: [307.00, 134.00] class: 0\n|   |--- cvss >  6.25\n|   |   |--- cvss <= 8.15\n|   |   |   |--- weights: [192.00, 188.00] class: 0\n|   |   |--- cvss >  8.15\n|   |   |   |--- weights: [32.00, 80.00] class: 1\n|--- tempo_deteccao_h >  15.14\n|   |--- treino <= 10.44\n|   |   |--- cvss <= 4.95\n|   |   |   |--- weights: [50.00, 87.00] class: 1\n|   |   |--- cvss >  4.95\n|   |   |   |--- weights: [27.00, 140.00] class: 1\n|   |--- treino >  10.44\n|   |   |--- cvss <= 5.15\n|   |   |   |--- weights: [43.00, 20.00] class: 0\n|   |   |--- cvss >  5.15\n|   |   |   |--- weights: [32.00, 57.00] class: 1\n",
+   "folhas": [
+    {
+     "no": 3,
+     "n": 477,
+     "p_materializa": 0.16352201257861634
+    },
+    {
+     "no": 4,
+     "n": 441,
+     "p_materializa": 0.30385487528344673
+    },
+    {
+     "no": 6,
+     "n": 380,
+     "p_materializa": 0.49473684210526314
+    },
+    {
+     "no": 7,
+     "n": 112,
+     "p_materializa": 0.7142857142857143
+    },
+    {
+     "no": 10,
+     "n": 137,
+     "p_materializa": 0.635036496350365
+    },
+    {
+     "no": 11,
+     "n": 167,
+     "p_materializa": 0.8383233532934131
+    },
+    {
+     "no": 13,
+     "n": 63,
+     "p_materializa": 0.31746031746031744
+    },
+    {
+     "no": 14,
+     "n": 89,
+     "p_materializa": 0.6404494382022472
+    }
+   ],
+   "importancias": {
+    "cvss": 0.526,
+    "tempo_deteccao_h": 0.4089,
+    "soc": 0.0,
+    "treino": 0.0651,
+    "fora_expediente": 0.0
+   }
+  },
+  "d": {
+   "logistica": {
+    "VN": 522,
+    "FP": 113,
+    "FN": 213,
+    "VP": 251,
+    "acuracia": 0.7033666969972703,
+    "precisao": 0.6895604395604396,
+    "recall": 0.540948275862069,
+    "f1": 0.606280193236715,
+    "auc": 0.7702959543850123
+   },
+   "arvore": {
+    "VN": 548,
+    "FP": 87,
+    "FN": 267,
+    "VP": 197,
+    "acuracia": 0.6778889899909009,
+    "precisao": 0.6936619718309859,
+    "recall": 0.4245689655172414,
+    "f1": 0.5267379679144385,
+    "auc": 0.72308240564757
+   }
+  },
+  "e": {
+   "c_fn": 29246.985,
+   "c_fp": 3000.0,
+   "limiar_otimo_treino": 0.14,
+   "limiar_teorico": 0.09303195321981264,
+   "custo_teste_05": 6568607.805,
+   "custo_teste_otimo": 1894457.79,
+   "metricas_otimo": {
+    "VN": 140,
+    "FP": 495,
+    "FN": 14,
+    "VP": 450,
+    "acuracia": 0.5368516833484986,
+    "precisao": 0.47619047619047616,
+    "recall": 0.9698275862068966,
+    "f1": 0.63875088715401,
+    "auc": 0.7702959543850123
+   },
+   "economia": 4674150.015
+  }
+ },
+ "q14": {
+  "beta_tempo": 0.022537157575457413,
+  "th_soc": 4.699597345132744,
+  "th_sem": 13.889102717127608,
+  "fator_tempo": 0.3383657994938253,
+  "tempo_medio_perdas_atual": 15.87566657064947,
+  "tempo_medio_perdas_ctrl": 5.884825848508942,
+  "entradas_tipo": [
+   {
+    "tipo": "Phishing",
+    "mu_ln": 9.951,
+    "sigma_ln": 0.9783,
+    "mediana_rs": 20972.6002,
+    "media_rs": 33844.2124,
+    "Lambda_atual": 141.6871,
+    "mu_ln_controles": 9.7052,
+    "Lambda_controles": 36.2054
+   },
+   {
+    "tipo": "Força bruta",
+    "mu_ln": 9.575,
+    "sigma_ln": 0.952,
+    "mediana_rs": 14399.5247,
+    "media_rs": 22654.0969,
+    "Lambda_atual": 80.0984,
+    "mu_ln_controles": 9.3012,
+    "Lambda_controles": 17.5354
+   },
+   {
+    "tipo": "Malware",
+    "mu_ln": 10.512,
+    "sigma_ln": 0.9265,
+    "mediana_rs": 36753.2635,
+    "media_rs": 56452.4184,
+    "Lambda_atual": 81.3593,
+    "mu_ln_controles": 10.3169,
+    "Lambda_controles": 24.0791
+   },
+   {
+    "tipo": "Exploração de vulnerabilidade",
+    "mu_ln": 10.9693,
+    "sigma_ln": 0.9837,
+    "mediana_rs": 58061.5239,
+    "media_rs": 94194.1556,
+    "Lambda_atual": 104.8535,
+    "mu_ln_controles": 10.7894,
+    "Lambda_controles": 36.9602
+   },
+   {
+    "tipo": "DDoS",
+    "mu_ln": 10.3558,
+    "sigma_ln": 1.0557,
+    "mediana_rs": 31437.3062,
+    "media_rs": 54883.683,
+    "Lambda_atual": 44.1141,
+    "mu_ln_controles": 10.0926,
+    "Lambda_controles": 10.3435
+   },
+   {
+    "tipo": "Ransomware",
+    "mu_ln": 12.1226,
+    "sigma_ln": 0.9124,
+    "mediana_rs": 183989.9798,
+    "media_rs": 278977.7433,
+    "Lambda_atual": 40.9732,
+    "mu_ln_controles": 11.9506,
+    "Lambda_controles": 15.3441
+   }
+  ],
+  "entradas_unidade": [
+   {
+    "unidade": 1,
+    "soc": 0,
+    "ataques_ano_atual": 55.609,
+    "p_medio_atual": 0.45,
+    "ataques_ano_controles": 36.372,
+    "p_medio_controles": 0.183
+   },
+   {
+    "unidade": 2,
+    "soc": 0,
+    "ataques_ano_atual": 49.81,
+    "p_medio_atual": 0.427,
+    "ataques_ano_controles": 29.608,
+    "p_medio_controles": 0.178
+   },
+   {
+    "unidade": 3,
+    "soc": 0,
+    "ataques_ano_atual": 36.193,
+    "p_medio_atual": 0.546,
+    "ataques_ano_controles": 11.57,
+    "p_medio_controles": 0.197
+   },
+   {
+    "unidade": 4,
+    "soc": 1,
+    "ataques_ano_atual": 53.51,
+    "p_medio_atual": 0.2,
+    "ataques_ano_controles": 43.136,
+    "p_medio_controles": 0.185
+   },
+   {
+    "unidade": 5,
+    "soc": 1,
+    "ataques_ano_atual": 58.714,
+    "p_medio_atual": 0.319,
+    "ataques_ano_controles": 36.372,
+    "p_medio_controles": 0.181
+   },
+   {
+    "unidade": 6,
+    "soc": 0,
+    "ataques_ano_atual": 58.0,
+    "p_medio_atual": 0.497,
+    "ataques_ano_controles": 43.136,
+    "p_medio_controles": 0.182
+   },
+   {
+    "unidade": 7,
+    "soc": 1,
+    "ataques_ano_atual": 28.209,
+    "p_medio_atual": 0.243,
+    "ataques_ano_controles": 13.825,
+    "p_medio_controles": 0.207
+   },
+   {
+    "unidade": 8,
+    "soc": 1,
+    "ataques_ano_atual": 44.507,
+    "p_medio_atual": 0.237,
+    "ataques_ano_controles": 31.862,
+    "p_medio_controles": 0.186
+   },
+   {
+    "unidade": 9,
+    "soc": 1,
+    "ataques_ano_atual": 46.58,
+    "p_medio_atual": 0.2,
+    "ataques_ano_controles": 38.626,
+    "p_medio_controles": 0.188
+   },
+   {
+    "unidade": 10,
+    "soc": 1,
+    "ataques_ano_atual": 45.217,
+    "p_medio_atual": 0.327,
+    "ataques_ano_controles": 25.098,
+    "p_medio_controles": 0.177
+   },
+   {
+    "unidade": 11,
+    "soc": 0,
+    "ataques_ano_atual": 58.278,
+    "p_medio_atual": 0.424,
+    "ataques_ano_controles": 34.117,
+    "p_medio_controles": 0.187
+   },
+   {
+    "unidade": 12,
+    "soc": 0,
+    "ataques_ano_atual": 47.612,
+    "p_medio_atual": 0.496,
+    "ataques_ano_controles": 27.353,
+    "p_medio_controles": 0.177
+   },
+   {
+    "unidade": 13,
+    "soc": 0,
+    "ataques_ano_atual": 44.367,
+    "p_medio_atual": 0.383,
+    "ataques_ano_controles": 34.117,
+    "p_medio_controles": 0.161
+   },
+   {
+    "unidade": 14,
+    "soc": 0,
+    "ataques_ano_atual": 63.103,
+    "p_medio_atual": 0.429,
+    "ataques_ano_controles": 47.645,
+    "p_medio_controles": 0.181
+   },
+   {
+    "unidade": 15,
+    "soc": 0,
+    "ataques_ano_atual": 60.67,
+    "p_medio_atual": 0.481,
+    "ataques_ano_controles": 43.136,
+    "p_medio_controles": 0.193
+   },
+   {
+    "unidade": 16,
+    "soc": 0,
+    "ataques_ano_atual": 41.381,
+    "p_medio_atual": 0.433,
+    "ataques_ano_controles": 27.353,
+    "p_medio_controles": 0.181
+   },
+   {
+    "unidade": 17,
+    "soc": 0,
+    "ataques_ano_atual": 51.503,
+    "p_medio_atual": 0.604,
+    "ataques_ano_controles": 22.843,
+    "p_medio_controles": 0.2
+   },
+   {
+    "unidade": 18,
+    "soc": 0,
+    "ataques_ano_atual": 78.309,
+    "p_medio_atual": 0.586,
+    "ataques_ano_controles": 56.664,
+    "p_medio_controles": 0.169
+   },
+   {
+    "unidade": 19,
+    "soc": 0,
+    "ataques_ano_atual": 42.904,
+    "p_medio_atual": 0.446,
+    "ataques_ano_controles": 22.843,
+    "p_medio_controles": 0.163
+   },
+   {
+    "unidade": 20,
+    "soc": 1,
+    "ataques_ano_atual": 32.86,
+    "p_medio_atual": 0.228,
+    "ataques_ano_controles": 25.098,
+    "p_medio_controles": 0.181
+   },
+   {
+    "unidade": 21,
+    "soc": 0,
+    "ataques_ano_atual": 45.512,
+    "p_medio_atual": 0.607,
+    "ataques_ano_controles": 18.334,
+    "p_medio_controles": 0.172
+   },
+   {
+    "unidade": 22,
+    "soc": 0,
+    "ataques_ano_atual": 38.636,
+    "p_medio_atual": 0.46,
+    "ataques_ano_controles": 29.608,
+    "p_medio_controles": 0.198
+   },
+   {
+    "unidade": 23,
+    "soc": 0,
+    "ataques_ano_atual": 50.647,
+    "p_medio_atual": 0.559,
+    "ataques_ano_controles": 22.843,
+    "p_medio_controles": 0.194
+   },
+   {
+    "unidade": 24,
+    "soc": 1,
+    "ataques_ano_atual": 59.503,
+    "p_medio_atual": 0.175,
+    "ataques_ano_controles": 52.154,
+    "p_medio_controles": 0.17
+   }
+  ],
+  "ataques_ano_atual": 1191.6340326340342,
+  "ataques_ano_ctrl": 773.7118783991004,
+  "perdas_ano_atual": 493.0857453587371,
+  "perdas_ano_ctrl": 140.46771300195707,
+  "p_medio_atual": 0.41378957956479406,
+  "p_medio_ctrl": 0.18155041550169948,
+  "sev_media_est": 70841.90555528106,
+  "b": {
+   "media": 34932072.04873354,
+   "mediana": 34746606.84017135,
+   "desvio": 3357560.025028942,
+   "var95": 40740305.50578262,
+   "var99": 43501142.531538,
+   "cvar95": 42489657.530519396,
+   "p_acima_30mi": 0.94025,
+   "ep_media": 10617.537059823408
+  },
+  "b_controles": {
+   "media": 9327672.3075631,
+   "mediana": 9181141.75415412,
+   "desvio": 1675492.2888728683,
+   "var95": 12284117.293167174,
+   "var99": 13939496.544470618,
+   "cvar95": 13315588.358934803,
+   "p_acima_30mi": 0.0,
+   "ep_media": 5298.371834887056
+  },
+  "c": [
+   {
+    "n": 1000,
+    "media": 34867055.1,
+    "ep_media": 107873.53,
+    "var95": 40890684.18,
+    "razao_ep": NaN
+   },
+   {
+    "n": 4000,
+    "media": 34905984.69,
+    "ep_media": 52515.53,
+    "var95": 40695778.76,
+    "razao_ep": 2.05
+   },
+   {
+    "n": 16000,
+    "media": 34952005.9,
+    "ep_media": 26528.62,
+    "var95": 40727067.48,
+    "razao_ep": 1.98
+   },
+   {
+    "n": 64000,
+    "media": 34929767.92,
+    "ep_media": 13275.96,
+    "var95": 40729968.85,
+    "razao_ep": 2.0
+   },
+   {
+    "n": 100000,
+    "media": 34932072.05,
+    "ep_media": 10617.54,
+    "var95": 40740305.51,
+    "razao_ep": 1.25
+   }
+  ],
+  "d": [
+   {
+    "metrica": "Perda média anual",
+    "atual": 34932072.04873354,
+    "com_controles": 9327672.3075631,
+    "reducao": 25604399.74117044,
+    "reducao_pct": 0.7329768387472086
+   },
+   {
+    "metrica": "Mediana",
+    "atual": 34746606.84017135,
+    "com_controles": 9181141.75415412,
+    "reducao": 25565465.086017232,
+    "reducao_pct": 0.7357686810575244
+   },
+   {
+    "metrica": "VaR 95%",
+    "atual": 40740305.50578262,
+    "com_controles": 12284117.293167174,
+    "reducao": 28456188.212615445,
+    "reducao_pct": 0.6984775361730269
+   },
+   {
+    "metrica": "VaR 99%",
+    "atual": 43501142.531538,
+    "com_controles": 13939496.544470618,
+    "reducao": 29561645.987067387,
+    "reducao_pct": 0.6795602199559566
+   },
+   {
+    "metrica": "CVaR 95%",
+    "atual": 42489657.530519396,
+    "com_controles": 13315588.358934803,
+    "reducao": 29174069.17158459,
+    "reducao_pct": 0.6866157758656797
+   },
+   {
+    "metrica": "P(perda > R$ 30 mi)",
+    "atual": 0.94025,
+    "com_controles": 0.0,
+    "reducao": 0.94025,
+    "reducao_pct": NaN
+   }
+  ],
+  "e": {
+   "reducao_media": 25604399.74117044,
+   "roi": 2.200549967646305,
+   "p_pior_com_pacote": 0.0,
+   "custo_maximo": 25604399.74117044,
+   "beneficio_p5": 14046237.826324655,
+   "beneficio_mediana": 17443841.00227612,
+   "reducao_var95": 28456188.212615445,
+   "reducao_cvar95": 29174069.17158459
+  },
+  "f": [
+   {
+    "cenario": "base",
+    "media_atual": 34924200.16,
+    "media_controles": 9324331.8,
+    "reducao": 25599868.36,
+    "beneficio_liquido": 17599868.36,
+    "roi": 2.2,
+    "var95_atual": 40753128.58,
+    "var95_controles": 12283291.62,
+    "decisao": "investir"
+   },
+   {
+    "cenario": "σ −20%",
+    "media_atual": 29626575.07,
+    "media_controles": 7922218.9,
+    "reducao": 21704356.17,
+    "beneficio_liquido": 13704356.17,
+    "roi": 1.71,
+    "var95_atual": 33813079.37,
+    "var95_controles": 10056561.75,
+    "decisao": "investir"
+   },
+   {
+    "cenario": "σ +20%",
+    "media_atual": 42714218.19,
+    "media_controles": 11381914.56,
+    "reducao": 31332303.63,
+    "beneficio_liquido": 23332303.63,
+    "roi": 2.92,
+    "var95_atual": 51416067.58,
+    "var95_controles": 15754728.94,
+    "decisao": "investir"
+   },
+   {
+    "cenario": "frequência −10%",
+    "media_atual": 31431350.04,
+    "media_controles": 8394794.22,
+    "reducao": 23036555.82,
+    "beneficio_liquido": 15036555.82,
+    "roi": 1.88,
+    "var95_atual": 37004782.88,
+    "var95_controles": 11201586.11,
+    "decisao": "investir"
+   },
+   {
+    "cenario": "frequência +10%",
+    "media_atual": 38402757.76,
+    "media_controles": 10253259.79,
+    "reducao": 28149497.97,
+    "beneficio_liquido": 20149497.97,
+    "roi": 2.52,
+    "var95_atual": 44440275.98,
+    "var95_controles": 13346372.56,
+    "decisao": "investir"
+   }
+  ],
+  "g": {
+   "verdadeiro": {
+    "media": 34267509.30003369,
+    "mediana": 33945864.85942092,
+    "desvio": 3805939.3653963185,
+    "var95": 40967820.938679084,
+    "var99": 44721024.61591262,
+    "cvar95": 43365665.38019113,
+    "p_acima_30mi": 0.8812,
+    "ep_media": 38059.39365396318
+   },
+   "tabela": [
+    {
+     "metrica": "media",
+     "modelo_estimado": 34932072.04873354,
+     "gerador_verdadeiro": 34267509.30003369,
+     "razao_estimado_verdadeiro": 1.0193933776418118
+    },
+    {
+     "metrica": "mediana",
+     "modelo_estimado": 34746606.84017135,
+     "gerador_verdadeiro": 33945864.85942092,
+     "razao_estimado_verdadeiro": 1.0235887930405227
+    },
+    {
+     "metrica": "desvio",
+     "modelo_estimado": 3357560.025028942,
+     "gerador_verdadeiro": 3805939.3653963185,
+     "razao_estimado_verdadeiro": 0.8821895733694418
+    },
+    {
+     "metrica": "var95",
+     "modelo_estimado": 40740305.50578262,
+     "gerador_verdadeiro": 40967820.938679084,
+     "razao_estimado_verdadeiro": 0.9944464843947397
+    },
+    {
+     "metrica": "var99",
+     "modelo_estimado": 43501142.531538,
+     "gerador_verdadeiro": 44721024.61591262,
+     "razao_estimado_verdadeiro": 0.9727224030564684
+    },
+    {
+     "metrica": "cvar95",
+     "modelo_estimado": 42489657.530519396,
+     "gerador_verdadeiro": 43365665.38019113,
+     "razao_estimado_verdadeiro": 0.9797995063146918
+    },
+    {
+     "metrica": "p_acima_30mi",
+     "modelo_estimado": 0.94025,
+     "gerador_verdadeiro": 0.8812,
+     "razao_estimado_verdadeiro": 1.067010894235134
+    }
+   ],
+   "contagens": {
+    "ataques_ano": 1075.5332,
+    "perdas_ano": 463.246,
+    "p_medio": 0.4307128780403989,
+    "sev_media": 73972.59620165895
+   }
+  },
+  "n": 100000
+ }
+}

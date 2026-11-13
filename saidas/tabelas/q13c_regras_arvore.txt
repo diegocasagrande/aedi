@@ -1,0 +1,22 @@
+|--- tempo_deteccao_h <= 15.14
+|   |--- cvss <= 6.25
+|   |   |--- cvss <= 4.85
+|   |   |   |--- weights: [399.00, 78.00] class: 0
+|   |   |--- cvss >  4.85
+|   |   |   |--- weights: [307.00, 134.00] class: 0
+|   |--- cvss >  6.25
+|   |   |--- cvss <= 8.15
+|   |   |   |--- weights: [192.00, 188.00] class: 0
+|   |   |--- cvss >  8.15
+|   |   |   |--- weights: [32.00, 80.00] class: 1
+|--- tempo_deteccao_h >  15.14
+|   |--- treino <= 10.44
+|   |   |--- cvss <= 4.95
+|   |   |   |--- weights: [50.00, 87.00] class: 1
+|   |   |--- cvss >  4.95
+|   |   |   |--- weights: [27.00, 140.00] class: 1
+|   |--- treino >  10.44
+|   |   |--- cvss <= 5.15
+|   |   |   |--- weights: [43.00, 20.00] class: 0
+|   |   |--- cvss >  5.15
+|   |   |   |--- weights: [32.00, 57.00] class: 1

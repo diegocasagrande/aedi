@@ -21,6 +21,8 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 | `main.py` | Executa tudo, em ordem |
 | `src/gerador.py` | Parte A: etapas A1–A5 e bases derivadas (Q1-a) |
 | `src/inversa.py` | Q1-b: transformação inversa da Exponencial e da Triangular, comparada com numpy |
+| `src/q02_*.py` … `src/q14_*.py` | Uma questão por arquivo (Partes B e C) |
+| `src/relatorio.py` | Gera relatório, parecer e registro do memorial a partir dos resultados |
 | `dados/` | `unidades`, `ataques`, `perdas`, `painel_trimestral`, `serie_mensal` (entregáveis) + `lambda_programado.csv` (auxiliar da Q2) |
 | `saidas/tabelas/`, `saidas/figuras/` | Tabelas e gráficos do relatório |
 | `saidas/resultados.xlsx` | Bases e tabelas em planilha |
@@ -35,10 +37,24 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 - Exponencial e Triangular são sorteadas pela inversa do próprio grupo (`src/inversa.py`); Poisson e Normal, pelo numpy.
 - `tempo_deteccao_h` gravado com 4 casas e `perda_rs` com 2; os cálculos internos usam a precisão completa.
 
+## Entregáveis
+
+| # | Entregável | Onde |
+| --- | --- | --- |
+| 1 | Código (Partes A, B e C), um único comando | `main.py`, `src/` |
+| 2 | Bases | `dados/*.csv` (+ `sha256.json`) |
+| 3 | Relatório técnico (Q1–Q14) | `relatorio/relatorio_tecnico.pdf` (e `.docx`, `.md`) |
+| 4 | Parecer executivo (Q15) | `relatorio/parecer_executivo.pdf` (e `.docx`, `.md`) |
+| 5 | Memorial do Uso de IA | `memorial_ia/registro_interacoes.*` (reflexão final a escrever pelo grupo) |
+
+`python main.py --grupo 4` roda tudo em cerca de 1 minuto: gerador, questões 1 a 14 (`src/q02_…py` a `src/q14_…py`),
+planilha `saidas/resultados.xlsx` (bases + todas as tabelas), resultados numéricos em `saidas/resultados.json`
+e os documentos (requer `pandoc` e LibreOffice para DOCX/PDF; use `--sem-relatorio` para pular essa etapa).
+
 ## Andamento
 
 - [x] Parte A — gerador e bases
-- [x] Q1-b — inversas
-- [ ] Q2 a Q13 — Parte B
-- [ ] Q14 — Parte C
-- [ ] Q15, relatório e memorial
+- [x] Parte B — Q2 a Q13
+- [x] Parte C — Q14
+- [x] Q15 — parecer executivo
+- [ ] Revisão do grupo: integrantes no relatório, reescrita das interpretações, reflexão do memorial

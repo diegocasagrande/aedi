@@ -1,0 +1,5 @@
+n,media,dp,t,margem,li,ls,soc,subconjunto,theta_programado,media_verdadeira,contem_theta,contem_media_verdadeira
+904,4.6996,4.7322,1.9626,0.3089,4.3907,5.0085,1,todos,4.0,4.7,False,True
+591,3.9055,3.8752,1.964,0.3131,3.5924,4.2185,1,só no expediente,4.0,4.0,True,True
+2061,13.8891,14.3919,1.9611,0.6217,13.2674,14.5108,0,todos,12.0,14.1,False,True
+1341,11.5312,11.6819,1.9617,0.6258,10.9054,12.1571,0,só no expediente,12.0,12.0,True,True
