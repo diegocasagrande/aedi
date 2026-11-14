@@ -482,13 +482,12 @@ def texto_parecer(R: dict) -> str:
 FERRAMENTA = ("Claude (Anthropic), modelo configurado claude-opus-5-5, pelo app claude.ai "
               "(sessão de trabalho com execução de código, conectores do Google Drive e de documentos)")
 RESPONSAVEL = tg.AUTORES
-SEM_IA = "Sem uso de IA (revisão feita pelo grupo)"
 
 
 def interacoes(grupo: int) -> list[dict]:
     """Uma entrada por interação relevante, com os nove campos exigidos pelo enunciado."""
-    def it(data, questao, exig, prompt, resp, verif, erros="", ferramenta=FERRAMENTA):
-        return {"Ferramenta": ferramenta, "Data e responsável": f"{data} · {RESPONSAVEL}",
+    def it(data, questao, exig, prompt, resp, verif, erros=""):
+        return {"Ferramenta": FERRAMENTA, "Data e responsável": f"{data} · {RESPONSAVEL}",
                 "Questão atendida": questao, "Exigência feita à IA": exig, "Prompt": prompt,
                 "Resposta obtida": resp, "Verificação": verif, "Decisão do grupo": "",
                 "Erros da IA": erros or "Nenhum identificado até aqui."}
@@ -549,7 +548,6 @@ def interacoes(grupo: int) -> list[dict]:
         it(**tg.INTERACAO_11),
         it(**tg.INTERACAO_12),
     ]
-    lista += [it(r["data"], r["questao"], r["exig"], "—", "—", r["verif"], "—", ferramenta=SEM_IA) for r in tg.REVISOES]
     assert len(lista) == len(tg.DECISOES)
     for d, decisao in zip(lista, tg.DECISOES):
         d["Decisão do grupo"] = decisao
@@ -570,9 +568,9 @@ author: "{tg.AUTORES}"
 lang: pt-BR
 ---
 
-O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado, e também as revisões feitas pelo grupo (interações 13 a 15), que não usaram IA. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
+O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
 
-**Ferramenta usada nas interações com IA:** {FERRAMENTA}.
+**Ferramenta usada em todas as interações:** {FERRAMENTA}.
 
 ## Registro das interações
 

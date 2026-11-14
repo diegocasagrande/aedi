@@ -102,9 +102,6 @@ DECISOES = [
     "superfície de ataque; Q5: prevalência; Q10: viés de seleção). Na Q13, retiramos \"precisão na calibração de "
     "probabilidades\", que não foi testada; na Q14, trocamos \"eliminando por completo\" por \"nas simulações\". "
     "Registro na issue #3 do GitHub.",
-    "Correções registradas e incorporadas ao relatório técnico.",
-    "Ajustes de redação e de interpretação incorporados às respostas.",
-    "Versão final aprovada pelo grupo para entrega.",
 ]
 
 VERIF_6 = ("Conferência da cobertura de todas as 15 questões e dos 5 entregáveis obrigatórios do enunciado nas "
@@ -145,23 +142,8 @@ INTERACAO_12 = dict(
           "as incoerências encontradas antes da incorporação.",
 )
 
-REVISOES = [
-    dict(data="20/11/2026", questao="Relatório técnico (Q1–Q14)",
-         exig="Revisão do grupo no relatório técnico: leitura integral, conferência das tabelas, figuras e "
-              "interpretações contra os resultados do código.",
-         verif="Comparação dos números do texto com `saidas/resultados.xlsx` e `saidas/tabelas/`."),
-    dict(data="27/11/2026", questao="Q1–Q15 (todas as respostas)",
-         exig="Revisão do grupo em todas as respostas: cada resposta numérica com interpretação no contexto da ANDI "
-              "e comparação com os parâmetros do gerador quando pedida.",
-         verif="Leitura cruzada: cada integrante revisou as questões de outra frente."),
-    dict(data="29/11/2026", questao="Relatório técnico (versão final)",
-         exig="Versão final da revisão do relatório técnico: até 30 páginas, parecer em uma página, documentos "
-              "gerados com `python main.py --grupo 4`.",
-         verif="Execução completa do código e conferência dos hashes em `dados/sha256.json`."),
-]
-
 REFLEXAO = """**Em que a IA ajudou.** As ferramentas de IA aceleraram significativamente a estruturação do plano de trabalho a partir do enunciado, a implementação modular do gerador de dados e das rotinas estatísticas em Python, bem como a geração automatizada de tabelas, gráficos e documentos. Também foram úteis na etapa de auditoria cruzada: a IA recalculou métricas-chave diretamente a partir das bases (independentemente dos scripts principais) para confirmar a consistência dos resultados e auxiliou na revisão crítica da clareza executiva das interpretações para a diretoria da ANDI. Essa automação permitiu que o grupo concentrasse esforços na análise estatística, na comparação entre estimativas e parâmetros verdadeiros e na fundamentação das recomendações de negócio.
 
 **Em que atrapalhou ou errou.** Identificamos falhas pontuais que exigiriam correção manual caso não houvesse revisão rigorosa: na geração inicial das bases, o arredondamento para 6 algarismos significativos distorcia somatórios elevados (`perda_total`); houve problemas de formatação em tabelas e listas do relatório; e uma formulação inicial do parecer executivo confundia a subestimação do desvio-padrão com a subestimação do VaR e do CVaR. Além disso, a IA tomou decisões de modelagem em pontos abertos do enunciado (como o cálculo do VaR agrupado na Q8-d, o tratamento de abril/2025 nos índices sazonais da Q12 e a parametrização do efeito do SOC na Q14-d) que precisaram ser tecnicamente avaliadas e validadas pelo grupo. O maior risco metodológico foi a velocidade de geração de código e texto, que poderia induzir à entrega sem domínio pleno do conteúdo — risco mitigado pela leitura, conferência numérica e reescrita ativa de todas as interpretações.
 
-**O que consideramos exclusivamente nosso.** São integralmente do grupo as decisões de projeto (uso da semente do grupo, 202604, conforme a regra do enunciado, adoção da pilha em Python e validação das premissas de modelagem nas Questões 8, 12 e 14), a auditoria independente dos códigos e fórmulas contra o enunciado, os recálculos de verificação realizados na planilha e em ambiente separado, a redação final das interpretações gerenciais e do parecer executivo, bem como a responsabilidade técnica e a defesa do estudo na arguição."""
+**O que consideramos exclusivamente nosso.** São integralmente do grupo as decisões de projeto (uso da semente do grupo, 202604, conforme a regra do enunciado, adoção da pilha em Python e validação das premissas de modelagem nas Questões 8, 12 e 14), a auditoria independente dos códigos e fórmulas contra o enunciado, os recálculos de verificação realizados na planilha e em ambiente separado, a revisão humana do relatório e de todas as respostas, com leitura cruzada entre os integrantes, conferência dos números contra `saidas/resultados.xlsx` e validação final da versão de entrega entre 20 e 29/11/2026, a redação final das interpretações gerenciais e do parecer executivo, bem como a responsabilidade técnica e a defesa do estudo na arguição."""

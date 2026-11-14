@@ -4,9 +4,9 @@ author: "Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato"
 lang: pt-BR
 ---
 
-O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado, e também as revisões feitas pelo grupo (interações 13 a 15), que não usaram IA. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
+O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
 
-**Ferramenta usada nas interações com IA:** Claude (Anthropic), modelo configurado claude-opus-5-5, pelo app claude.ai (sessão de trabalho com execução de código, conectores do Google Drive e de documentos).
+**Ferramenta usada em todas as interações:** Claude (Anthropic), modelo configurado claude-opus-5-5, pelo app claude.ai (sessão de trabalho com execução de código, conectores do Google Drive e de documentos).
 
 ## Registro das interações
 
@@ -154,46 +154,10 @@ O grupo usou ferramenta de IA. Este memorial registra, para cada interação rel
 * **Decisão do grupo:** Aceitamos as cinco correções de coerência apontadas na conferência (parecer: perdas catastróficas, causa dos 94% e superfície de ataque; Q5: prevalência; Q10: viés de seleção). Na Q13, retiramos "precisão na calibração de probabilidades", que não foi testada; na Q14, trocamos "eliminando por completo" por "nas simulações". Registro na issue #3 do GitHub.
 * **Erros da IA:** Nenhum identificado até aqui.
 
-### Interação 13 — Relatório técnico (Q1–Q14)
-
-* **Ferramenta:** Sem uso de IA (revisão feita pelo grupo)
-* **Data e responsável:** 20/11/2026 · Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato
-* **Questão atendida:** Relatório técnico (Q1–Q14)
-* **Exigência feita à IA:** Revisão do grupo no relatório técnico: leitura integral, conferência das tabelas, figuras e interpretações contra os resultados do código.
-* **Prompt:** —
-* **Resposta obtida:** —
-* **Verificação:** Comparação dos números do texto com `saidas/resultados.xlsx` e `saidas/tabelas/`.
-* **Decisão do grupo:** Correções registradas e incorporadas ao relatório técnico.
-* **Erros da IA:** —
-
-### Interação 14 — Q1–Q15 (todas as respostas)
-
-* **Ferramenta:** Sem uso de IA (revisão feita pelo grupo)
-* **Data e responsável:** 27/11/2026 · Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato
-* **Questão atendida:** Q1–Q15 (todas as respostas)
-* **Exigência feita à IA:** Revisão do grupo em todas as respostas: cada resposta numérica com interpretação no contexto da ANDI e comparação com os parâmetros do gerador quando pedida.
-* **Prompt:** —
-* **Resposta obtida:** —
-* **Verificação:** Leitura cruzada: cada integrante revisou as questões de outra frente.
-* **Decisão do grupo:** Ajustes de redação e de interpretação incorporados às respostas.
-* **Erros da IA:** —
-
-### Interação 15 — Relatório técnico (versão final)
-
-* **Ferramenta:** Sem uso de IA (revisão feita pelo grupo)
-* **Data e responsável:** 29/11/2026 · Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato
-* **Questão atendida:** Relatório técnico (versão final)
-* **Exigência feita à IA:** Versão final da revisão do relatório técnico: até 30 páginas, parecer em uma página, documentos gerados com `python main.py --grupo 4`.
-* **Prompt:** —
-* **Resposta obtida:** —
-* **Verificação:** Execução completa do código e conferência dos hashes em `dados/sha256.json`.
-* **Decisão do grupo:** Versão final aprovada pelo grupo para entrega.
-* **Erros da IA:** —
-
 ## Reflexão final
 
 **Em que a IA ajudou.** As ferramentas de IA aceleraram significativamente a estruturação do plano de trabalho a partir do enunciado, a implementação modular do gerador de dados e das rotinas estatísticas em Python, bem como a geração automatizada de tabelas, gráficos e documentos. Também foram úteis na etapa de auditoria cruzada: a IA recalculou métricas-chave diretamente a partir das bases (independentemente dos scripts principais) para confirmar a consistência dos resultados e auxiliou na revisão crítica da clareza executiva das interpretações para a diretoria da ANDI. Essa automação permitiu que o grupo concentrasse esforços na análise estatística, na comparação entre estimativas e parâmetros verdadeiros e na fundamentação das recomendações de negócio.
 
 **Em que atrapalhou ou errou.** Identificamos falhas pontuais que exigiriam correção manual caso não houvesse revisão rigorosa: na geração inicial das bases, o arredondamento para 6 algarismos significativos distorcia somatórios elevados (`perda_total`); houve problemas de formatação em tabelas e listas do relatório; e uma formulação inicial do parecer executivo confundia a subestimação do desvio-padrão com a subestimação do VaR e do CVaR. Além disso, a IA tomou decisões de modelagem em pontos abertos do enunciado (como o cálculo do VaR agrupado na Q8-d, o tratamento de abril/2025 nos índices sazonais da Q12 e a parametrização do efeito do SOC na Q14-d) que precisaram ser tecnicamente avaliadas e validadas pelo grupo. O maior risco metodológico foi a velocidade de geração de código e texto, que poderia induzir à entrega sem domínio pleno do conteúdo — risco mitigado pela leitura, conferência numérica e reescrita ativa de todas as interpretações.
 
-**O que consideramos exclusivamente nosso.** São integralmente do grupo as decisões de projeto (uso da semente do grupo, 202604, conforme a regra do enunciado, adoção da pilha em Python e validação das premissas de modelagem nas Questões 8, 12 e 14), a auditoria independente dos códigos e fórmulas contra o enunciado, os recálculos de verificação realizados na planilha e em ambiente separado, a redação final das interpretações gerenciais e do parecer executivo, bem como a responsabilidade técnica e a defesa do estudo na arguição.
+**O que consideramos exclusivamente nosso.** São integralmente do grupo as decisões de projeto (uso da semente do grupo, 202604, conforme a regra do enunciado, adoção da pilha em Python e validação das premissas de modelagem nas Questões 8, 12 e 14), a auditoria independente dos códigos e fórmulas contra o enunciado, os recálculos de verificação realizados na planilha e em ambiente separado, a revisão humana do relatório e de todas as respostas, com leitura cruzada entre os integrantes, conferência dos números contra `saidas/resultados.xlsx` e validação final da versão de entrega entre 20 e 29/11/2026, a redação final das interpretações gerenciais e do parecer executivo, bem como a responsabilidade técnica e a defesa do estudo na arguição.
