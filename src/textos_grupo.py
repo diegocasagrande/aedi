@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import re
 
+FERRAMENTAS = ("Claude (Anthropic), modelo configurado claude-opus-5-5 (Interações 1 a 12), e Gemini (Google), "
+               "interface web (Interação 13)")
 AUTORES = "Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato"
 PRAZO = "04/12/2026"
 
@@ -102,6 +104,10 @@ DECISOES = [
     "superfície de ataque; Q5: prevalência; Q10: viés de seleção). Na Q13, retiramos \"precisão na calibração de "
     "probabilidades\", que não foi testada; na Q14, trocamos \"eliminando por completo\" por \"nas simulações\". "
     "Registro na issue #3 do GitHub.",
+    "Acatamos as sugestões de revisão textual e os ajustes de conformidade: consolidamos os textos revisados para "
+    "incorporação no código (Interação 12), retiramos os registros sem IA da tabela do memorial (movendo a descrição "
+    "da revisão humana para a Reflexão final), sincronizamos registro.xlsx com este documento e formalizamos esta "
+    "etapa de auditoria com a segunda ferramenta de IA.",
 ]
 
 VERIF_6 = ("Conferência da cobertura de todas as 15 questões e dos 5 entregáveis obrigatórios do enunciado nas "
@@ -140,6 +146,26 @@ INTERACAO_12 = dict(
          "preenchidos; destaques amarelos removidos.",
     verif="A IA conferiu cada número dos textos do grupo contra `saidas/resultados.json` e `saidas/tabelas/` e apontou "
           "as incoerências encontradas antes da incorporação.",
+)
+
+INTERACAO_13 = dict(
+    ferramenta="Gemini (Google), interface web (gemini.google.com)",
+    data="14/11/2026", questao="Q1–Q15 e entregáveis finais (auditoria e revisão cruzada)",
+    exig="Realizar auditoria independente de todo o conjunto de entregáveis (relatório técnico, parecer executivo, "
+         "memorial de uso de IA e planilha de registro) frente às regras do enunciado, além de apoiar a revisão "
+         "redacional das interpretações gerenciais e do parecer executivo.",
+    prompt="Envio sequencial dos arquivos (AEDI_Enunciado_Prova.pdf, relatorio_tecnico.pdf, parecer_executivo.pdf, "
+           "registro_interacoes.pdf e registro.xlsx) solicitando revisão crítica dos textos das Questões 1 a 15, revisão "
+           "do parecer executivo para a diretoria da ANDI e auditoria geral de conformidade dos entregáveis.",
+    resp="Revisão redacional das interpretações gerenciais, estruturação do parecer executivo em 1 página, diagnóstico "
+         "de conformidade com o enunciado (sincronização da planilha registro.xlsx e inclusão deste registro) e "
+         "apontamento de falhas de renderização de símbolos matemáticos (letras gregas) no PDF.",
+    verif="Conferência de cada apontamento de auditoria e de cada métrica revisada contra o enunciado da prova, a "
+          "planilha `saidas/resultados.xlsx`, as tabelas em `saidas/tabelas/` e os limites de extensão (27 páginas no "
+          "relatório técnico contra o teto de 30, e 1 página exata no parecer executivo).",
+    erros="Durante a inspeção da planilha anexada, a IA inicialmente tentou ler o arquivo pelo nome de exibição em vez "
+          "do nome interno no ambiente, corrigindo o caminho de leitura na sequência; não houve erros nas verificações "
+          "de conteúdo ou conformidade.",
 )
 
 REFLEXAO = """**Em que a IA ajudou.** As ferramentas de IA aceleraram significativamente a estruturação do plano de trabalho a partir do enunciado, a implementação modular do gerador de dados e das rotinas estatísticas em Python, bem como a geração automatizada de tabelas, gráficos e documentos. Também foram úteis na etapa de auditoria cruzada: a IA recalculou métricas-chave diretamente a partir das bases (independentemente dos scripts principais) para confirmar a consistência dos resultados e auxiliou na revisão crítica da clareza executiva das interpretações para a diretoria da ANDI. Essa automação permitiu que o grupo concentrasse esforços na análise estatística, na comparação entre estimativas e parâmetros verdadeiros e na fundamentação das recomendações de negócio.

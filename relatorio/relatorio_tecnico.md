@@ -41,7 +41,7 @@ A ordem dos sorteios é fixa (unidades → contagens do mês → atributos de ca
 Para a Triangular, com F\_c = (c − a)/(b − a), a inversa é X = a + √(U(b − a)(c − a)) se U < F\_c e X = b − √((1 − U)(b − a)(b − c)) caso contrário. As duas inversas (`src/inversa.py`) foram comparadas com as funções do numpy em 100.000 sorteios:
 
 | Distribuição | Média (grupo) | Média (numpy) | P95 (grupo) | P95 (numpy) | KS | p-valor |
-| :---------------------- | ---------------: | ---------------: | -------------: | -------------: | --------: | ---------: |
+| :----------------------------- | ---------------: | ---------------: | -------------: | -------------: | ---------: | ------------: |
 | Exponencial(θ=4) | 4,011 | 3,985 | 12,07 | 11,95 | 0,004 | 0,363 |
 | Exponencial(θ=12) | 11,939 | 11,954 | 35,67 | 35,66 | 0,002 | 0,981 |
 | Triangular(60;80;95) | 78,355 | 78,329 | 89,87 | 89,90 | 0,004 | 0,503 |
@@ -66,7 +66,7 @@ Usar a Normal para a severidade seria um erro grave por três motivos, que os pr
 **c) Tipos e materialização.**
 
 | Tipo | Ataques | Observado | Programado | σ/√n | z |
-| :------------- | ---------: | -----------: | ------------: | --------: | --------: |
+| :---------------- | ------------: | --------------: | ----------------: | ---------: | ---------: |
 | Phishing | 1005 | 33,9% | 35% | 0,88% | −1,26 |
 | Força bruta | 658 | 22,2% | 20% | 0,73% | 2,98 |
 | Malware | 422 | 14,2% | 15% | 0,66% | −1,17 |
@@ -92,7 +92,7 @@ O qui-quadrado de aderência dá 10,87 com 5 g.l. (crítico 11,07, p = 0,0540): 
 **b) Distribuições de frequências.**
 
 | Tipo | Freq. absoluta | Freq. relativa | Abs. acumulada | Rel. acumulada |
-| :------------- | ----------------: | ----------------: | ----------------: | ----------------: |
+| :---------------- | ----------------: | ----------------: | ----------------: | ----------------: |
 | Phishing | 1005 | 33,9% | 1005 | 33,9% |
 | Força bruta | 658 | 22,2% | 1663 | 56,1% |
 | Exploração | 444 | 15,0% | 2107 | 71,1% |
@@ -107,7 +107,7 @@ Para a perda, a regra de Sturges dá k = 1 + 3,322·log₁₀(1.248) ≈ 11 clas
 **c) Medidas de posição.**
 
 | Tipo | n | Média | Mediana | Moda (classe modal) | Média/mediana |
-| :------------- | --------: | ------------: | ------------: | ----------------: | ---------------: |
+| :---------------- | --------: | ------------: | ------------: | ----------------: | -------------------: |
 | Phishing | 384 | R$ 34.081 | R$ 20.301 | R$ 17.531 | 1,68 |
 | Força bruta | 199 | R$ 22.502 | R$ 15.417 | R$ 11.264 | 1,46 |
 | Malware | 192 | R$ 59.771 | R$ 35.752 | R$ 54.945 | 1,67 |
@@ -125,7 +125,7 @@ Como a perda é contínua, nenhum valor se repete; a moda é o ponto médio da c
 **a) Dispersão por tipo.**
 
 | Tipo | Desvio-padrão | CV | AIQ | Outliers | % da perda do tipo nos outliers |
-| :------------- | ---------------: | --------: | ------------: | ----------: | ----------------: |
+| :---------------- | -------------------: | --------: | ------------: | -------------: | ----------------: |
 | Phishing | R$ 42.410 | 1,24 | R$ 29.301 | 31 | 34% |
 | Força bruta | R$ 24.936 | 1,11 | R$ 20.150 | 18 | 35% |
 | Malware | R$ 94.090 | 1,57 | R$ 47.675 | 12 | 33% |
@@ -187,7 +187,7 @@ idêntico à contagem direta (411 materializados entre 657 alarmes = 0,626). A r
 **a) Tempo médio de detecção.**
 
 | Grupo | n | Média (h) | IC 95% (t) | θ programado | Contém θ? |
-| :------------------------- | --------: | -----------: | ----------------: | --------------: | -----------: |
+| :------------------------- | --------: | -----------: | ----------------: | ----------------: | -----------: |
 | Com SOC (todos) | 904 | 4,70 | [4,39; 5,01] | 4 | não |
 | Com SOC (só expediente) | 591 | 3,91 | [3,59; 4,22] | 4 | sim |
 | Sem SOC (todos) | 2061 | 13,89 | [13,27; 14,51] | 12 | não |
@@ -245,7 +245,7 @@ O desvio das médias acompanha σ/√n nos três tamanhos (Figura 8). Mas a form
 **a) ANOVA.**
 
 | Fonte | SQ | g.l. | QM | F |
-| :----------- | ----------: | --------: | ---------: | --------: |
+| :-------------- | -------------: | --------: | ------------: | ---------: |
 | Regressão | 91,95 | 1 | 91,9476 | 68,44 |
 | Resíduos | 1.674,03 | 1246 | 1,3435 |  |
 | Total | 1.765,98 | 1247 |  |  |
@@ -259,7 +259,7 @@ F = 68,438 e t(β₁) = 8,2727, com t² = 68,438 = F: na regressão simples os d
 **d) Com dummies de tipo.** O R² vai de 0,052 para **0,432**, o erro padrão cai para 0,899 (próximo do σ = 0,9 programado), e β₁ = 0,02254 com IC **[0,01945; 0,02562]**, mais estreito (amplitude 0,0062 contra 0,0079) e centrado perto de 0,02. As dummies recuperam as razões entre medianas programadas:
 
 | Tipo (base: Phishing) | Razão de medianas estimada | Programada |
-| :---------------- | ----------------: | ------------: |
+| :---------------- | ----------------: | ----------------: |
 | DDoS | 1,51 | 1,67 |
 | Exploração | 2,98 | 3,00 |
 | Força bruta | 0,65 | 0,67 |
@@ -274,7 +274,7 @@ F = 68,438 e t(β₁) = 8,2727, com t² = 68,438 = F: na regressão simples os d
 **a) Modelo.** n\_ataques = β₀ + β₁·servicos + β₂·patch + β₃·treino + β₄·soc + β₅·trimestre + erro, no painel de 288 unidades-trimestre:
 
 | Termo | Coeficiente | Erro padrão | t | p-valor | IC 95% |
-| :------------ | -------------: | -------------: | --------: | ----------: | ------------------: |
+| :---------------- | -----------------: | -------------: | ---------: | ------------: | ------------------: |
 | Intercepto | 12,7573 | 2,7764 | 4,59 | < 0,0001 | [7,292; 18,222] |
 | servicos | 0,5637 | 0,0441 | 12,79 | < 0,0001 | [0,477; 0,650] |
 | patch | −0,1463 | 0,0347 | −4,21 | < 0,0001 | [−0,215; −0,078] |
@@ -293,7 +293,7 @@ F = 68,438 e t(β₁) = 8,2727, com t² = 68,438 = F: na regressão simples os d
 **c) Comparação com os verdadeiros.**
 
 | Termo | Estimado | Verdadeiro | IC 95% | Contém? |
-| :----------- | ----------: | ------------: | ------------------: | ---------: |
+| :-------------- | -------------: | ----------------: | ------------------: | ------------: |
 | servicos | 0,564 | 0,50 | [0,477; 0,650] | sim |
 | patch | −0,146 | −0,08 | [−0,215; −0,078] | sim |
 | treino | −0,325 | −0,20 | [−0,436; −0,215] | não |
@@ -305,7 +305,7 @@ F = 68,438 e t(β₁) = 8,2727, com t² = 68,438 = F: na regressão simples os d
 **d) Sazonalidade e campanha.**
 
 | Termo | Coeficiente | Erro padrão | p-valor |
-| :----------- | -------------: | -------------: | ---------: |
+| :-------------- | -----------------: | -------------: | ------------: |
 | trimestre | 0,159 | 0,067 | 0,0180 |
 | Q2 | −0,175 | 0,624 | 0,7798 |
 | Q3 | −0,276 | 0,571 | 0,6296 |
@@ -338,7 +338,7 @@ As cinco variáveis de puro ruído **aumentam o R² de treino** (como sempre aco
 **b) Decomposição.** Usamos a decomposição **multiplicativa**, porque o gerador multiplica λ pelo fator S\_m: o efeito sazonal é proporcional ao nível e cresce com a tendência. Os índices foram calculados pela razão à média móvel centrada 2×12 e normalizados para média 1:
 
 | Mês | S\_m programado | Estimado | Estimado sem abril/2025 |
-| :-------- | ----------------: | ----------: | ----------------: |
+| :-------- | ----------------: | -------------: | ----------------: |
 | jan | 0,90 | 0,902 | 0,932 |
 | fev | 0,85 | 0,840 | 0,868 |
 | mar | 1,10 | 1,137 | 1,175 |
@@ -372,7 +372,7 @@ Treino: 1.866 ataques de 2023–2024; teste: 1.099 ataques de 2025.
 **a) Regressão logística.**
 
 | Termo | Coeficiente | Erro padrão | Razão de chances e^β | Programado | IC 95% contém? |
-| :----------------- | -------------: | -------------: | ----------------: | ------------: | ----------------: |
+| :---------------------- | -----------------: | -------------: | ----------------: | ----------------: | ----------------: |
 | Intercepto | −2,9473 | 0,2440 | 0,052 | −2,80 | sim |
 | cvss | 0,4853 | 0,0357 | 1,625 | 0,45 | sim |
 | tempo (h) | 0,0564 | 0,0055 | 1,058 | 0,06 | sim |
@@ -397,7 +397,7 @@ A árvore usa CVSS (importância 0,53), tempo (0,41) e treino (0,07); SOC e fora
 **d) Desempenho no teste (2025, limiar 0,5).**
 
 | Modelo | VN | FP | FN | VP | Acurácia | Precisão | Recall | F1 | AUC |
-| :----------- | --------: | --------: | --------: | --------: | ----------: | ----------: | --------: | --------: | --------: |
+| :-------------- | --------: | --------: | --------: | --------: | -------------: | -------------: | ----------: | ---------: | ---------: |
 | Logística | 522 | 113 | 213 | 251 | 0,703 | 0,690 | 0,541 | 0,606 | 0,770 |
 | Árvore | 548 | 87 | 267 | 197 | 0,678 | 0,694 | 0,425 | 0,527 | 0,723 |
 
@@ -425,7 +425,7 @@ A logística é melhor em quase tudo, e sobretudo na AUC (0,770 contra 0,723; Fi
 **Thinning.** Se os ataques de u chegam como Poisson(λ\_u) e cada um vira perda com probabilidade p̄\_u, independentemente, as perdas são Poisson(λ\_u·p̄\_u). Separando por tipo, N\_(u,k) ~ Poisson(λ\_u·p̄\_u·w\_(u,k)) independentes, e a soma sobre unidades é Poisson(Λ\_k). Resultam 493 perdas esperadas por ano.
 
 | Tipo | μ (ln) | σ (ln) | Mediana | Média | Λ\_k (perdas/ano) |
-| :------------- | --------: | --------: | ------------: | ------------: | ----------------: |
+| :---------------- | ----------: | ---------: | ------------: | ------------: | ------------------: |
 | Phishing | 9,951 | 0,978 | R$ 20.973 | R$ 33.844 | 141,7 |
 | Força bruta | 9,575 | 0,952 | R$ 14.400 | R$ 22.654 | 80,1 |
 | Malware | 10,512 | 0,926 | R$ 36.753 | R$ 56.452 | 81,4 |
@@ -452,7 +452,7 @@ A distribuição é quase simétrica: com cerca de 493 perdas por ano, a soma de
 **c) Convergência.**
 
 | n | Perda média | Erro padrão da média | VaR 95% | EP anterior / EP atual |
-| ---------: | --------------: | ----------------: | -------------: | ----------------: |
+| ------------: | --------------: | ----------------: | -------------: | ----------------: |
 | 1.000 | R$ 34,867 mi | R$ 107.874 | R$ 40,89 mi | — |
 | 4.000 | R$ 34,906 mi | R$ 52.516 | R$ 40,70 mi | 2,05 |
 | 16.000 | R$ 34,952 mi | R$ 26.529 | R$ 40,73 mi | 1,98 |
@@ -487,7 +487,7 @@ Resultado: 140 perdas esperadas por ano, contra 493.
 **f) Sensibilidade.**
 
 | Cenário | Perda média atual | Com controles | Benefício líquido | ROI | Decisão |
-| :----------------- | ----------------: | ---------------: | ----------------: | --------: | ----------: |
+| :----------------- | ----------------: | ---------------: | ----------------: | --------: | -------------: |
 | base | R$ 34,9 mi | R$ 9,3 mi | R$ 17,6 mi | 220% | investir |
 | σ −20% | R$ 29,6 mi | R$ 7,9 mi | R$ 13,7 mi | 171% | investir |
 | σ +20% | R$ 42,7 mi | R$ 11,4 mi | R$ 23,3 mi | 292% | investir |
@@ -501,7 +501,7 @@ Resultado: 140 perdas esperadas por ano, contra 493.
 **g) Erro de modelo.** Rodando o gerador verdadeiro (Etapas A2–A5 com os parâmetros programados, t = 37 a 48, sem campanha, mesmas 24 unidades) por 10.000 anos:
 
 | Métrica | SMC com modelos estimados | Gerador verdadeiro | Diferença |
-| :--------------- | ----------------: | ----------------: | -----------: |
+| :------------------- | ----------------: | ----------------: | --------------: |
 | Média | R$ 34,93 mi | R$ 34,27 mi | 1,9% |
 | Mediana | R$ 34,75 mi | R$ 33,95 mi | 2,4% |
 | Desvio-padrão | R$ 3,36 mi | R$ 3,81 mi | -11,8% |

@@ -53,7 +53,7 @@ def tabela(linhas: list[list], cab: list[str], alin: str | None = None) -> str:
         palavras = [w for li in linhas for w in li[j].split()] + str(h).split()
         maior_palavra = max([len(w) for w in palavras] + [3])
         conteudo = max([len(li[j]) for li in linhas] + [min(len(str(h)), 14)])
-        larg.append(max(9, maior_palavra + 3, min(conteudo + 3, 60)))
+        larg.append(max(9, int(maior_palavra * 1.3) + 4, min(conteudo + 3, 60)))
     sep = [("-" * (w - 1) + ":") if a == "r" else (":" + "-" * (w - 2) + ":") if a == "c" else (":" + "-" * (w - 1))
            for a, w in zip(alin, larg)]
     out = ["| " + " | ".join(cab) + " |", "| " + " | ".join(sep) + " |"]
@@ -486,8 +486,8 @@ RESPONSAVEL = tg.AUTORES
 
 def interacoes(grupo: int) -> list[dict]:
     """Uma entrada por interação relevante, com os nove campos exigidos pelo enunciado."""
-    def it(data, questao, exig, prompt, resp, verif, erros=""):
-        return {"Ferramenta": FERRAMENTA, "Data e responsável": f"{data} · {RESPONSAVEL}",
+    def it(data, questao, exig, prompt, resp, verif, erros="", ferramenta=FERRAMENTA):
+        return {"Ferramenta": ferramenta, "Data e responsável": f"{data} · {RESPONSAVEL}",
                 "Questão atendida": questao, "Exigência feita à IA": exig, "Prompt": prompt,
                 "Resposta obtida": resp, "Verificação": verif, "Decisão do grupo": "",
                 "Erros da IA": erros or "Nenhum identificado até aqui."}
@@ -547,6 +547,7 @@ def interacoes(grupo: int) -> list[dict]:
            "Checklist dos entregáveis e das questões contra o enunciado."),
         it(**tg.INTERACAO_11),
         it(**tg.INTERACAO_12),
+        it(**tg.INTERACAO_13),
     ]
     assert len(lista) == len(tg.DECISOES)
     for d, decisao in zip(lista, tg.DECISOES):
@@ -568,9 +569,9 @@ author: "{tg.AUTORES}"
 lang: pt-BR
 ---
 
-O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
+O grupo usou ferramentas de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
 
-**Ferramenta usada em todas as interações:** {FERRAMENTA}.
+**Ferramentas usadas nas interações:** {tg.FERRAMENTAS}.
 
 ## Registro das interações
 
@@ -587,12 +588,42 @@ def salvar_registro_xlsx(R: dict, caminho: str) -> None:
     df.to_excel(caminho, index=False, sheet_name="registro")
 
 
+FONTE_TEXTO = "Times New Roman"  # no LibreOffice vira Liberation Serif; as duas têm letras gregas e símbolos
+
+
+def fonte_texto(doc) -> None:
+    """Fonte do corpo com cobertura de μ, σ, θ, λ, β, x̄ etc. (a fonte padrão do pandoc não tem grego
+    e o PDF trocava esses símbolos por outra fonte). Títulos mantêm a fonte própria."""
+    from docx.oxml.ns import qn
+    def aplicar(rpr):
+        rf = rpr.find(qn("w:rFonts"))
+        if rf is None:
+            rf = rpr.makeelement(qn("w:rFonts"), {})
+            rpr.insert(0, rf)
+        for at in ("w:asciiTheme", "w:hAnsiTheme", "w:cstheme", "w:eastAsiaTheme"):
+            rf.attrib.pop(qn(at), None)
+        for at in ("w:ascii", "w:hAnsi", "w:cs", "w:eastAsia"):
+            rf.set(qn(at), FONTE_TEXTO)
+    st = doc.styles.element
+    rpr_padrao = st.find(qn("w:docDefaults") + "/" + qn("w:rPrDefault") + "/" + qn("w:rPr"))
+    if rpr_padrao is not None:
+        aplicar(rpr_padrao)
+    for estilo in doc.styles:
+        nome = estilo.name or ""
+        if nome.startswith("Heading") or nome in ("Title", "Subtitle") or "Code" in nome or "Verbatim" in nome:
+            continue
+        rpr = estilo.element.find(qn("w:rPr"))
+        if rpr is not None and rpr.find(qn("w:rFonts")) is not None:
+            aplicar(rpr)
+
+
 def ajustar_docx(docx_path: str, compacto: bool = False) -> None:
     """Parágrafos de texto justificados; no parecer, margens e fonte menores para caber em uma página."""
     from docx import Document
     from docx.enum.text import WD_ALIGN_PARAGRAPH
     from docx.shared import Cm, Pt
     doc = Document(docx_path)
+    fonte_texto(doc)
     texto = {"Body Text", "First Paragraph", "Compact", "Block Text"}
     for par in doc.paragraphs:
         if par.style is not None and par.style.name in texto and not par.text.startswith(("Assunto:", "De:")):

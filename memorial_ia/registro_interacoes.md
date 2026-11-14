@@ -4,9 +4,9 @@ author: "Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato"
 lang: pt-BR
 ---
 
-O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
+O grupo usou ferramentas de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
 
-**Ferramenta usada em todas as interações:** Claude (Anthropic), modelo configurado claude-opus-5-5, pelo app claude.ai (sessão de trabalho com execução de código, conectores do Google Drive e de documentos).
+**Ferramentas usadas nas interações:** Claude (Anthropic), modelo configurado claude-opus-5-5 (Interações 1 a 12), e Gemini (Google), interface web (Interação 13).
 
 ## Registro das interações
 
@@ -153,6 +153,18 @@ O grupo usou ferramenta de IA. Este memorial registra, para cada interação rel
 * **Verificação:** A IA conferiu cada número dos textos do grupo contra `saidas/resultados.json` e `saidas/tabelas/` e apontou as incoerências encontradas antes da incorporação.
 * **Decisão do grupo:** Aceitamos as cinco correções de coerência apontadas na conferência (parecer: perdas catastróficas, causa dos 94% e superfície de ataque; Q5: prevalência; Q10: viés de seleção). Na Q13, retiramos "precisão na calibração de probabilidades", que não foi testada; na Q14, trocamos "eliminando por completo" por "nas simulações". Registro na issue #3 do GitHub.
 * **Erros da IA:** Nenhum identificado até aqui.
+
+### Interação 13 — Q1–Q15 e entregáveis finais (auditoria e revisão cruzada)
+
+* **Ferramenta:** Gemini (Google), interface web (gemini.google.com)
+* **Data e responsável:** 14/11/2026 · Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato
+* **Questão atendida:** Q1–Q15 e entregáveis finais (auditoria e revisão cruzada)
+* **Exigência feita à IA:** Realizar auditoria independente de todo o conjunto de entregáveis (relatório técnico, parecer executivo, memorial de uso de IA e planilha de registro) frente às regras do enunciado, além de apoiar a revisão redacional das interpretações gerenciais e do parecer executivo.
+* **Prompt:** Envio sequencial dos arquivos (AEDI\_Enunciado\_Prova.pdf, relatorio\_tecnico.pdf, parecer\_executivo.pdf, registro\_interacoes.pdf e registro.xlsx) solicitando revisão crítica dos textos das Questões 1 a 15, revisão do parecer executivo para a diretoria da ANDI e auditoria geral de conformidade dos entregáveis.
+* **Resposta obtida:** Revisão redacional das interpretações gerenciais, estruturação do parecer executivo em 1 página, diagnóstico de conformidade com o enunciado (sincronização da planilha registro.xlsx e inclusão deste registro) e apontamento de falhas de renderização de símbolos matemáticos (letras gregas) no PDF.
+* **Verificação:** Conferência de cada apontamento de auditoria e de cada métrica revisada contra o enunciado da prova, a planilha `saidas/resultados.xlsx`, as tabelas em `saidas/tabelas/` e os limites de extensão (27 páginas no relatório técnico contra o teto de 30, e 1 página exata no parecer executivo).
+* **Decisão do grupo:** Acatamos as sugestões de revisão textual e os ajustes de conformidade: consolidamos os textos revisados para incorporação no código (Interação 12), retiramos os registros sem IA da tabela do memorial (movendo a descrição da revisão humana para a Reflexão final), sincronizamos registro.xlsx com este documento e formalizamos esta etapa de auditoria com a segunda ferramenta de IA.
+* **Erros da IA:** Durante a inspeção da planilha anexada, a IA inicialmente tentou ler o arquivo pelo nome de exibição em vez do nome interno no ambiente, corrigindo o caminho de leitura na sequência; não houve erros nas verificações de conteúdo ou conformidade.
 
 ## Reflexão final
 
