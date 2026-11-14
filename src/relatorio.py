@@ -502,65 +502,112 @@ lang: pt-BR
 """
 
 
+FERRAMENTA = ("Claude (Anthropic), modelo configurado claude-opus-5-5, pelo app claude.ai "
+              "(sessão de trabalho com execução de código, conectores do Google Drive e de documentos)")
+RESPONSAVEL = "Diego Casagrande"
+A_PREENCHER = "(a preencher pelo grupo)"
+
+
+def interacoes(grupo: int) -> list[dict]:
+    """Uma entrada por interação relevante, com os nove campos exigidos pelo enunciado."""
+    def it(data, questao, exig, prompt, resp, verif, erros=""):
+        return {"Ferramenta": FERRAMENTA, "Data e responsável": f"{data} · {RESPONSAVEL}",
+                "Questão atendida": questao, "Exigência feita à IA": exig, "Prompt": prompt,
+                "Resposta obtida": resp, "Verificação": verif, "Decisão do grupo": A_PREENCHER,
+                "Erros da IA": erros or "Nenhum identificado até aqui."}
+    return [
+        it("12/11/2026", "Q1–Q15 (planejamento)",
+           "Entender o que a prova pede e organizar a resolução antes de começar.",
+           "[anexo: AEDI_Enunciado_Prova.pdf] \"do mesmo professor que é autor do livro temos que fazer essa prova passo a passo e gerar os itens integraveis conforme escrito no documento anexo aqui avalie como pode ser realizado esse trabalho, escreva o roteiro passo a passo para resolução\"",
+           "Roteiro em documento compartilhado: avaliação e pontuação, estrutura do repositório, implementação da Parte A, método e armadilhas de cada questão, memorial, cronograma até 09/12 e ambiguidades do enunciado. Para dar ordens de grandeza, rodou um protótipo do gerador com semente de teste (202699).",
+           "Conferência das regras e da pontuação contra o enunciado.",
+           "Erro de digitação no roteiro (\"A tempo médio\"), corrigido na mesma sessão."),
+        it("12/11/2026", "Decisões de implementação",
+           "Fechar os pontos em aberto do enunciado.",
+           "\"pode ser tudo como está na proposta\" → \"falta o que\"",
+           "Registro das decisões no roteiro: calendário real (fev/2024 com 29 dias), trimestre = q(t) de 1 a 12, coluna p_programado, planilha gerada pelo código, VaR da Q8-d com todas as unidades-mês, p̄ por unidade na Q14.",
+           "O número do grupo e o uso de Python foram informados pelo grupo na tabela do roteiro."),
+        it("12/11/2026", "Q1-a, Q1-b",
+           "Implementar o gerador (Parte A) e as bases num repositório.",
+           "\"use esse respositório para o código https://github.com/diegocasagrande/aedi\" → \"salve os arquivos nessa pasta https://drive.google.com/drive/folders/1fhICSMGAVKpyEv8afX6zrzEAQgXnIySQ\"",
+           "Anexos: src/gerador.py, src/inversa.py, main.py, README.md (commit 2d63be9). Bases e hashes sha256. Arquivos salvos na pasta PROVA do Drive. O envio ao GitHub falhou por falta de permissão; o commit foi entregue em arquivo bundle.",
+           "Duas execuções com hashes idênticos; contagens, taxa de materialização e tempos médios comparados com os valores programados; teste KS das inversas contra o numpy.",
+           "A exportação inicial das bases usava formato numérico com 6 algarismos significativos, o que arredondaria totais grandes (perda_total); percebido e corrigido antes do commit."),
+        it("12/11/2026", "Q1, Q2-c",
+           "Ter os números da Parte A numa planilha.",
+           "\"Crie uma planilha a partir da sua última resposta.\"",
+           "Planilha compartilhada com conferência estimado × programado, tipos de ataque com σ/√n, inversas, lista de arquivos e pendências.",
+           "Fórmulas da planilha lidas de volta e conferidas; qui-quadrado dos tipos recalculado."),
+        it("13/11/2026", "Q1",
+           "Entender a semente do gerador.",
+           "\"Confere como ficou a seed, me explica porque?\"",
+           "Explicação: semente = 202600 + nº do grupo; gerador pseudoaleatório (PCG64); reprodutibilidade; bases diferentes por grupo; importância da ordem dos sorteios.",
+           "Conferido contra o enunciado e por execução (mesmos três primeiros sorteios com a mesma semente)."),
+        it("13/11/2026", "Organização do trabalho",
+           "Planejar a execução e a auditoria.",
+           "\"resume o plano de execução e como podemos organizar em issues talvez para registro e auditoria?\"",
+           "Plano em quatro marcos, 22 issues propostas, modelo de issue e ligação das issues com o memorial.", "—"),
+        it("13/11/2026", "Q1",
+           "Corrigir o número do grupo (estava 3).",
+           "\"o grupo estava errado... corrigi para 4\"",
+           f"Semente alterada para 2026{grupo:02d}, bases regeradas (commit 545e564).",
+           "Hashes de duas execuções idênticos; números da Parte A recalculados."),
+        it("13/11/2026", "Q2 a Q15",
+           "Executar o plano completo.",
+           "\"pode executar todo o plano\"",
+           "Anexos: src/q02_verificacao.py … src/q14_smc_risco.py, src/relatorio.py, tabelas e figuras em saidas/, relatório técnico, parecer executivo e este registro (commit fa4c144).",
+           "Verificação independente feita pela IA a partir das bases, sem o código do projeto: t da Q8-a, z da Q8-b, VaR da Q4-e, F = t² da Q10, LR de Kupiec da Q8-d, valor preditivo da Q5-c e ROI da Q14-e coincidiram; duas execuções com resultados idênticos. Conferência pelo grupo: " + A_PREENCHER,
+           "Escolhas de modelagem da IA que o grupo deve validar: VaR da Q8-d sobre todas as unidades-mês; índices sazonais com e sem abril/2025 (Q12); efeito do SOC no tempo e na severidade da Q14-d. Ajustes de formatação de tabelas e listas no relatório foram corrigidos pela IA ao revisar o PDF."),
+        it("13/11/2026", "Entrega (repositório)",
+           "Dar acesso de escrita ao repositório GitHub.",
+           "\"?como concedo acesso ao repositório git?\" → \"teste acesso ao git\"",
+           "Instruções para instalar o app do Claude no repositório; após a liberação, envio dos três commits ao branch main.",
+           "git ls-remote confirmou o mesmo commit no servidor e localmente."),
+        it("13/11/2026", "Entrega (revisão final)",
+           "Conferir se tudo foi feito e concluir as pendências.",
+           "\"isso, agora confere se já fez tudo e pode fazer todo o resto\"",
+           "Checklist contra o enunciado; memorial com os nove campos; atualização da pasta PROVA no Drive, da planilha e do roteiro para o grupo 4.",
+           "Checklist dos entregáveis e das questões contra o enunciado."),
+    ]
+
+
 def texto_memorial(R: dict) -> str:
     grupo = R["q01"]["grupo"]
-    linhas = [
-        ("12/11/2026", "Q1–Q15 (planejamento)",
-         "Avaliar a prova e escrever um roteiro passo a passo de resolução.",
-         "\"[anexo: AEDI_Enunciado_Prova.pdf] do mesmo professor que é autor do livro temos que fazer essa prova passo a passo e gerar os itens integraveis conforme escrito no documento anexo aqui / avalie como pode ser realizado esse trabalho, escreva o roteiro passo a passo para resolução\"",
-         "Roteiro (documento compartilhado): avaliação, estrutura do repositório, Parte A, roteiro por questão, memorial, cronograma e ambiguidades do enunciado. Incluiu um protótipo do gerador com semente de teste para ordens de grandeza.",
-         "Leitura do roteiro pelo grupo e conferência das regras e pontos contra o enunciado."),
-        ("12/11/2026", "Decisões de implementação",
-         "Confirmar as decisões propostas.", "\"pode ser tudo como está na proposta\" / \"falta o que\"",
-         "Registro das decisões no roteiro.", "Decisões revistas pelo grupo (o número do grupo foi informado pelo grupo)."),
-        ("12/11/2026", "Q1 (Parte A)",
-         "Implementar o gerador e as bases.", "\"use esse respositório para o código https://github.com/diegocasagrande/aedi\" / \"salve os arquivos nessa pasta [link do Drive]\"",
-         "src/gerador.py, src/inversa.py, main.py, README; bases e hashes. A IA não conseguiu enviar ao GitHub (sem permissão) e entregou o commit em arquivo (bundle).",
-         "Duas execuções com hashes idênticos; contagens, taxa de materialização e tempos médios comparados com os valores programados; teste KS das inversas."),
-        ("12/11/2026", "Q1–Q2", "Gerar uma planilha com os números da Parte A.", "\"Crie uma planilha a partir da sua última resposta.\"",
-         "Planilha com conferência, tipos, inversas, arquivos e pendências.", "Fórmulas da planilha lidas de volta e conferidas."),
-        ("13/11/2026", "Q1", "Explicar a semente.", "\"Confere como ficou a seed, me explica porque?\"",
-         "Explicação de gerador pseudoaleatório, reprodutibilidade e bases por grupo.", "Conferido contra o enunciado (semente = 202600 + nº do grupo)."),
-        ("13/11/2026", "Organização", "Plano de execução e organização em issues.", "\"resume o plano de execução e como podemos organizar em issues talvez para registro e auditoria?\"",
-         "Proposta de milestones, 22 issues e modelo de issue.", "—"),
-        ("13/11/2026", "Q1", "Corrigir o número do grupo.", "\"o grupo estava errado... corrigi para 4\"",
-         f"Semente alterada para 2026{grupo:02d}; bases regeradas; novo commit.", "Hashes de duas execuções idênticos; números da Parte A recalculados."),
-        ("13/11/2026", "Q2–Q15", "Executar todo o plano.", "\"pode executar todo o plano\"",
-         "Código das questões 2 a 14 (src/q02…q14), tabelas, figuras, este relatório, o parecer e este registro.",
-         "A preencher pelo grupo: conferência de cada número (ver sugestões abaixo)."),
-    ]
-    tab = tabela([[d, q, ex, p, r, v] for d, q, ex, p, r, v in linhas],
-                 ["Data", "Questão", "Exigência feita à IA", "Prompt (íntegra)", "Resposta obtida (síntese)", "Verificação feita"], "llllll")
+    blocos = []
+    for k, d in enumerate(interacoes(grupo), 1):
+        linhas = [f"### Interação {k} — {d['Questão atendida']}", ""]
+        linhas += [f"* **{campo}:** {valor}" for campo, valor in d.items()]
+        blocos.append("\n".join(linhas))
+    corpo = "\n\n".join(blocos)
     return f"""---
 title: "Memorial do Uso de IA — Grupo {grupo}"
 lang: pt-BR
 ---
 
-**Ferramenta:** Claude (Anthropic), modelo configurado `claude-opus-5-5`, acesso pelo app claude.ai (sessão de trabalho com execução de código).
-**Responsável pelas interações:** Diego Casagrande. _(Acrescentar as interações dos demais integrantes, se houver.)_
+O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa deve ser anexado em `memorial_ia/anexos/`.
 
-Este registro foi preparado a partir da conversa com a IA. As colunas **Decisão do grupo** e **Erros da IA**, e a reflexão final, devem ser escritas pelo grupo.
+**Ferramenta usada em todas as interações:** {FERRAMENTA}.
+
+**A preencher pelo grupo antes da entrega:** o campo *Decisão do grupo* de cada interação, interações de outros integrantes (se houver), o anexo com o histórico da conversa e a reflexão final.
 
 ## Registro das interações
 
-{tab}
-## Erros e limitações da IA observados (rascunho para o grupo revisar)
-
-* Na exportação inicial das bases, a IA usou um formato numérico com 6 algarismos significativos que arredondaria totais grandes (ex.: perda_total). O erro foi percebido e corrigido antes do primeiro commit.
-* O roteiro inicial trazia números de um protótipo com semente de teste (202699). Eles servem só como ordem de grandeza e não são as bases do grupo.
-* A IA não teve acesso de escrita ao GitHub nem, em parte da sessão, aos conectores do Google Drive e do documento compartilhado; os arquivos foram entregues por outros meios.
-* Escolhas de modelagem feitas pela IA que o grupo deve validar: (i) VaR da Q8-d calculado sobre todas as unidades-mês juntas; (ii) na Q12, índices sazonais com e sem abril/2025; (iii) na Q14-d, o efeito do SOC no tempo de detecção entrou como reescala dos tempos (razão das médias estimadas na Q7) e na severidade por β_tempo da Q10-d.
+{corpo}
 
 ## Verificações sugeridas antes da entrega
 
 1. Rodar `python main.py --grupo {grupo}` em outra máquina e comparar `dados/sha256.json`.
-2. Recalcular à mão (ou na planilha) um resultado por questão: por exemplo, o t da Q8-a, o VaR da Q4-e, o F = t² da Q10-a e o ROI da Q14-e.
+2. Recalcular à mão, ou na planilha, um resultado por questão: por exemplo o t da Q8-a, o VaR da Q4-e, o F = t² da Q10-a e o ROI da Q14-e.
 3. Ler cada interpretação do relatório e reescrevê-la com as palavras do grupo: a arguição cobra o entendimento de todos.
 
-## Decisão do grupo e reflexão final (1 página — a escrever pelo grupo)
+## Reflexão final (até uma página — a escrever pelo grupo)
 
-_Onde a IA ajudou, onde atrapalhou, o que foi aceito, corrigido ou descartado, e qual parte do trabalho o grupo considera exclusivamente sua._
+*Em que a IA ajudou, em que atrapalhou ou errou, e qual parte do trabalho o grupo considera exclusivamente sua.*
 """
+
+
+def salvar_registro_xlsx(R: dict, caminho: str) -> None:
+    pd.DataFrame(interacoes(R["q01"]["grupo"])).to_excel(caminho, index=False, sheet_name="registro")
 
 
 def converter(md_path: str, docx_path: str, pdf: bool = True) -> int | None:
@@ -586,6 +633,7 @@ def gerar():
         os.path.join(REL, "parecer_executivo.md"): texto_parecer(R),
         os.path.join(mem, "registro_interacoes.md"): texto_memorial(R),
     }
+    salvar_registro_xlsx(R, os.path.join(mem, "registro.xlsx"))
     paginas = {}
     for caminho, txt in arquivos.items():
         txt = escapar_sublinhados(espacar_listas(txt))

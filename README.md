@@ -45,7 +45,7 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 | 2 | Bases | `dados/*.csv` (+ `sha256.json`) |
 | 3 | Relatório técnico (Q1–Q14) | `relatorio/relatorio_tecnico.pdf` (e `.docx`, `.md`) |
 | 4 | Parecer executivo (Q15) | `relatorio/parecer_executivo.pdf` (e `.docx`, `.md`) |
-| 5 | Memorial do Uso de IA | `memorial_ia/registro_interacoes.*` (reflexão final a escrever pelo grupo) |
+| 5 | Memorial do Uso de IA | `memorial_ia/registro_interacoes.*` e `memorial_ia/registro.xlsx` (nove campos por interação; decisão do grupo, anexo da conversa e reflexão final a completar pelo grupo) |
 
 `python main.py --grupo 4` roda tudo em cerca de 1 minuto: gerador, questões 1 a 14 (`src/q02_…py` a `src/q14_…py`),
 planilha `saidas/resultados.xlsx` (bases + todas as tabelas), resultados numéricos em `saidas/resultados.json`
