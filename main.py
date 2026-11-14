@@ -28,8 +28,6 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--grupo", type=int, default=4)
     ap.add_argument("--sem-relatorio", action="store_true", help="não gera relatório/parecer (só dados e análises)")
-    ap.add_argument("--final", action="store_true",
-                    help="versão de entrega: as sugestões de redação do grupo saem sem destaque amarelo")
     args = ap.parse_args()
     semente = gerador.semente(args.grupo)
     print(f"Grupo {args.grupo} — semente {semente}")
@@ -85,7 +83,7 @@ def main() -> None:
 
     if not args.sem_relatorio:
         import relatorio
-        relatorio.gerar(final=args.final)
+        relatorio.gerar()
         print("[Q15] relatório, parecer e memorial gerados")
     print(f"Concluído em {time.time() - t0:.0f} s")
 

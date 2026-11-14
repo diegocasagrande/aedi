@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-import sugestoes
+import textos_grupo as tg
 from util import ARQ_RESULTADOS, FIGURAS, RAIZ, TABELAS, TIPOS, carregar, fmt
 
 REL = os.path.join(RAIZ, "relatorio")
@@ -118,12 +118,12 @@ def texto_relatorio(R: dict, b: dict) -> str:
     A(f"""---
 title: "Risco Cibernético por Simulação de Monte Carlo — Estudo de caso ANDI"
 subtitle: "Relatório técnico — Questões 1 a 14"
-author: "Grupo {q1['grupo']} · Análise Estatística de Dados e Informações (PPCA/UnB)"
-date: "Semente do gerador: {q1['semente']} · Entrega: 09/12/2026"
+author: "Grupo {q1['grupo']}: {tg.AUTORES} · Análise Estatística de Dados e Informações (PPCA/UnB)"
+date: "Semente do gerador: {q1['semente']} · Entrega: {tg.PRAZO}"
 lang: pt-BR
 ---
 
-**Integrantes:** (preencher)
+**Integrantes:** {tg.AUTORES}
 
 **Como reproduzir.** `python main.py --grupo {q1['grupo']}` recria as cinco bases (hashes sha256 em `dados/sha256.json`), todas as tabelas (`saidas/tabelas/`), figuras (`saidas/figuras/`), a planilha `saidas/resultados.xlsx` e este relatório. Nível de significância: α = 5% em todos os testes, salvo indicação. Cada análise que sorteia números usa um fluxo próprio derivado da semente, `default_rng([{q1['semente']}, nº da questão])`, para não consumir números do gerador das bases.
 
@@ -476,51 +476,27 @@ Para provisionamento, o VaR e o CVaR estimados devem ser lidos como **limites in
 
 
 def texto_parecer(R: dict) -> str:
-    q14 = R["q14"]
-    b0, b1, e = q14["b"], q14["b_controles"], q14["e"]
-    sens = q14["f"]
-    g = q14["g"]["tabela"]
-    n_sem_soc = int((carregar()["unidades"].soc == 0).sum())
-    return f"""---
-title: "Parecer executivo à diretoria da ANDI"
-subtitle: "Risco cibernético em 2026 e o pacote de controles"
-author: "Grupo {R['q01']['grupo']} · AEDI/PPCA-UnB"
-lang: pt-BR
----
-
-**1. Quanto a ANDI deve esperar perder em 2026?** Cerca de **{mi(b0['media'])}** em perdas com incidentes cibernéticos. Em 1 ano a cada 20, a perda passa de **{mi(b0['var95'])}** (VaR 95%); nesses 5% piores anos, a perda média é de **{mi(b0['cvar95'])}** (CVaR 95%). Em 1 ano a cada 100 ela ultrapassa {mi(b0['var99'])}. A chance de perder mais de R$ 30 milhões é de {pct(b0['p_acima_30mi'], 0)}. Esses números vêm de 100.000 anos simulados a partir dos dados de 2023–2025 das 24 unidades.
-
-**2. O pacote de controles de R$ 8 milhões por ano compensa?** **Sim, com folga.** O pacote leva a cobertura de patches a 95%, o treinamento a 12 h e cria um SOC em todas as unidades. Com isso, a perda esperada cai para **{mi(b1['media'])}**: uma redução de **{mi(e['reducao_media'])} por ano**, ou **retorno de {pct(e['roi'], 0)}** sobre o custo. A cauda também encolhe: o ano ruim (VaR 95%) passa de {mi(b0['var95'])} para {mi(b1['var95'])}. Em nenhum dos anos simulados o pacote somado ao seu custo saiu mais caro do que não fazer nada. O pacote continuaria valendo a pena até um custo de cerca de **{mi(e['custo_maximo'], 0)} por ano**. O maior ganho vem do SOC: ele reduz o número de ataques, a chance de cada ataque virar perda e o tempo até a detecção, que encarece cada perda em cerca de 2% por hora.
-
-**3. Quão confiáveis são esses números?** A recomendação é robusta: mesmo variando a gravidade das perdas em ±20% e a frequência de ataques em ±10%, o benefício líquido fica entre {mi(min(r['beneficio_liquido'] for r in sens))} e {mi(max(r['beneficio_liquido'] for r in sens))} por ano. Os valores exatos, porém, têm limites que a diretoria deve conhecer:
-
-* **A cauda está subestimada.** Comparado com o processo real que gerou os dados, o modelo acerta a perda média (diferença de {pct(g[0]['razao_estimado_verdadeiro'] - 1, 0)}), mas subestima a variação de um ano para outro em cerca de {pct(1 - g[2]['razao_estimado_verdadeiro'], 0)} e a perda dos anos extremos (VaR 99% e CVaR) em cerca de {pct(1 - g[5]['razao_estimado_verdadeiro'], 0)} a {pct(1 - g[4]['razao_estimado_verdadeiro'], 0)}. VaR e CVaR devem ser tratados como pisos, com margem de segurança.
-* **O passado pode não se repetir.** A tendência de alta vem de apenas três anos e foi inflada pela campanha de ataques de abril de 2025. Novas campanhas, novos tipos de ataque ou mudanças de comportamento dos atacantes alteram o quadro.
-* **O efeito dos controles foi estimado, não observado.** Nenhuma unidade tem hoje os três controles no nível proposto; o efeito é extrapolado dos modelos. O efeito do SOC no tempo de detecção supõe que o novo SOC funcione como os atuais.
-* **Eventos catastróficos raros** (um "cisne negro" acima de tudo o que já foi visto) não estão nos dados e não podem ser previstos por eles.
-
-**Recomendação:** aprovar o pacote, priorizando a implantação do SOC nas {n_sem_soc} unidades que não o têm. O modelo deve ser revisto a cada trimestre com os novos dados, e a perda real de 2026 comparada com a faixa prevista (backtesting).
-"""
+    return tg.PARECER
 
 
 FERRAMENTA = ("Claude (Anthropic), modelo configurado claude-opus-5-5, pelo app claude.ai "
               "(sessão de trabalho com execução de código, conectores do Google Drive e de documentos)")
-RESPONSAVEL = "Diego Casagrande"
-A_PREENCHER = "(a preencher pelo grupo)"
+RESPONSAVEL = tg.AUTORES
+SEM_IA = "Sem uso de IA (revisão feita pelo grupo)"
 
 
 def interacoes(grupo: int) -> list[dict]:
     """Uma entrada por interação relevante, com os nove campos exigidos pelo enunciado."""
-    def it(data, questao, exig, prompt, resp, verif, erros=""):
-        return {"Ferramenta": FERRAMENTA, "Data e responsável": f"{data} · {RESPONSAVEL}",
+    def it(data, questao, exig, prompt, resp, verif, erros="", ferramenta=FERRAMENTA):
+        return {"Ferramenta": ferramenta, "Data e responsável": f"{data} · {RESPONSAVEL}",
                 "Questão atendida": questao, "Exigência feita à IA": exig, "Prompt": prompt,
-                "Resposta obtida": resp, "Verificação": verif, "Decisão do grupo": A_PREENCHER,
+                "Resposta obtida": resp, "Verificação": verif, "Decisão do grupo": "",
                 "Erros da IA": erros or "Nenhum identificado até aqui."}
     lista = [
         it("12/11/2026", "Q1–Q15 (planejamento)",
            "Entender o que a prova pede e organizar a resolução antes de começar.",
            "[anexo: AEDI_Enunciado_Prova.pdf] \"do mesmo professor que é autor do livro temos que fazer essa prova passo a passo e gerar os itens integraveis conforme escrito no documento anexo aqui avalie como pode ser realizado esse trabalho, escreva o roteiro passo a passo para resolução\"",
-           "Roteiro em documento compartilhado: avaliação e pontuação, estrutura do repositório, implementação da Parte A, método e armadilhas de cada questão, memorial, cronograma até 09/12 e ambiguidades do enunciado. Para dar ordens de grandeza, rodou um protótipo do gerador com semente de teste (202699).",
+           "Roteiro em documento compartilhado: avaliação e pontuação, estrutura do repositório, implementação da Parte A, método e armadilhas de cada questão, memorial, cronograma até 04/12 e ambiguidades do enunciado. Para dar ordens de grandeza, rodou um protótipo do gerador com semente de teste (202699).",
            "Conferência das regras e da pontuação contra o enunciado.",
            "Erro de digitação no roteiro (\"A tempo médio\"), corrigido na mesma sessão."),
         it("12/11/2026", "Decisões de implementação",
@@ -547,7 +523,8 @@ def interacoes(grupo: int) -> list[dict]:
         it("13/11/2026", "Organização do trabalho",
            "Planejar a execução e a auditoria.",
            "\"resume o plano de execução e como podemos organizar em issues talvez para registro e auditoria?\"",
-           "Plano em quatro marcos, 22 issues propostas, modelo de issue e ligação das issues com o memorial.", "—"),
+           "Plano em quatro marcos, 22 issues propostas, modelo de issue e ligação das issues com o memorial.",
+           tg.VERIF_6),
         it("13/11/2026", "Q1",
            "Corrigir o número do grupo (estava 3).",
            "\"o grupo estava errado... corrigi para 4\"",
@@ -557,7 +534,7 @@ def interacoes(grupo: int) -> list[dict]:
            "Executar o plano completo.",
            "\"pode executar todo o plano\"",
            "Anexos: src/q02_verificacao.py … src/q14_smc_risco.py, src/relatorio.py, tabelas e figuras em saidas/, relatório técnico, parecer executivo e este registro (commit fa4c144).",
-           "Verificação independente feita pela IA a partir das bases, sem o código do projeto: t da Q8-a, z da Q8-b, VaR da Q4-e, F = t² da Q10, LR de Kupiec da Q8-d, valor preditivo da Q5-c e ROI da Q14-e coincidiram; duas execuções com resultados idênticos. Conferência pelo grupo: " + sugestoes.CONFERENCIA_GRUPO,
+           tg.VERIF_8,
            "Escolhas de modelagem da IA que o grupo deve validar: VaR da Q8-d sobre todas as unidades-mês; índices sazonais com e sem abril/2025 (Q12); efeito do SOC no tempo e na severidade da Q14-d. Ajustes de formatação de tabelas e listas no relatório foram corrigidos pela IA ao revisar o PDF."),
         it("13/11/2026", "Entrega (repositório)",
            "Dar acesso de escrita ao repositório GitHub.",
@@ -569,9 +546,12 @@ def interacoes(grupo: int) -> list[dict]:
            "\"isso, agora confere se já fez tudo e pode fazer todo o resto\"",
            "Checklist contra o enunciado; memorial com os nove campos; atualização da pasta PROVA no Drive, da planilha e do roteiro para o grupo 4.",
            "Checklist dos entregáveis e das questões contra o enunciado."),
-        it(**sugestoes.INTERACAO_11),
+        it(**tg.INTERACAO_11),
+        it(**tg.INTERACAO_12),
     ]
-    for d, decisao in zip(lista, sugestoes.DECISOES):
+    lista += [it(r["data"], r["questao"], r["exig"], "—", "—", r["verif"], "—", ferramenta=SEM_IA) for r in tg.REVISOES]
+    assert len(lista) == len(tg.DECISOES)
+    for d, decisao in zip(lista, tg.DECISOES):
         d["Decisão do grupo"] = decisao
     return lista
 
@@ -581,62 +561,63 @@ def texto_memorial(R: dict) -> str:
     blocos = []
     for k, d in enumerate(interacoes(grupo), 1):
         linhas = [f"### Interação {k} — {d['Questão atendida']}", ""]
-        for campo, valor in d.items():
-            if campo == "Decisão do grupo":
-                valor = sugestoes.M(valor)
-            valor = valor.replace(sugestoes.CONFERENCIA_GRUPO, sugestoes.M(sugestoes.CONFERENCIA_GRUPO))
-            linhas.append(f"* **{campo}:** {valor}")
+        linhas += [f"* **{campo}:** {valor}" for campo, valor in d.items()]
         blocos.append("\n".join(linhas))
     corpo = "\n\n".join(blocos)
-    legenda = "" if sugestoes.FINAL else sugestoes.S(sugestoes.LEGENDA) + "\n"
     return f"""---
 title: "Memorial do Uso de IA — Grupo {grupo}"
+author: "{tg.AUTORES}"
 lang: pt-BR
 ---
 
-O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa deve ser anexado em `memorial_ia/anexos/`.
+O grupo usou ferramenta de IA. Este memorial registra, para cada interação relevante, os nove campos pedidos no enunciado, e também as revisões feitas pelo grupo (interações 13 a 15), que não usaram IA. A mesma informação está em planilha (`memorial_ia/registro.xlsx`). O código gerado está no repositório, identificado pelo commit indicado em cada interação, e o histórico exportado da conversa está anexado em `memorial_ia/anexos/`.
 
-**Ferramenta usada em todas as interações:** {FERRAMENTA}.
-
-{legenda}
+**Ferramenta usada nas interações com IA:** {FERRAMENTA}.
 
 ## Registro das interações
 
 {corpo}
 
-## Verificações sugeridas antes da entrega
-
-1. Rodar `python main.py --grupo {grupo}` em outra máquina e comparar `dados/sha256.json`.
-2. Recalcular à mão, ou na planilha, um resultado por questão: por exemplo o t da Q8-a, o VaR da Q4-e, o F = t² da Q10-a e o ROI da Q14-e.
-3. Ler cada interpretação do relatório e reescrevê-la com as palavras do grupo: a arguição cobra o entendimento de todos.
-
 ## Reflexão final
 
-{sugestoes.reflexao()}
+{tg.REFLEXAO}
 """
 
 
 def salvar_registro_xlsx(R: dict, caminho: str) -> None:
-    df = pd.DataFrame(interacoes(R["q01"]["grupo"]))
+    df = pd.DataFrame(interacoes(R["q01"]["grupo"])).replace("`", "", regex=True)
     df.to_excel(caminho, index=False, sheet_name="registro")
-    if sugestoes.FINAL:
-        return
-    from openpyxl import load_workbook
-    from openpyxl.styles import PatternFill
-    wb = load_workbook(caminho)
-    ws = wb["registro"]
-    amarelo = PatternFill("solid", fgColor="FFFF00")
-    col_dec = list(df.columns).index("Decisão do grupo") + 1
-    col_ver = list(df.columns).index("Verificação") + 1
-    for i, d in enumerate(df.to_dict("records"), start=2):
-        ws.cell(i, col_dec).fill = amarelo
-        if sugestoes.CONFERENCIA_GRUPO in d["Verificação"] or d["Questão atendida"] == sugestoes.INTERACAO_11["questao"]:
-            ws.cell(i, col_ver).fill = amarelo
-    wb.save(caminho)
 
 
-def converter(md_path: str, docx_path: str, pdf: bool = True) -> int | None:
+def ajustar_docx(docx_path: str, compacto: bool = False) -> None:
+    """Parágrafos de texto justificados; no parecer, margens e fonte menores para caber em uma página."""
+    from docx import Document
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.shared import Cm, Pt
+    doc = Document(docx_path)
+    texto = {"Body Text", "First Paragraph", "Compact", "Block Text"}
+    for par in doc.paragraphs:
+        if par.style is not None and par.style.name in texto and not par.text.startswith(("Assunto:", "De:")):
+            par.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    if compacto:
+        for sec in doc.sections:
+            sec.top_margin = sec.bottom_margin = Cm(1.2)
+            sec.left_margin = sec.right_margin = Cm(1.5)
+        for nome, tam in [("Normal", 9.5), ("Body Text", 9.5), ("First Paragraph", 9.5), ("Compact", 9.5), ("Title", 14)]:
+            try:
+                st = doc.styles[nome]
+            except KeyError:
+                continue
+            st.font.size = Pt(tam)
+            pf = st.paragraph_format
+            pf.space_before = Pt(0)
+            pf.space_after = Pt(3 if nome != "Title" else 2)
+    doc.save(docx_path)
+
+
+def converter(md_path: str, docx_path: str, pdf: bool = True, compacto: bool = False) -> int | None:
     subprocess.run(["pandoc", md_path, "-o", docx_path, "--resource-path", RAIZ, "--columns", "40"], check=True)
+    ajustar_docx(docx_path, compacto)
     if not pdf:
         return None
     subprocess.run(["soffice", "--headless", "--convert-to", "pdf", "--outdir", os.path.dirname(docx_path), docx_path],
@@ -646,8 +627,7 @@ def converter(md_path: str, docx_path: str, pdf: bool = True) -> int | None:
     return int([l for l in out.splitlines() if l.startswith("Pages")][0].split()[-1])
 
 
-def gerar(final: bool = False):
-    sugestoes.FINAL = final
+def gerar():
     with open(ARQ_RESULTADOS, encoding="utf-8") as fh:
         R = json.load(fh)
     b = carregar()
@@ -655,7 +635,7 @@ def gerar(final: bool = False):
     mem = os.path.join(RAIZ, "memorial_ia")
     os.makedirs(mem, exist_ok=True)
     arquivos = {
-        os.path.join(REL, "relatorio_tecnico.md"): sugestoes.inserir_leituras(texto_relatorio(R, b), R),
+        os.path.join(REL, "relatorio_tecnico.md"): tg.inserir_leituras(texto_relatorio(R, b)),
         os.path.join(REL, "parecer_executivo.md"): texto_parecer(R),
         os.path.join(mem, "registro_interacoes.md"): texto_memorial(R),
     }
@@ -665,7 +645,8 @@ def gerar(final: bool = False):
         txt = escapar_sublinhados(espacar_listas(txt))
         with open(caminho, "w", encoding="utf-8") as fh:
             fh.write(txt)
-        paginas[os.path.basename(caminho)] = converter(caminho, caminho[:-3] + ".docx")
+        paginas[os.path.basename(caminho)] = converter(caminho, caminho[:-3] + ".docx",
+                                                       compacto=caminho.endswith("parecer_executivo.md"))
     print("páginas:", paginas)
     return paginas
 

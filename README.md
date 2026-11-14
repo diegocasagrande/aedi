@@ -1,7 +1,8 @@
 # Prova AEDI — Grupo 4
 
 Estudo de caso **ANDI: Risco Cibernético por Simulação de Monte Carlo**
-Análise Estatística de Dados e Informações (PPCA/UnB), Prof. João Carlos Félix Souza. Entrega: 09/12/2026.
+Análise Estatística de Dados e Informações (PPCA/UnB), Prof. João Carlos Félix Souza. Entrega: 04/12/2026.
+Grupo 4: Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato.
 
 ## Como rodar
 
@@ -23,6 +24,7 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 | `src/inversa.py` | Q1-b: transformação inversa da Exponencial e da Triangular, comparada com numpy |
 | `src/q02_*.py` … `src/q14_*.py` | Uma questão por arquivo (Partes B e C) |
 | `src/relatorio.py` | Gera relatório, parecer e registro do memorial a partir dos resultados |
+| `src/textos_grupo.py` | Textos do grupo: leituras das questões, parecer executivo, decisões e reflexão do memorial |
 | `dados/` | `unidades`, `ataques`, `perdas`, `painel_trimestral`, `serie_mensal` (entregáveis) + `lambda_programado.csv` (auxiliar da Q2) |
 | `saidas/tabelas/`, `saidas/figuras/` | Tabelas e gráficos do relatório |
 | `saidas/resultados.xlsx` | Bases e tabelas em planilha |
@@ -51,16 +53,11 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 planilha `saidas/resultados.xlsx` (bases + todas as tabelas), resultados numéricos em `saidas/resultados.json`
 e os documentos (requer `pandoc` e LibreOffice para DOCX/PDF; use `--sem-relatorio` para pular essa etapa).
 
-**Sugestões para o grupo.** Por padrão, os documentos saem com sugestões de redação destacadas em amarelo nas partes
-que cabem ao grupo: a "Leitura do grupo para a ANDI" ao fim de cada questão, o campo *Decisão do grupo* do memorial
-e a reflexão final. O texto fica em `src/sugestoes.py`. Depois da revisão, `python main.py --grupo 4 --final` gera a
-versão de entrega, sem o destaque.
-
 ## Andamento
 
 - [x] Parte A — gerador e bases
 - [x] Parte B — Q2 a Q13
 - [x] Parte C — Q14
 - [x] Q15 — parecer executivo
-- [x] Sugestões de redação para as partes do grupo (destacadas em amarelo; `src/sugestoes.py`)
-- [ ] Revisão do grupo: integrantes no relatório, revisão das sugestões, anexo da conversa, versão `--final`
+- [x] Leituras do grupo (Q1–Q14), parecer e memorial com os textos do grupo
+- [ ] Revisões do grupo (20/11, 27/11 e versão final em 29/11) e anexo da conversa exportada
