@@ -79,7 +79,7 @@ O grupo usou ferramenta de IA. Este memorial registra, para cada interação rel
 * **Prompt:** "resume o plano de execução e como podemos organizar em issues talvez para registro e auditoria?"
 * **Resposta obtida:** Plano em quatro marcos, 22 issues propostas, modelo de issue e ligação das issues com o memorial.
 * **Verificação:** Conferência da cobertura de todas as 15 questões e dos 5 entregáveis obrigatórios do enunciado nas etapas do plano.
-* **Decisão do grupo:** Usamos o plano em quatro marcos como guia interno de controle de progresso e auditoria das entregas entre os integrantes, sem necessidade de abrir issues formais no GitHub.
+* **Decisão do grupo:** Usamos o plano em quatro marcos como guia interno de controle de progresso e, na reta final, abrimos issues no GitHub (#1 a #3) para acompanhar as verificações e a revisão dos textos.
 * **Erros da IA:** Nenhum identificado até aqui.
 
 ### Interação 7 — Q1
@@ -151,7 +151,7 @@ O grupo usou ferramenta de IA. Este memorial registra, para cada interação rel
 * **Prompt:** Pedido em nove itens, enviado com os anexos TextosDoGrupo.docx (leituras revisadas) e relatorio\_tecnico.docx (novo parecer); texto integral no histórico exportado da conversa, em anexo.
 * **Resposta obtida:** Textos do grupo incorporados ao relatório e ao parecer, com correções pontuais de coerência; parágrafos justificados; prazo interno de 04/12 e autoria com os quatro integrantes; campos das interações 6, 8 e 11 preenchidos; destaques amarelos removidos.
 * **Verificação:** A IA conferiu cada número dos textos do grupo contra `saidas/resultados.json` e `saidas/tabelas/` e apontou as incoerências encontradas antes da incorporação.
-* **Decisão do grupo:** Aceitamos as correções pontuais de coerência apontadas na conferência e mantivemos o conteúdo dos nossos textos.
+* **Decisão do grupo:** Aceitamos as cinco correções de coerência apontadas na conferência (parecer: perdas catastróficas, causa dos 94% e superfície de ataque; Q5: prevalência; Q10: viés de seleção). Na Q13, retiramos "precisão na calibração de probabilidades", que não foi testada; na Q14, trocamos "eliminando por completo" por "nas simulações". Registro na issue #3 do GitHub.
 * **Erros da IA:** Nenhum identificado até aqui.
 
 ### Interação 13 — Relatório técnico (Q1–Q14)
