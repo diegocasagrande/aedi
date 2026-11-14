@@ -109,10 +109,12 @@ VERIF_6 = ("Conferência da cobertura de todas as 15 questões e dos 5 entregáv
 
 VERIF_8 = ("Verificação independente feita pela IA a partir das bases, sem o código do projeto: t da Q8-a, z da "
            "Q8-b, VaR da Q4-e, F = t² da Q10, LR de Kupiec da Q8-d, valor preditivo da Q5-c e ROI da Q14-e "
-           "coincidiram; duas execuções com resultados idênticos. Conferência pelo grupo: recalculamos na planilha "
-           "`resultados.xlsx` o teste t da Q8-a, o teste Z da Q8-b, os intervalos de confiança da Q7 e o ROI da Q14-e, "
-           "além de executar `python main.py --grupo 4` em outra máquina, confirmando os mesmos hashes SHA-256 em "
-           "`dados/sha256.json`.")
+           "coincidiram; duas execuções com resultados idênticos. Conferência pelo grupo (14/11/2026, execução local): "
+           "recalculamos na planilha `saidas/resultados.xlsx` o teste t da Q8-a, (4,70 − 4)/(4,73/√904) ≈ 4,45, o teste Z "
+           "da Q8-b, (0,4209 − 0,40)/√(0,24/2965) ≈ 2,32, e o ROI da Q14-e, (25,60 − 8)/8 = 220%; em outro computador, "
+           "clonamos o repositório, instalamos as dependências (`pip install -r requirements.txt`) e executamos "
+           "`python main.py --grupo 4 --sem-relatorio`, e o `dados/sha256.json` gerado coincidiu com o do repositório "
+           "(`git diff` sem mudanças).")
 
 INTERACAO_11 = dict(
     data="13/11/2026", questao="Q1–Q14 (interpretações) e memorial",

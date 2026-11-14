@@ -508,7 +508,7 @@ def interacoes(grupo: int) -> list[dict]:
            "Implementar o gerador (Parte A) e as bases num repositório.",
            "\"use esse respositório para o código https://github.com/diegocasagrande/aedi\" → \"salve os arquivos nessa pasta https://drive.google.com/drive/folders/1fhICSMGAVKpyEv8afX6zrzEAQgXnIySQ\"",
            "Anexos: src/gerador.py, src/inversa.py, main.py, README.md (commit 2d63be9). Bases e hashes sha256. Arquivos salvos na pasta PROVA do Drive. O envio ao GitHub falhou por falta de permissão; o commit foi entregue em arquivo bundle.",
-           "Duas execuções com hashes idênticos; contagens, taxa de materialização e tempos médios comparados com os valores programados; teste KS das inversas contra o numpy.",
+           "Duas execuções com hashes idênticos; contagens, taxa de materialização e tempos médios comparados com os valores programados; teste KS das inversas contra o numpy. Conferência pelo grupo (14/11/2026): fórmulas de `src/gerador.py` conferidas contra o enunciado: λ por unidade e mês, CVSS Triangular por tipo, tempo de detecção Exponencial com fator 1,5 fora do expediente, logística da materialização e Lognormal da severidade.",
            "A exportação inicial das bases usava formato numérico com 6 algarismos significativos, o que arredondaria totais grandes (perda_total); percebido e corrigido antes do commit."),
         it("12/11/2026", "Q1, Q2-c",
            "Ter os números da Parte A numa planilha.",
