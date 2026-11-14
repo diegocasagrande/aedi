@@ -51,10 +51,16 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 planilha `saidas/resultados.xlsx` (bases + todas as tabelas), resultados numéricos em `saidas/resultados.json`
 e os documentos (requer `pandoc` e LibreOffice para DOCX/PDF; use `--sem-relatorio` para pular essa etapa).
 
+**Sugestões para o grupo.** Por padrão, os documentos saem com sugestões de redação destacadas em amarelo nas partes
+que cabem ao grupo: a "Leitura do grupo para a ANDI" ao fim de cada questão, o campo *Decisão do grupo* do memorial
+e a reflexão final. O texto fica em `src/sugestoes.py`. Depois da revisão, `python main.py --grupo 4 --final` gera a
+versão de entrega, sem o destaque.
+
 ## Andamento
 
 - [x] Parte A — gerador e bases
 - [x] Parte B — Q2 a Q13
 - [x] Parte C — Q14
 - [x] Q15 — parecer executivo
-- [ ] Revisão do grupo: integrantes no relatório, reescrita das interpretações, reflexão do memorial
+- [x] Sugestões de redação para as partes do grupo (destacadas em amarelo; `src/sugestoes.py`)
+- [ ] Revisão do grupo: integrantes no relatório, revisão das sugestões, anexo da conversa, versão `--final`

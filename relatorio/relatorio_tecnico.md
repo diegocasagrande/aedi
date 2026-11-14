@@ -8,6 +8,8 @@ lang: pt-BR
 
 **Integrantes:** (preencher)
 
+[**Trechos destacados em amarelo:** sugestões de redação para as partes que cabem ao grupo. Revisar, reescrever com as palavras do grupo e gerar a versão final com `python main.py --final`, que remove o destaque.]{.mark}
+
 **Como reproduzir.** `python main.py --grupo 4` recria as cinco bases (hashes sha256 em `dados/sha256.json`), todas as tabelas (`saidas/tabelas/`), figuras (`saidas/figuras/`), a planilha `saidas/resultados.xlsx` e este relatório. Nível de significância: α = 5% em todos os testes, salvo indicação. Cada análise que sorteia números usa um fluxo próprio derivado da semente, `default_rng([202604, nº da questão])`, para não consumir números do gerador das bases.
 
 # Parte A — O modelo gerador
@@ -53,6 +55,8 @@ Em nenhum caso o teste de Kolmogorov-Smirnov rejeita a igualdade das distribuiç
 
 Usar a Normal para a severidade seria um erro grave por três motivos, que os próprios dados mostram. (i) Ajustando uma Normal às perdas observadas (média R$ 70.051, desvio R$ 123.622), 28,5% das perdas seriam **negativas**, o que não existe. (ii) A Normal é simétrica, e as perdas têm assimetria 5,03. (iii) A Normal subestima a cauda: seu quantil de 99,9% é R$ 452.073, contra R$ 1.287.463 observado. A cauda é justamente o que define o risco, e a Normal a cortaria.
 
+[**Leitura do grupo para a ANDI.** Para nós, a Questão 1 é a base de todo o resto: como fomos nós que programamos o gerador, conhecemos os parâmetros verdadeiros e podemos medir, nas questões seguintes, quanto cada método estatístico acerta. Implementar as inversas à mão mostrou que qualquer distribuição pode ser obtida a partir de uma uniforme, e o teste KS confirmou que a nossa implementação equivale à do numpy. Para a ANDI, a decisão mais importante desta parte é usar a Lognormal para a severidade: uma Normal produziria perdas negativas e cortaria justamente a cauda que define o risco.]{.mark}
+
 ## Questão 2 — Verificação do gerador
 
 **a) Média mensal por unidade.** A média observada de ataques por mês acompanha a média teórica dos λ\_u,t (correlação 0,92; Figura 1). Medindo a diferença em erros padrão (√(λ̄/36)), 3 das 24 unidades ficam fora de ±1,96 (z de −3,00 a 1,96); o esperado por acaso seria cerca de 1,2. As unidades fora da faixa têm z de 1,96, −2,13, −3,00; o excesso é pequeno e compatível com a flutuação de 36 meses (a correlação forte mostra que o gerador segue λ).
@@ -73,6 +77,8 @@ Usar a Normal para a severidade seria um erro grave por três motivos, que os pr
 | Ransomware | 157 | 5,3% | 5% | 0,40% | 0,74 |
 
 O qui-quadrado de aderência dá 10,87 com 5 g.l. (crítico 11,07, p = 0,0540): as frequências são compatíveis com as programadas a 5%, ainda que por pouco, puxadas por Força bruta (z = 2,98). Com seis comparações, um z perto de 3 é raro mas não impossível. A taxa de materialização observada é 42,09% contra a média dos p\_i de 43,11%; o erro de simulação (√Σp\_i(1 − p\_i)/n) é 0,80%, então a diferença equivale a z = −1,28. As discrepâncias são do tamanho do erro σ/√n da Seção 12.3: o gerador faz o que foi programado.
+
+[**Leitura do grupo para a ANDI.** Concluímos que o gerador faz o que foi programado: as diferenças entre observado e programado têm o tamanho do erro de simulação esperado. O que mais nos chamou atenção foi a superdispersão das contagens agregadas. Ela não indica que a Poisson está errada, e sim que as unidades da ANDI são diferentes entre si. Para a gestão, isso significa que a frequência de ataques deve ser acompanhada por unidade, e não pela média da agência.]{.mark}
 
 # Parte B — Análise das bases
 
@@ -114,6 +120,8 @@ Para a perda, a regra de Sturges dá k = 1 + 3,322·log₁₀(1.248) ≈ 11 clas
 
 Como a perda é contínua, nenhum valor se repete; a moda é o ponto médio da classe modal (Sturges dentro de cada tipo) e depende da largura escolhida. A média é de 1,4 a 2,4 vezes a mediana: poucas perdas muito grandes a puxam para cima. **A mediana representa melhor a "perda típica" de um incidente** (geral R$ 29.734). A média continua necessária para o orçamento: a perda total é o número de incidentes vezes a média, não a mediana.
 
+[**Leitura do grupo para a ANDI.** Para a diretoria, a lição desta questão é que a perda típica de um incidente e a perda que pesa no orçamento são coisas diferentes. A mediana descreve o incidente comum; o orçamento depende da média, puxada por poucos incidentes caros. Por isso recomendamos que os relatórios de risco da ANDI apresentem sempre as duas medidas juntas.]{.mark}
+
 ## Questão 4 — Dispersão, formato e associação
 
 **a) Dispersão por tipo.**
@@ -141,6 +149,8 @@ Em termos relativos o tipo mais arriscado é **DDoS** (CV = 2,27): sua perda mé
 
 **e) VaR histórico.** O percentil 95 das 36 perdas mensais totais é **R$ 4,48 mi** (média mensal R$ 2,43 mi). Com 36 pontos, esse quantil fica na posição 34,25 da amostra ordenada, entre o 2º maior mês (R$ 5,10 mi) e o 3º (R$ 4,27 mi). Ele depende de dois ou três meses: retirando só o maior mês (2024-09), o VaR cai para R$ 4,27 mi. Um quantil de cauda estimado com tão poucas observações é muito instável, e é por isso que a Parte C o estima por simulação.
 
+[**Leitura do grupo para a ANDI.** Na nossa leitura, os outliers são o próprio risco da ANDI: poucos incidentes respondem por uma parte grande da perda de cada tipo, e retirá-los faria a agência provisionar menos do que precisa. A correlação nula entre patch e ataques mostrou, com os nossos dados, que a correlação simples pode esconder um efeito real, o que motivou a regressão múltipla da Q11. E o VaR histórico de 36 meses caiu de R$ 4,48 mi para R$ 4,27 mi ao retirar um único mês: por isso não o usamos como base de decisão e estimamos a cauda por simulação na Parte C.]{.mark}
+
 ## Questão 5 — Probabilidade e Bayes
 
 **a) Tipo × materialização.** A tabela de contingência completa e as probabilidades conjuntas estão em `saidas/tabelas/q05a_*.csv`. A probabilidade de materializar varia de 30,2% (Força bruta) a 64,3% (Ransomware). **P(materializou | ransomware) = 0,643**, mas **P(ransomware | materializou) = 0,081**. As duas diferem porque têm denominadores diferentes: a primeira divide pelos 157 ransomwares, a segunda pelas 1.248 perdas. Ransomware materializa muito (CVSS alto), mas é só 5,3% dos ataques, então é uma fração pequena das perdas. Confundir as duas é o erro de inverter a condição.
@@ -157,6 +167,8 @@ idêntico à contagem direta (411 materializados entre 657 alarmes = 0,626). A r
 
 ![Figura 5 — Árvore de triagem com a prevalência observada e com a prevalência pela metade.](/home/claude/aedi/saidas/figuras/q05d_arvore_triagem.png){width=15.5cm}
 
+[**Leitura do grupo para a ANDI.** O resultado que levaríamos à equipe de segurança é a diferença entre P(materializou | ransomware) e P(ransomware | materializou). O ransomware é o ataque com maior chance de virar perda, mas é uma fração pequena das perdas; uma estratégia voltada só para ele deixaria a maior parte da perda descoberta. Sobre a triagem, a regra do CVSS ≥ 7 acerta 63% dos alarmes, mas deixa passar 67% das perdas, e com ataques mais raros o mesmo alarme passaria a acertar só 38%. Uma triagem melhor precisa olhar também o tempo de detecção, como mostra a Q13.]{.mark}
+
 ## Questão 6 — Distribuições
 
 **a) Poisson.** Para a unidade 23 (sem SOC, média mensal mediana entre as sem SOC), λ̂ = 3,33 ataques/mês. Pela Poisson, P(N ≥ 6) = 1 − P(N ≤ 5) = **0,121**; na base, 5 dos 36 meses tiveram 6 ou mais ataques (**0,139**). A diferença corresponde a menos de um mês, dentro do esperado para 36 observações (Figura 6).
@@ -169,6 +181,8 @@ idêntico à contagem direta (411 materializados entre 657 alarmes = 0,626). A r
 
 ![Figura 7 — Gráficos Q-Q de ln(perda) contra a Normal: ransomware e phishing.](/home/claude/aedi/saidas/figuras/q06c_qq_lognormal.png){width=13cm}
 
+
+[**Leitura do grupo para a ANDI.** Escolhemos a unidade 23 por ser a de média mensal mediana entre as unidades sem SOC: queríamos uma unidade típica, e não um caso extremo. Nas três verificações, as distribuições escolhidas no gerador se sustentaram nos dados. Para a ANDI, isso permite planejar a capacidade de resposta com a Poisson: numa unidade como esta, a chance de seis ou mais ataques num mês é de 12%, perto do que se observou.]{.mark}
 
 ## Questão 7 — Amostragem e estimação
 
@@ -198,6 +212,8 @@ O desvio das médias acompanha σ/√n nos três tamanhos (Figura 8). Mas a form
 ![Figura 8 — Distribuição de 2.000 médias amostrais de perda_rs para n = 5, 30 e 100.](/home/claude/aedi/saidas/figuras/q07c_tcl.png){width=15cm}
 
 
+[**Leitura do grupo para a ANDI.** O que mais aprendemos aqui foi por que os intervalos não contêm 4 h e 12 h: o θ programado vale só para o expediente, e os ataques fora do expediente demoram 50% mais. Para a ANDI, qualquer meta de tempo de detecção precisa dizer se vale para o expediente ou para as 24 horas. Para uma auditoria, cerca de 2.341 ataques bastariam para estimar a taxa de materialização com margem de 2 pontos percentuais.]{.mark}
+
 ## Questão 8 — Testes de hipóteses e backtesting
 
 **a) Contrato do SOC (máximo 4 h).** (1) H₀: μ ≤ 4 h; Hₐ: μ > 4 h. (2) Estatística t de Student (σ desconhecido). (3) α = 5%, unilateral à direita. (4) Rejeitar H₀ se t > t₀,₀₅;903 = 1,647. (5) n = 904, x̄ = 4,70 h, s = 4,73 h, t = (x̄ − 4)/(s/√n) = **4,45**, p-valor < 0,0001. (6) **Rejeita-se H₀**: o tempo médio de detecção nas unidades com SOC supera o prometido. O resultado não deveria surpreender: o θ = 4 h vale só para ataques no expediente; com o fator 1,5 fora do expediente a média verdadeira é 4,7 h. Testando apenas os ataques no expediente, x̄ = 3,91 h, t = −0,59 e p = 0,723: o contrato é cumprido no expediente e descumprido fora dele.
@@ -210,6 +226,8 @@ O desvio das médias acompanha σ/√n nos três tamanhos (Figura 8). Mas a form
 
 ![Figura 9 — Perdas mensais por unidade em 2025 e o VaR 95% estimado em 2023–2024.](/home/claude/aedi/saidas/figuras/q08d_backtesting.png){width=13cm}
 
+[**Leitura do grupo para a ANDI.** Os dois testes apontam problemas de natureza diferente. O SOC cumpre as 4 h no expediente, mas não fora dele: na nossa visão, a renegociação do contrato deveria tratar da cobertura noturna e de fins de semana, e não trocar o fornecedor. A meta de 40% de materialização não está sendo cumprida (42,1%), o que reforça o pacote de controles avaliado na Q14. E o backtesting nos convenceu de que um VaR estático falha quando o risco cresce: o modelo de risco da agência precisa ser reestimado com frequência.]{.mark}
+
 ## Questão 9 — Correlação e regressão simples
 
 **a) Correlação.** Entre perda\_rs e tempo, r = 0,217 (t = 7,85); entre ln(perda) e tempo, r = 0,228 (t = 8,27). Nos dois casos rejeita-se H₀: ρ = 0 (p < 0,0001). A correlação com a perda bruta é dominada por poucos valores extremos (Figura 10); o log torna a relação linear e homogênea.
@@ -221,6 +239,8 @@ O desvio das médias acompanha σ/√n nos três tamanhos (Figura 8). Mas a form
 **c) Ajuste.** R² = 0,052 e erro padrão da regressão s = 1,159 (em ln). Um R² baixo **não** invalida a conclusão: o coeficiente é estimado com precisão (t = 8,27) e o efeito existe; o tempo simplesmente explica uma parte pequena da variação. A variável omitida que mais infla o resíduo é o **tipo de ataque**: as medianas vão de R$ 10 mil a R$ 150 mil, e incluí-lo leva o R² a 0,43 (Q10-d); o restante é o erro ε próprio da Lognormal.
 
 **d) Gauss-Markov.** São plausíveis: linearidade em ln(perda); independência entre perdas (Durbin-Watson = 1,94); homocedasticidade (Breusch-Pagan p = 0,78). A normalidade dos erros é aproximada (Jarque-Bera p = 0,004), pois o resíduo mistura tipos com medianas diferentes. O problema maior é o **viés de seleção**: só vemos perdas de ataques que se materializaram, e a materialização depende do tempo e do CVSS. Ataques de tipos baratos (CVSS baixo) quase só materializam quando a detecção demora: o tempo médio do phishing é 11,1 h entre todos os ataques e 17,0 h entre os materializados; no ransomware, 10,3 h e 11,6 h. Entre as perdas, tempos longos ficam associados a tipos baratos, e isso **atenua** β₁ (0,0166 na regressão simples contra 0,0225 controlando o tipo).
+
+[**Leitura do grupo para a ANDI.** A conclusão que levamos à diretoria é que tempo é dinheiro: cada hora a mais até a detecção encarece a perda em cerca de 1,7%. O R² baixo não enfraquece essa conclusão, porque o efeito é estimado com precisão; ele mostra apenas que o tempo não é o único fator. Também aprendemos que olhar só para os ataques que viraram perda distorce a análise, porque eles não são uma amostra aleatória de todos os ataques.]{.mark}
 
 ## Questão 10 — Inferência na regressão
 
@@ -248,6 +268,8 @@ F = 68,438 e t(β₁) = 8,2727, com t² = 68,438 = F: na regressão simples os d
 | Malware | 1,87 | 2,00 |
 | Ransomware | 9,91 | 10,00 |
 
+
+[**Leitura do grupo para a ANDI.** Para orçar um incidente individual, o que importa é o intervalo de previsão, e ele é muito largo: um ataque detectado em 24 h pode custar de R$ 3.866 a R$ 365.951. Já a perda típica desse ataque é conhecida com boa precisão. Incluir o tipo de ataque aproximou o efeito do tempo do valor que programamos; para a ANDI, avaliar o risco sem considerar o tipo de ataque leva a conclusões enviesadas.]{.mark}
 
 ## Questão 11 — Regressão múltipla
 
@@ -307,6 +329,8 @@ O ajuste melhora: R² ajustado de 0,403 para 0,431, e o F parcial das quatro var
 
 As cinco variáveis de puro ruído **aumentam o R² de treino** (como sempre acontece) mas **reduzem o R² ajustado e pioram o erro de previsão** em 2025: o modelo passou a ajustar ruído. O R² de treino não serve para escolher modelos; o R² ajustado e o erro fora da amostra servem.
 
+[**Leitura do grupo para a ANDI.** Do ponto de vista da gestão, a regressão mostra onde agir: um SOC dedicado retira cerca de 1,5 ataques por trimestre em cada unidade, e cada serviço exposto a menos retira 0,56. O fato de só 3 dos 5 intervalos conterem o valor verdadeiro nos ensinou que um modelo pode acertar os sinais e ainda errar na incerteza, quando falta uma variável (a campanha) ou a variância dos erros não é constante. Por isso usamos a Q11 na Q14 sabendo que ela superestima a tendência.]{.mark}
+
 ## Questão 12 — Séries temporais
 
 **a) Tendência e sazonalidade.** Os ataques anuais foram 902 (2023), 964 (2024) e 1.099 (2025). A média móvel de 12 meses sobe de 75,2 para 91,6 ataques/mês: há **tendência de alta** (Figura 12). A média móvel de 3 meses e a suavização exponencial (α = 0,11, estimado) mostram picos em março–abril e novembro e vales em fevereiro e junho, ou seja, **sazonalidade** sobreposta ao ruído. O ponto que mais chama atenção é **abril/2025, com 165 ataques**, quase o dobro da média.
@@ -340,6 +364,8 @@ O índice de abril sai **1,38** contra 1,10 programado: com só dois abris na ja
 
 ![Figura 14 — Ajuste, previsão de 2026 com banda de 95% e alarme pela regra dos 3σ.](/home/claude/aedi/saidas/figuras/q12d_previsao.png){width=15cm}
 
+
+[**Leitura do grupo para a ANDI.** A previsão de cerca de 1.153 ataques em 2026 dá à ANDI uma base para dimensionar a equipe de resposta mês a mês. A regra dos 3σ encontrou a campanha de abril/2025 sem falsos alarmes, e sugerimos adotá-la como monitoramento mensal, calculando o σ sem o mês testado. A principal limitação é a série curta: com três anos, a sazonalidade aparece, mas é medida com pouca precisão.]{.mark}
 
 ## Questão 13 — Classificação
 
@@ -385,6 +411,8 @@ A logística é melhor em quase tudo, e sobretudo na AUC (0,770 contra 0,723; Fi
 
 ![Figura 16 — Custo total dos erros no teste em função do limiar.](/home/claude/aedi/saidas/figuras/q13e_limiar_custo.png){width=10cm}
 
+
+[**Leitura do grupo para a ANDI.** Para a operação, a lição é que o limiar de 0,5 não é neutro: como deixar passar uma perda custa muito mais do que investigar um alarme falso, o limiar de custo mínimo reduziu o custo dos erros de R$ 6,57 mi para R$ 1,89 mi em 2025. Preferimos a logística à árvore pela AUC maior e porque seus coeficientes têm leitura direta; a árvore, porém, é útil para explicar a triagem a quem não é da área.]{.mark}
 
 # Parte C — SMC de risco e decisão
 
@@ -499,3 +527,6 @@ A cauda fica curta por três razões:
 3. A severidade e a materialização são tratadas como independentes, quando ambas crescem com o tempo de detecção, o que produz anos ruins mais concentrados.
 
 Para provisionamento, o VaR e o CVaR estimados devem ser lidos como **limites inferiores** e acompanhados de margem.
+
+
+[**Leitura do grupo para a ANDI.** Na nossa avaliação, o pacote de controles deve ser aprovado: reduz a perda esperada em R$ 25,6 mi por ano, com ROI de 220%, e em nenhuma das réplicas deixou a ANDI pior. A comparação com o gerador verdadeiro mostrou que o modelo acerta o centro, mas subestima a cauda; por isso recomendamos tratar VaR e CVaR como pisos e revisar o modelo a cada trimestre, com os dados novos.]{.mark}

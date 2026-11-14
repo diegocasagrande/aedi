@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
+import sugestoes
 from util import ARQ_RESULTADOS, FIGURAS, RAIZ, TABELAS, TIPOS, carregar, fmt
 
 REL = os.path.join(RAIZ, "relatorio")
@@ -515,7 +516,7 @@ def interacoes(grupo: int) -> list[dict]:
                 "Questão atendida": questao, "Exigência feita à IA": exig, "Prompt": prompt,
                 "Resposta obtida": resp, "Verificação": verif, "Decisão do grupo": A_PREENCHER,
                 "Erros da IA": erros or "Nenhum identificado até aqui."}
-    return [
+    lista = [
         it("12/11/2026", "Q1–Q15 (planejamento)",
            "Entender o que a prova pede e organizar a resolução antes de começar.",
            "[anexo: AEDI_Enunciado_Prova.pdf] \"do mesmo professor que é autor do livro temos que fazer essa prova passo a passo e gerar os itens integraveis conforme escrito no documento anexo aqui avalie como pode ser realizado esse trabalho, escreva o roteiro passo a passo para resolução\"",
@@ -556,7 +557,7 @@ def interacoes(grupo: int) -> list[dict]:
            "Executar o plano completo.",
            "\"pode executar todo o plano\"",
            "Anexos: src/q02_verificacao.py … src/q14_smc_risco.py, src/relatorio.py, tabelas e figuras em saidas/, relatório técnico, parecer executivo e este registro (commit fa4c144).",
-           "Verificação independente feita pela IA a partir das bases, sem o código do projeto: t da Q8-a, z da Q8-b, VaR da Q4-e, F = t² da Q10, LR de Kupiec da Q8-d, valor preditivo da Q5-c e ROI da Q14-e coincidiram; duas execuções com resultados idênticos. Conferência pelo grupo: " + A_PREENCHER,
+           "Verificação independente feita pela IA a partir das bases, sem o código do projeto: t da Q8-a, z da Q8-b, VaR da Q4-e, F = t² da Q10, LR de Kupiec da Q8-d, valor preditivo da Q5-c e ROI da Q14-e coincidiram; duas execuções com resultados idênticos. Conferência pelo grupo: " + sugestoes.CONFERENCIA_GRUPO,
            "Escolhas de modelagem da IA que o grupo deve validar: VaR da Q8-d sobre todas as unidades-mês; índices sazonais com e sem abril/2025 (Q12); efeito do SOC no tempo e na severidade da Q14-d. Ajustes de formatação de tabelas e listas no relatório foram corrigidos pela IA ao revisar o PDF."),
         it("13/11/2026", "Entrega (repositório)",
            "Dar acesso de escrita ao repositório GitHub.",
@@ -568,7 +569,11 @@ def interacoes(grupo: int) -> list[dict]:
            "\"isso, agora confere se já fez tudo e pode fazer todo o resto\"",
            "Checklist contra o enunciado; memorial com os nove campos; atualização da pasta PROVA no Drive, da planilha e do roteiro para o grupo 4.",
            "Checklist dos entregáveis e das questões contra o enunciado."),
+        it(**sugestoes.INTERACAO_11),
     ]
+    for d, decisao in zip(lista, sugestoes.DECISOES):
+        d["Decisão do grupo"] = decisao
+    return lista
 
 
 def texto_memorial(R: dict) -> str:
@@ -576,9 +581,14 @@ def texto_memorial(R: dict) -> str:
     blocos = []
     for k, d in enumerate(interacoes(grupo), 1):
         linhas = [f"### Interação {k} — {d['Questão atendida']}", ""]
-        linhas += [f"* **{campo}:** {valor}" for campo, valor in d.items()]
+        for campo, valor in d.items():
+            if campo == "Decisão do grupo":
+                valor = sugestoes.M(valor)
+            valor = valor.replace(sugestoes.CONFERENCIA_GRUPO, sugestoes.M(sugestoes.CONFERENCIA_GRUPO))
+            linhas.append(f"* **{campo}:** {valor}")
         blocos.append("\n".join(linhas))
     corpo = "\n\n".join(blocos)
+    legenda = "" if sugestoes.FINAL else sugestoes.S(sugestoes.LEGENDA) + "\n"
     return f"""---
 title: "Memorial do Uso de IA — Grupo {grupo}"
 lang: pt-BR
@@ -588,7 +598,7 @@ O grupo usou ferramenta de IA. Este memorial registra, para cada interação rel
 
 **Ferramenta usada em todas as interações:** {FERRAMENTA}.
 
-**A preencher pelo grupo antes da entrega:** o campo *Decisão do grupo* de cada interação, interações de outros integrantes (se houver), o anexo com o histórico da conversa e a reflexão final.
+{legenda}
 
 ## Registro das interações
 
@@ -600,14 +610,29 @@ O grupo usou ferramenta de IA. Este memorial registra, para cada interação rel
 2. Recalcular à mão, ou na planilha, um resultado por questão: por exemplo o t da Q8-a, o VaR da Q4-e, o F = t² da Q10-a e o ROI da Q14-e.
 3. Ler cada interpretação do relatório e reescrevê-la com as palavras do grupo: a arguição cobra o entendimento de todos.
 
-## Reflexão final (até uma página — a escrever pelo grupo)
+## Reflexão final
 
-*Em que a IA ajudou, em que atrapalhou ou errou, e qual parte do trabalho o grupo considera exclusivamente sua.*
+{sugestoes.reflexao()}
 """
 
 
 def salvar_registro_xlsx(R: dict, caminho: str) -> None:
-    pd.DataFrame(interacoes(R["q01"]["grupo"])).to_excel(caminho, index=False, sheet_name="registro")
+    df = pd.DataFrame(interacoes(R["q01"]["grupo"]))
+    df.to_excel(caminho, index=False, sheet_name="registro")
+    if sugestoes.FINAL:
+        return
+    from openpyxl import load_workbook
+    from openpyxl.styles import PatternFill
+    wb = load_workbook(caminho)
+    ws = wb["registro"]
+    amarelo = PatternFill("solid", fgColor="FFFF00")
+    col_dec = list(df.columns).index("Decisão do grupo") + 1
+    col_ver = list(df.columns).index("Verificação") + 1
+    for i, d in enumerate(df.to_dict("records"), start=2):
+        ws.cell(i, col_dec).fill = amarelo
+        if sugestoes.CONFERENCIA_GRUPO in d["Verificação"] or d["Questão atendida"] == sugestoes.INTERACAO_11["questao"]:
+            ws.cell(i, col_ver).fill = amarelo
+    wb.save(caminho)
 
 
 def converter(md_path: str, docx_path: str, pdf: bool = True) -> int | None:
@@ -621,7 +646,8 @@ def converter(md_path: str, docx_path: str, pdf: bool = True) -> int | None:
     return int([l for l in out.splitlines() if l.startswith("Pages")][0].split()[-1])
 
 
-def gerar():
+def gerar(final: bool = False):
+    sugestoes.FINAL = final
     with open(ARQ_RESULTADOS, encoding="utf-8") as fh:
         R = json.load(fh)
     b = carregar()
@@ -629,7 +655,7 @@ def gerar():
     mem = os.path.join(RAIZ, "memorial_ia")
     os.makedirs(mem, exist_ok=True)
     arquivos = {
-        os.path.join(REL, "relatorio_tecnico.md"): texto_relatorio(R, b),
+        os.path.join(REL, "relatorio_tecnico.md"): sugestoes.inserir_leituras(texto_relatorio(R, b), R),
         os.path.join(REL, "parecer_executivo.md"): texto_parecer(R),
         os.path.join(mem, "registro_interacoes.md"): texto_memorial(R),
     }
