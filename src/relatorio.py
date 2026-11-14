@@ -624,6 +624,7 @@ def ajustar_docx(docx_path: str, compacto: bool = False) -> None:
     from docx.shared import Cm, Pt
     doc = Document(docx_path)
     fonte_texto(doc)
+    manter_tabelas(doc)
     texto = {"Body Text", "First Paragraph", "Compact", "Block Text"}
     for par in doc.paragraphs:
         if par.style is not None and par.style.name in texto and not par.text.startswith(("Assunto:", "De:")):
@@ -644,14 +645,84 @@ def ajustar_docx(docx_path: str, compacto: bool = False) -> None:
     doc.save(docx_path)
 
 
+CSS_PDF = """
+@page { size: A4; margin: 2.2cm 2.2cm 2.2cm 2.2cm; }
+html { font-family: 'Liberation Serif', 'Times New Roman', serif; font-size: 11.5pt; line-height: 1.32; color: #111; }
+body { margin: 0; max-width: none; padding: 0; }
+h1, h2, h3, header .title, header .subtitle { font-family: 'Carlito', 'Calibri', sans-serif; color: #2f5496; break-after: avoid; }
+header { text-align: center; margin-bottom: 1.2em; }
+header .title { font-size: 20pt; margin: 0 0 .2em; }
+header .subtitle { font-size: 13pt; margin: 0 0 .4em; font-weight: normal; }
+header .author, header .date { margin: .15em 0; }
+h1 { font-size: 16pt; margin: 1.2em 0 .5em; }
+h2 { font-size: 13.5pt; margin: 1.1em 0 .45em; }
+h3 { font-size: 12pt; margin: .9em 0 .35em; }
+p, li { text-align: justify; hyphens: auto; orphans: 3; widows: 3; }
+p { margin: 0 0 .55em; }
+ul, ol { margin: .2em 0 .6em; padding-left: 1.6em; }
+code { font-family: 'DejaVu Sans Mono', monospace; font-size: .86em; }
+table { border-collapse: collapse; margin: .5em auto .9em; font-size: 9.6pt; break-inside: avoid; page-break-inside: avoid; }
+thead th { border-bottom: 1px solid #333; border-top: 1px solid #333; padding: 3px 6px; vertical-align: bottom; }
+td { padding: 2px 6px; vertical-align: top; }
+tbody tr:last-child td { border-bottom: 1px solid #333; }
+tr { break-inside: avoid; }
+figure { margin: .6em 0 .9em; text-align: center; break-inside: avoid; page-break-inside: avoid; }
+figure img { max-width: 100%; height: auto; }
+figcaption { font-style: italic; font-size: 10pt; margin-top: .3em; }
+"""
+
+CSS_COMPACTO = """
+@page { size: A4; margin: 1.2cm 1.5cm; }
+html { font-size: 9.6pt; line-height: 1.25; }
+header { margin-bottom: .5em; }
+header .title { font-size: 14pt; }
+p { margin: 0 0 .4em; }
+ul { margin: .1em 0 .4em; }
+"""
+
+
+def pdf_chromium(md_path: str, pdf_path: str, compacto: bool = False) -> None:
+    """PDF pelo Chromium: fontes gravadas em Unicode (Identity-H), legíveis por qualquer extrator de texto,
+    parágrafos justificados e tabelas e figuras sem quebra entre páginas."""
+    css = os.path.join(os.path.dirname(pdf_path), ".estilo_pdf.css")
+    with open(css, "w", encoding="utf-8") as fh:
+        fh.write(CSS_PDF + (CSS_COMPACTO if compacto else ""))
+    html = pdf_path[:-4] + ".html"
+    subprocess.run(["pandoc", md_path, "-s", "-o", html, "--resource-path", RAIZ, "--embed-resources",
+                    "--css", css, "--metadata", "lang=pt-BR"], check=True, capture_output=True)
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        nav = pw.chromium.launch()
+        pag = nav.new_page()
+        pag.goto("file://" + html)
+        pag.pdf(path=pdf_path, format="A4", print_background=True, prefer_css_page_size=True)
+        nav.close()
+    os.remove(html)
+    os.remove(css)
+
+
+def manter_tabelas(doc) -> None:
+    """No docx, cada tabela fica numa página só (linhas sem quebra e ligadas à seguinte)."""
+    from docx.oxml.ns import qn
+    for tab in doc.tables:
+        linhas = tab.rows
+        for i, ln in enumerate(linhas):
+            trpr = ln._tr.get_or_add_trPr()
+            if trpr.find(qn("w:cantSplit")) is None:
+                trpr.append(trpr.makeelement(qn("w:cantSplit"), {}))
+            if i < len(linhas) - 1:
+                for cel in ln.cells:
+                    for par in cel.paragraphs:
+                        par.paragraph_format.keep_with_next = True
+
+
 def converter(md_path: str, docx_path: str, pdf: bool = True, compacto: bool = False) -> int | None:
     subprocess.run(["pandoc", md_path, "-o", docx_path, "--resource-path", RAIZ, "--columns", "40"], check=True)
     ajustar_docx(docx_path, compacto)
     if not pdf:
         return None
-    subprocess.run(["soffice", "--headless", "--convert-to", "pdf", "--outdir", os.path.dirname(docx_path), docx_path],
-                   check=True, capture_output=True)
     pdf_path = docx_path[:-5] + ".pdf"
+    pdf_chromium(md_path, pdf_path, compacto)
     out = subprocess.run(["pdfinfo", pdf_path], capture_output=True, text=True).stdout
     return int([l for l in out.splitlines() if l.startswith("Pages")][0].split()[-1])
 

@@ -51,7 +51,7 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 
 `python main.py --grupo 4` roda tudo em cerca de 1 minuto: gerador, questões 1 a 14 (`src/q02_…py` a `src/q14_…py`),
 planilha `saidas/resultados.xlsx` (bases + todas as tabelas), resultados numéricos em `saidas/resultados.json`
-e os documentos (requer `pandoc` e LibreOffice para DOCX/PDF; use `--sem-relatorio` para pular essa etapa).
+e os documentos (requer `pandoc` para o DOCX e o Chromium do Playwright para o PDF — `playwright install chromium`; use `--sem-relatorio` para pular essa etapa).
 
 ## Andamento
 
