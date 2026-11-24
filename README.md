@@ -1,7 +1,7 @@
 # Prova AEDI — Grupo 4
 
 Estudo de caso **ANDI: Risco Cibernético por Simulação de Monte Carlo**
-Análise Estatística de Dados e Informações (PPCA/UnB), Prof. João Carlos Félix Souza. Entrega: 04/12/2026.
+Análise Estatística de Dados e Informações (PPCA/UnB), Prof. João Carlos Félix Souza. Entrega oficial: 09/12/2026 (prazo interno do grupo: 04/12/2026).
 Grupo 4: Diego Casagrande, Mateus Martins, Silvio Sznifer, Vinícius Chiconato.
 
 ## Como rodar
@@ -29,7 +29,7 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 | `saidas/tabelas/`, `saidas/figuras/` | Tabelas e gráficos do relatório |
 | `saidas/resultados.xlsx` | Bases e tabelas em planilha |
 | `relatorio/` | Relatório técnico (Q1–Q14) e parecer executivo (Q15) |
-| `memorial_ia/` | Memorial do Uso de IA e anexos |
+| `memorial_ia/` | Memorial do Uso de IA e anexos (histórico exportado das conversas com o Claude e auditoria feita no Gemini) |
 
 ## Decisões de implementação
 
@@ -47,7 +47,7 @@ os hashes sha256 esperados estão em `dados/sha256.json`. Testado com Python 3.1
 | 2 | Bases | `dados/*.csv` (+ `sha256.json`) |
 | 3 | Relatório técnico (Q1–Q14) | `relatorio/relatorio_tecnico.pdf` (e `.docx`, `.md`) |
 | 4 | Parecer executivo (Q15) | `relatorio/parecer_executivo.pdf` (e `.docx`, `.md`) |
-| 5 | Memorial do Uso de IA | `memorial_ia/registro_interacoes.*` e `memorial_ia/registro.xlsx` (nove campos por interação; decisão do grupo, anexo da conversa e reflexão final a completar pelo grupo) |
+| 5 | Memorial do Uso de IA | `memorial_ia/registro_interacoes.*` e `memorial_ia/registro.xlsx` (nove campos por interação, 14 interações) e anexos em `memorial_ia/anexos/` |
 
 `python main.py --grupo 4` roda tudo em cerca de 1 minuto: gerador, questões 1 a 14 (`src/q02_…py` a `src/q14_…py`),
 planilha `saidas/resultados.xlsx` (bases + todas as tabelas), resultados numéricos em `saidas/resultados.json`

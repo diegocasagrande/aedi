@@ -82,7 +82,7 @@ O qui-quadrado de aderência dá 10,87 com 5 g.l. (crítico 11,07, p = 0,0540): 
 
 ## Questão 3 — Dos dados à decisão
 
-**a) Tipos de variáveis e estrutura.** Em `ataques.csv`: tipo, unidade, fora\_expediente e materializou são **qualitativas nominais** (as duas últimas dicotômicas 0/1); mês é qualitativa ordinal (cíclica); trimestre e ano são quantitativas discretas (índices de tempo); cvss e tempo\_deteccao\_h são **quantitativas contínuas** (o CVSS é registrado com uma casa, mas é contínuo por natureza); id\_ataque e data são identificador e carimbo temporal. Em `perdas.csv`, perda\_rs é quantitativa contínua. Quanto à estrutura, ataques e perdas são **microdados em painel** (cada evento ligado a uma unidade e a uma data); o painel trimestral é um painel balanceado 24 × 12 e a série mensal é uma série temporal.
+**a) Tipos de variáveis e estrutura.** Em `ataques.csv`: tipo, unidade, fora\_expediente e materializou são **qualitativas nominais** (as duas últimas dicotômicas 0/1); mês é qualitativa ordinal (cíclica); trimestre e ano são quantitativas discretas (índices de tempo); cvss e tempo\_deteccao\_h são **quantitativas contínuas** (o CVSS é registrado com uma casa, mas é contínuo por natureza); id\_ataque e data são identificador e carimbo temporal. Em `perdas.csv`, id\_perda e id\_ataque são identificadores (o segundo liga cada perda ao ataque de origem), unidade e tipo são qualitativas nominais, data é carimbo temporal, tempo\_deteccao\_h é quantitativa contínua e perda\_rs é **quantitativa contínua** (em R$, positiva e assimétrica). Quanto à estrutura, ataques e perdas são **microdados em painel** (cada evento ligado a uma unidade e a uma data); o painel trimestral é um painel balanceado 24 × 12 e a série mensal é uma série temporal.
 
 * **População:** todos os ataques que a ANDI sofre (o processo gerador, em qualquer período).
 * **Amostra:** os 2.965 ataques e 1.248 perdas observados em 2023–2025.
@@ -141,7 +141,18 @@ Em termos relativos o tipo mais arriscado é **DDoS** (CV = 2,27): sua perda mé
 
 **c) Formato.** A perda tem assimetria 5,03 e curtose 38,33 (a Normal tem 0 e 3). O ln(perda) tem assimetria 0,24 e curtose 3,00: **o logaritmo transforma uma distribuição muito assimétrica e de cauda pesada em outra quase Normal**, o que é a definição da Lognormal e justifica modelar ln(perda) por regressão (Q9–Q10).
 
-**d) Covariâncias e correlações (painel).** As matrizes completas estão em `saidas/tabelas/q04d_*.csv`; as correlações estão na Figura 4. n\_ataques cresce com serviços expostos (r = 0,50) e cai com SOC (−0,14) e treino (−0,09), nos sentidos esperados. A correlação de n\_ataques com patch é praticamente nula (0,00), embora patch reduza ataques no gerador: nesta amostra de 24 unidades, patch é positivamente correlacionado com serviços (0,30), e o efeito de serviços mascara o de patch. **Correlação simples não é efeito parcial**: a regressão múltipla da Q11 separa os dois. A perda total trimestral correlaciona com o número de ataques (0,41) e, mais fortemente que ele, com SOC (−0,32), porque o SOC reduz ataques, materialização e severidade ao mesmo tempo.
+**d) Covariâncias e correlações (painel).** A matriz de covariâncias está abaixo (perda\_total em R$ mil, para caber na tabela; arquivo completo em `saidas/tabelas/q04d_covariancias.csv`); as correlações estão na Figura 4.
+
+| Variável | n\_ataques | perda\_total | servicos | patch | treino | soc |
+| :----------------- | --------------: | -----------------: | -------------: | ------------: | ------------: | ----------: |
+| n\_ataques | 19,51 | 605,57 | 11,15 | 0,09 | -1,54 | -0,29 |
+| perda\_total | 605,57 | 112.299,30 | 124,89 | -317,12 | -178,12 | -50,46 |
+| servicos | 11,15 | 124,89 | 25,14 | 9,55 | 4,27 | 0,15 |
+| patch | 0,09 | -317,12 | 9,55 | 40,35 | -4,14 | 0,48 |
+| treino | -1,54 | -178,12 | 4,27 | -4,14 | 14,48 | -0,10 |
+| soc | -0,29 | -50,46 | 0,15 | 0,48 | -0,10 | 0,22 |
+
+Na diagonal estão as variâncias. As covariâncias dependem das unidades de medida (a da perda total é da ordem de milhões), por isso a comparação de intensidade é feita pelas correlações. n\_ataques cresce com serviços expostos (r = 0,50) e cai com SOC (−0,14) e treino (−0,09), nos sentidos esperados. A correlação de n\_ataques com patch é praticamente nula (0,00), embora patch reduza ataques no gerador: nesta amostra de 24 unidades, patch é positivamente correlacionado com serviços (0,30), e o efeito de serviços mascara o de patch. **Correlação simples não é efeito parcial**: a regressão múltipla da Q11 separa os dois. A perda total trimestral correlaciona com o número de ataques (0,41) e, mais fortemente que ele, com SOC (−0,32), porque o SOC reduz ataques, materialização e severidade ao mesmo tempo.
 
 ![Figura 4 — Matriz de correlações no painel trimestral (288 observações).](/home/claude/aedi/saidas/figuras/q04d_correlacoes.png){width=9cm}
 
@@ -151,7 +162,19 @@ Em termos relativos o tipo mais arriscado é **DDoS** (CV = 2,27): sua perda mé
 
 ## Questão 5 — Probabilidade e Bayes
 
-**a) Tipo × materialização.** A tabela de contingência completa e as probabilidades conjuntas estão em `saidas/tabelas/q05a_*.csv`. A probabilidade de materializar varia de 30,2% (Força bruta) a 64,3% (Ransomware). **P(materializou | ransomware) = 0,643**, mas **P(ransomware | materializou) = 0,081**. As duas diferem porque têm denominadores diferentes: a primeira divide pelos 157 ransomwares, a segunda pelas 1.248 perdas. Ransomware materializa muito (CVSS alto), mas é só 5,3% dos ataques, então é uma fração pequena das perdas. Confundir as duas é o erro de inverter a condição.
+**a) Tipo × materialização.** Contagens, probabilidades conjuntas P(tipo ∩ materialização) e marginais (última coluna e última linha):
+
+| Tipo | Não materializou | Materializou | Total (marginal) | Taxa de materialização |
+| :---------------- | ------------------: | ------------------: | ----------------: | ---------------------: |
+| Phishing | 621 (0,209) | 384 (0,130) | 1005 (0,339) | 38,2% |
+| Força bruta | 459 (0,155) | 199 (0,067) | 658 (0,222) | 30,2% |
+| Malware | 230 (0,078) | 192 (0,065) | 422 (0,142) | 45,5% |
+| Exploração | 190 (0,064) | 254 (0,086) | 444 (0,150) | 57,2% |
+| DDoS | 161 (0,054) | 118 (0,040) | 279 (0,094) | 42,3% |
+| Ransomware | 56 (0,019) | 101 (0,034) | 157 (0,053) | 64,3% |
+| Total | 1717 (0,579) | 1248 (0,421) | 2965 (1,000) | 42,1% |
+
+As probabilidades conjuntas somam 1; as marginais da linha "Total" são P(não materializou) e P(materializou). A probabilidade de materializar varia de 30,2% (Força bruta) a 64,3% (Ransomware). **P(materializou | ransomware) = 0,643**, mas **P(ransomware | materializou) = 0,081**. As duas diferem porque têm denominadores diferentes: a primeira divide pelos 157 ransomwares, a segunda pelas 1.248 perdas. Ransomware materializa muito (CVSS alto), mas é só 5,3% dos ataques, então é uma fração pequena das perdas. Confundir as duas é o erro de inverter a condição.
 
 **b) SOC e materialização.** P(SOC) = 0,305, P(materializou) = 0,421 e P(SOC ∩ materializou) = 0,0728, bem abaixo de P(SOC)·P(materializou) = 0,1283. **Os eventos não são independentes**: com SOC, materializam 23,9% dos ataques; sem SOC, 50,1% (qui-quadrado de independência = 176,7, p < 0,0001).
 
@@ -244,11 +267,11 @@ O desvio das médias acompanha σ/√n nos três tamanhos (Figura 8). Mas a form
 
 **a) ANOVA.**
 
-| Fonte | SQ | g.l. | QM | F |
-| :-------------- | -------------: | --------: | ------------: | ---------: |
-| Regressão | 91,95 | 1 | 91,9476 | 68,44 |
-| Resíduos | 1.674,03 | 1246 | 1,3435 |  |
-| Total | 1.765,98 | 1247 |  |  |
+| Fonte | SQ | g.l. | QM | F | p-valor |
+| :-------------- | -------------: | --------: | ------------: | ---------: | ------------: |
+| Regressão | 91,95 | 1 | 91,9476 | 68,44 | < 0,0001 |
+| Resíduos | 1.674,03 | 1246 | 1,3435 |  |  |
+| Total | 1.765,98 | 1247 |  |  |  |
 
 F = 68,438 e t(β₁) = 8,2727, com t² = 68,438 = F: na regressão simples os dois testes são o mesmo (p < 0,0001).
 
@@ -354,13 +377,16 @@ As cinco variáveis de puro ruído **aumentam o R² de treino** (como sempre aco
 
 O índice de abril sai **1,38** contra 1,10 programado: com só dois abris na janela da média móvel, a campanha de abril/2025 contamina o índice sazonal. Excluindo esse mês, o índice de abril cai para 1,03 e o erro absoluto médio dos 12 índices cai de 0,062 para 0,048 (correlação com os S\_m de 0,77 para 0,83). Com só três anos, cada índice se baseia em dois valores e erra cerca de ±0,05.
 
-**c) ACF.** As autocorrelações ficam todas dentro da faixa ±1,96/√36 = ±0,327: a maior é 0,27. A defasagem 1 (0,21) reflete a tendência, e a defasagem 12 (0,11) a sazonalidade anual. Com 36 meses a ACF tem pouco poder: a sazonalidade do gerador é real (S\_m varia de 0,85 a 1,15), mas o ruído Poisson de cerca de ±9 ataques/mês é do mesmo tamanho que ela.
+**c) ACF.** As autocorrelações ficam todas dentro da faixa ±1,96/√36 = ±0,327: a maior é 0,27. A defasagem 1 (0,21) reflete a tendência, e a defasagem 12 (0,11) a sazonalidade anual. Com 36 meses a ACF tem pouco poder: a sazonalidade do gerador é real (S\_m varia de 0,85 a 1,15), mas o ruído Poisson de cerca de ±9 ataques/mês é do mesmo tamanho que ela (Figura 13).
 
-![Figura 13 — Índices sazonais estimados (com e sem abril/2025) × programados.](/home/claude/aedi/saidas/figuras/q12b_indices.png){width=11cm}
+![Figura 13 — Função de autocorrelação da série mensal de ataques até a defasagem 12, com a faixa ±1,96/√36.](/home/claude/aedi/saidas/figuras/q12c_acf.png){width=11cm}
 
-**d) Previsão e anomalias.** O modelo dessazonaliza a série com os índices sem abril/2025, ajusta uma tendência linear (+0,57 ataque/mês) e ressazonaliza. A previsão para 2026 soma **1.153 ataques**, de 81 (fevereiro) a 114 (novembro), com banda de 95% de ±17 ataques/mês (Figura 14). A regra dos 3σ sobre os resíduos **encontra abril/2025**, com resíduo de 8,6σ (calculando σ sem o próprio mês) e de 3,5σ mesmo usando os índices contaminados. **Nenhum falso alarme**: o maior |resíduo| dos demais meses é 1,9σ. Há uma ressalva: uma anomalia infla o próprio σ e o índice sazonal que a deveria revelar, então a detecção é mais robusta com estimativas que excluem o ponto testado.
 
-![Figura 14 — Ajuste, previsão de 2026 com banda de 95% e alarme pela regra dos 3σ.](/home/claude/aedi/saidas/figuras/q12d_previsao.png){width=15cm}
+![Figura 14 — Índices sazonais estimados (com e sem abril/2025) × programados.](/home/claude/aedi/saidas/figuras/q12b_indices.png){width=11cm}
+
+**d) Previsão e anomalias.** O modelo dessazonaliza a série com os índices sem abril/2025, ajusta uma tendência linear (+0,57 ataque/mês) e ressazonaliza. A previsão para 2026 soma **1.153 ataques**, de 81 (fevereiro) a 114 (novembro), com banda de 95% de ±17 ataques/mês (Figura 15). A regra dos 3σ sobre os resíduos **encontra abril/2025**, com resíduo de 8,6σ (calculando σ sem o próprio mês) e de 3,5σ mesmo usando os índices contaminados. **Nenhum falso alarme**: o maior |resíduo| dos demais meses é 1,9σ. Há uma ressalva: uma anomalia infla o próprio σ e o índice sazonal que a deveria revelar, então a detecção é mais robusta com estimativas que excluem o ponto testado.
+
+![Figura 15 — Ajuste, previsão de 2026 com banda de 95% e alarme pela regra dos 3σ.](/home/claude/aedi/saidas/figuras/q12d_previsao.png){width=15cm}
 
 
 **Leitura do grupo para a ANDI.** A projeção de 1.153 ataques para 2026 (com banda de 95% de ±17 ataques/mês) oferece à ANDI uma referência concreta para escalonar a capacidade de resposta ao longo do ano, reforçando equipes nos meses historicamente mais pressionados, como março, abril e novembro (onde a previsão chega a 114 ataques). No monitoramento contínuo, a regra dos 3σ aplicada aos resíduos dessazonalizados mostrou-se altamente eficaz: detectou o surto anômalo de abril/2025 (165 ataques, resíduo de 8,6σ) sem gerar nenhum falso alarme nos demais 35 meses. Recomendamos que a agência adote essa regra como gatilho automático de alerta operacional, tomando o cuidado metodológico de excluir o mês sob avaliação do cálculo do desvio-padrão e dos índices sazonais para que a própria anomalia não mascare o limite de controle. Como limitação, ressaltamos que três anos de histórico ainda geram margem de erro de cerca de ±0,05 nos fatores sazonais.
@@ -401,13 +427,13 @@ A árvore usa CVSS (importância 0,53), tempo (0,41) e treino (0,07); SOC e fora
 | Logística | 522 | 113 | 213 | 251 | 0,703 | 0,690 | 0,541 | 0,606 | 0,770 |
 | Árvore | 548 | 87 | 267 | 197 | 0,678 | 0,694 | 0,425 | 0,527 | 0,723 |
 
-A logística é melhor em quase tudo, e sobretudo na AUC (0,770 contra 0,723; Figura 15). Com profundidade 3 a árvore só produz 8 probabilidades diferentes, e o modelo verdadeiro é ele próprio uma logística. Com limiar 0,5 as duas deixam escapar metade ou mais das perdas (recall 0,54 e 0,42).
+A logística é melhor em quase tudo, e sobretudo na AUC (0,770 contra 0,723; Figura 16). Com profundidade 3 a árvore só produz 8 probabilidades diferentes, e o modelo verdadeiro é ele próprio uma logística. Com limiar 0,5 as duas deixam escapar metade ou mais das perdas (recall 0,54 e 0,42).
 
-![Figura 15 — Curvas ROC no conjunto de teste (2025).](/home/claude/aedi/saidas/figuras/q13d_roc.png){width=8.5cm}
+![Figura 16 — Curvas ROC no conjunto de teste (2025).](/home/claude/aedi/saidas/figuras/q13d_roc.png){width=8.5cm}
 
-**e) Limiar de custo mínimo.** Um falso negativo custa a perda mediana observada em 2023–2024 (R$ 29.247) e um falso positivo, R$ 3.000. O limiar que minimiza o custo no treino é **0,14**, próximo do valor teórico C\_FP/(C\_FP + C\_FN) = 0,093. Aplicado em 2025, ele derruba o custo dos erros de R$ 6,57 mi (limiar 0,5) para **R$ 1,89 mi** (Figura 16): o recall sobe para 0,97 e a precisão cai para 0,48, com 495 falsos positivos e só 14 falsos negativos. É a tensão α × β do cap. 7: baixar o limiar aceita mais erros do Tipo I (alarmes falsos, baratos) para reduzir os do Tipo II (perdas não tratadas, caras). Quando os custos são assimétricos, 0,5 não é neutro: favorece o erro mais caro.
+**e) Limiar de custo mínimo.** Um falso negativo custa a perda mediana observada em 2023–2024 (R$ 29.247) e um falso positivo, R$ 3.000. O limiar que minimiza o custo no treino é **0,14**, próximo do valor teórico C\_FP/(C\_FP + C\_FN) = 0,093. Aplicado em 2025, ele derruba o custo dos erros de R$ 6,57 mi (limiar 0,5) para **R$ 1,89 mi** (Figura 17): o recall sobe para 0,97 e a precisão cai para 0,48, com 495 falsos positivos e só 14 falsos negativos. É a tensão α × β do cap. 7: baixar o limiar aceita mais erros do Tipo I (alarmes falsos, baratos) para reduzir os do Tipo II (perdas não tratadas, caras). Quando os custos são assimétricos, 0,5 não é neutro: favorece o erro mais caro.
 
-![Figura 16 — Custo total dos erros no teste em função do limiar.](/home/claude/aedi/saidas/figuras/q13e_limiar_custo.png){width=10cm}
+![Figura 17 — Custo total dos erros no teste em função do limiar.](/home/claude/aedi/saidas/figuras/q13e_limiar_custo.png){width=10cm}
 
 
 **Leitura do grupo para a ANDI.** Para a operação diária do SOC da ANDI, o resultado mais transformador desta questão é a demonstração de que o limiar padrão de classificação (0,50) é financeiramente inadequado quando os custos dos erros são assimétricos. Como deixar passar um ataque real custa em média R$ 29,2 mil contra R$ 3,0 mil de uma investigação improdutiva, calibrar o limiar de decisão para 0,14 reduziu o custo total esperado dos erros em 2025 de R$ 6,57 milhões para R$ 1,89 milhão (uma economia de 71%), elevando a detecção de incidentes críticos (recall) de 54,1% para 97,0% e reduzindo os incidentes não tratados para apenas 14 casos. Recomendamos adotar a regressão logística como motor principal de triagem, tanto pela sua capacidade discriminatória superior (AUC = 0,770 contra 0,723 da árvore) quanto pela leitura direta de seus coeficientes em razões de chances, mantendo a árvore de decisão apenas como guia visual rápido para treinamento de analistas júnior.
@@ -445,7 +471,7 @@ A logística é melhor em quase tudo, e sobretudo na AUC (0,770 contra 0,723; Fi
 | CVaR 95% | R$ 42,49 mi | Perda média nos 5% piores anos |
 | P(perda > R$ 30 mi) | 94,0% | Probabilidade de perda relevante |
 
-![Figura 17 — Distribuição simulada da perda anual de 2026 com média, VaR e CVaR (como na Figura 12.6).](/home/claude/aedi/saidas/figuras/q14b_distribuicao_atual.png){width=14cm}
+![Figura 18 — Distribuição simulada da perda anual de 2026 com média, VaR e CVaR (como na Figura 12.6).](/home/claude/aedi/saidas/figuras/q14b_distribuicao_atual.png){width=14cm}
 
 A distribuição é quase simétrica: com cerca de 493 perdas por ano, a soma de muitas Lognormais já se aproxima da Normal (TCL). Mesmo assim, a cauda direita é mais longa que a esquerda.
 
@@ -461,7 +487,7 @@ A distribuição é quase simétrica: com cerca de 493 perdas por ano, a soma de
 
 Cada vez que n quadruplica, o erro padrão cai à metade (razões 2,05, 1,98, 2,00; de 64.000 para 100.000 a razão esperada é √(100/64) = 1,25 e a observada é 1,25). **O erro cai na proporção 1/√n**, como na Seção 12.3. Com 100.000 réplicas a média tem erro de R$ 10.618, desprezível frente às incertezas dos modelos.
 
-![Figura 18 — Convergência da perda média e do seu erro padrão.](/home/claude/aedi/saidas/figuras/q14c_convergencia.png){width=12cm}
+![Figura 19 — Convergência da perda média e do seu erro padrão.](/home/claude/aedi/saidas/figuras/q14c_convergencia.png){width=12cm}
 
 **d) Cenário com controles (patch 95%, treino 12 h e SOC em todas as unidades).** Os modelos foram realimentados assim:
 
@@ -480,7 +506,7 @@ Resultado: 140 perdas esperadas por ano, contra 493.
 | CVaR 95% | R$ 42,49 mi | R$ 13,32 mi | R$ 29,17 mi (69%) |
 | P(perda > R$ 30 mi) | 94,0% | 0,0% | −94,0 p.p. |
 
-![Figura 19 — Distribuições da perda anual nos dois cenários (como na Figura 12.7).](/home/claude/aedi/saidas/figuras/q14d_comparacao.png){width=14cm}
+![Figura 20 — Distribuições da perda anual nos dois cenários (como na Figura 12.7).](/home/claude/aedi/saidas/figuras/q14d_comparacao.png){width=14cm}
 
 **e) Decisão.** Redução média de R$ 25,60 mi por ano, a um custo de R$ 8 mi: **ROI = (25,60 − 8)/8 = 220%**. Com números aleatórios comuns (mesmas uniformes e normais nos dois cenários, réplica a réplica), a probabilidade de a perda com controles somada ao custo superar a perda sem controles é **0,00%**: em nenhuma das 100.000 réplicas o pacote deixou a ANDI pior. Mesmo nos 5% de anos menos favoráveis o benefício líquido é de R$ 14,0 mi. O **custo máximo** que ainda se pagaria na média é a própria redução esperada, **R$ 25,6 mi por ano**. O pacote também corta a cauda: VaR 95% −R$ 28,5 mi e CVaR 95% −R$ 29,2 mi.
 
@@ -494,7 +520,7 @@ Resultado: 140 perdas esperadas por ano, contra 493.
 | frequência −10% | R$ 31,4 mi | R$ 8,4 mi | R$ 15,0 mi | 188% | investir |
 | frequência +10% | R$ 38,4 mi | R$ 10,3 mi | R$ 20,1 mi | 252% | investir |
 
-![Figura 20 — Gráfico de tornado do benefício líquido do pacote.](/home/claude/aedi/saidas/figuras/q14f_tornado.png){width=11cm}
+![Figura 21 — Gráfico de tornado do benefício líquido do pacote.](/home/claude/aedi/saidas/figuras/q14f_tornado.png){width=11cm}
 
 **A decisão não muda em nenhum caso.** O σ da Lognormal é o parâmetro mais influente (benefício entre R$ 13,7 mi e R$ 23,3 mi), porque a média da Lognormal cresce com e^(σ²/2); a frequência ±10% move o benefício de forma proporcional. Para o pacote deixar de compensar, a redução esperada teria de cair abaixo de R$ 8 mi, cerca de um terço do valor estimado.
 
@@ -510,7 +536,7 @@ Resultado: 140 perdas esperadas por ano, contra 493.
 | CVaR 95% | R$ 42,49 mi | R$ 43,37 mi | -2,0% |
 | P(> R$ 30 mi) | 94,0% | 88,1% | 6,7% |
 
-![Figura 21 — Perda anual de 2026: modelo estimado × gerador verdadeiro.](/home/claude/aedi/saidas/figuras/q14g_erro_modelo.png){width=13cm}
+![Figura 22 — Perda anual de 2026: modelo estimado × gerador verdadeiro.](/home/claude/aedi/saidas/figuras/q14g_erro_modelo.png){width=13cm}
 
 A SMC estimada acerta bem o centro (média 1,9%), mas **subestima a dispersão e a cauda extrema**: desvio-padrão -11,8%, VaR 99% -2,7% e CVaR 95% -2,0%. Os acertos no centro vêm de erros que se compensam:
 

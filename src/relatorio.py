@@ -89,6 +89,26 @@ def espacar_listas(md: str) -> str:
     return "\n".join(out)
 
 
+def tabela_cov() -> str:
+    cov = T("q04d_covariancias").set_index("Unnamed: 0")
+    esc = pd.Series(1.0, index=cov.index)
+    esc["perda_total"] = 1e-3
+    cov = cov.mul(esc, axis=0).mul(esc, axis=1)
+    nomes = list(cov.columns)
+    linhas = [[i] + [fmt(float(cov.loc[i, j]), 2) for j in nomes] for i in nomes]
+    return tabela(linhas, ["Variável"] + nomes)
+
+
+def tabela_contingencia() -> str:
+    c = T("q05a_contingencia").set_index("tipo")
+    n = float(c.loc["Total", "total"])
+    linhas = []
+    for t, r in c.iterrows():
+        linhas.append([t] + [f"{int(r[k])} ({fmt(r[k] / n, 3)})" for k in ["nao_materializou", "materializou", "total"]]
+                      + [pct(r["materializou"] / r["total"])])
+    return tabela(linhas, ["Tipo", "Não materializou", "Materializou", "Total (marginal)", "Taxa de materialização"])
+
+
 def fig(nome, legenda, largura="15cm"):
     return f"![{legenda}]({os.path.join(FIGURAS, nome + '.png')}){{width={largura}}}\n"
 
@@ -180,7 +200,7 @@ O qui-quadrado de aderência dá {f(q2['c']['qui2'])} com 5 g.l. (crítico {f(q2
 
 ## Questão 3 — Dos dados à decisão
 
-**a) Tipos de variáveis e estrutura.** Em `ataques.csv`: tipo, unidade, fora_expediente e materializou são **qualitativas nominais** (as duas últimas dicotômicas 0/1); mês é qualitativa ordinal (cíclica); trimestre e ano são quantitativas discretas (índices de tempo); cvss e tempo_deteccao_h são **quantitativas contínuas** (o CVSS é registrado com uma casa, mas é contínuo por natureza); id_ataque e data são identificador e carimbo temporal. Em `perdas.csv`, perda_rs é quantitativa contínua. Quanto à estrutura, ataques e perdas são **microdados em painel** (cada evento ligado a uma unidade e a uma data); o painel trimestral é um painel balanceado 24 × 12 e a série mensal é uma série temporal.
+**a) Tipos de variáveis e estrutura.** Em `ataques.csv`: tipo, unidade, fora_expediente e materializou são **qualitativas nominais** (as duas últimas dicotômicas 0/1); mês é qualitativa ordinal (cíclica); trimestre e ano são quantitativas discretas (índices de tempo); cvss e tempo_deteccao_h são **quantitativas contínuas** (o CVSS é registrado com uma casa, mas é contínuo por natureza); id_ataque e data são identificador e carimbo temporal. Em `perdas.csv`, id_perda e id_ataque são identificadores (o segundo liga cada perda ao ataque de origem), unidade e tipo são qualitativas nominais, data é carimbo temporal, tempo_deteccao_h é quantitativa contínua e perda_rs é **quantitativa contínua** (em R$, positiva e assimétrica). Quanto à estrutura, ataques e perdas são **microdados em painel** (cada evento ligado a uma unidade e a uma data); o painel trimestral é um painel balanceado 24 × 12 e a série mensal é uma série temporal.
 
 * **População:** todos os ataques que a ANDI sofre (o processo gerador, em qualquer período).
 * **Amostra:** os {fmt(q3['n_ataques'], 0)} ataques e {fmt(q3['n_perdas'], 0)} perdas observados em 2023–2025.
@@ -213,14 +233,20 @@ Em termos relativos o tipo mais arriscado é **{cv_max['tipo']}** (CV = {f(cv_ma
 {fig('q04b_boxplots', 'Figura 3 — Box-plots da perda por tipo, em escala linear e logarítmica.', '15cm')}
 **c) Formato.** A perda tem assimetria {f(q4['forma'][0]['assimetria'])} e curtose {f(q4['forma'][0]['curtose'])} (a Normal tem 0 e 3). O ln(perda) tem assimetria {f(q4['forma'][1]['assimetria'])} e curtose {f(q4['forma'][1]['curtose'])}: **o logaritmo transforma uma distribuição muito assimétrica e de cauda pesada em outra quase Normal**, o que é a definição da Lognormal e justifica modelar ln(perda) por regressão (Q9–Q10).
 
-**d) Covariâncias e correlações (painel).** As matrizes completas estão em `saidas/tabelas/q04d_*.csv`; as correlações estão na Figura 4. n_ataques cresce com serviços expostos (r = {f(q4['cor'][0]['servicos'])}) e cai com SOC ({f(q4['cor'][0]['soc'])}) e treino ({f(q4['cor'][0]['treino'])}), nos sentidos esperados. A correlação de n_ataques com patch é praticamente nula ({f(q4['cor'][0]['patch'])}), embora patch reduza ataques no gerador: nesta amostra de 24 unidades, patch é positivamente correlacionado com serviços ({f(q4['cor'][2]['patch'])}), e o efeito de serviços mascara o de patch. **Correlação simples não é efeito parcial**: a regressão múltipla da Q11 separa os dois. A perda total trimestral correlaciona com o número de ataques ({f(q4['cor'][0]['perda_total'])}) e, mais fortemente que ele, com SOC ({f(q4['cor'][1]['soc'])}), porque o SOC reduz ataques, materialização e severidade ao mesmo tempo.
+**d) Covariâncias e correlações (painel).** A matriz de covariâncias está abaixo (perda_total em R$ mil, para caber na tabela; arquivo completo em `saidas/tabelas/q04d_covariancias.csv`); as correlações estão na Figura 4.
+
+{tabela_cov()}
+Na diagonal estão as variâncias. As covariâncias dependem das unidades de medida (a da perda total é da ordem de milhões), por isso a comparação de intensidade é feita pelas correlações. n_ataques cresce com serviços expostos (r = {f(q4['cor'][0]['servicos'])}) e cai com SOC ({f(q4['cor'][0]['soc'])}) e treino ({f(q4['cor'][0]['treino'])}), nos sentidos esperados. A correlação de n_ataques com patch é praticamente nula ({f(q4['cor'][0]['patch'])}), embora patch reduza ataques no gerador: nesta amostra de 24 unidades, patch é positivamente correlacionado com serviços ({f(q4['cor'][2]['patch'])}), e o efeito de serviços mascara o de patch. **Correlação simples não é efeito parcial**: a regressão múltipla da Q11 separa os dois. A perda total trimestral correlaciona com o número de ataques ({f(q4['cor'][0]['perda_total'])}) e, mais fortemente que ele, com SOC ({f(q4['cor'][1]['soc'])}), porque o SOC reduz ataques, materialização e severidade ao mesmo tempo.
 
 {fig('q04d_correlacoes', 'Figura 4 — Matriz de correlações no painel trimestral (288 observações).', '9cm')}
 **e) VaR histórico.** O percentil 95 das 36 perdas mensais totais é **{mi(q4['var95_mensal'], 2)}** (média mensal {mi(q4['media_mensal'], 2)}). Com 36 pontos, esse quantil fica na posição {f(q4['posicao_quantil'])} da amostra ordenada, entre o 2º maior mês ({mi(q4['segundo_maior'], 2)}) e o 3º ({mi(q4['terceiro_maior'], 2)}). Ele depende de dois ou três meses: retirando só o maior mês ({q4['mes_maior']}), o VaR cai para {mi(q4['var95_sem_maior'], 2)}. Um quantil de cauda estimado com tão poucas observações é muito instável, e é por isso que a Parte C o estima por simulação.
 
 ## Questão 5 — Probabilidade e Bayes
 
-**a) Tipo × materialização.** A tabela de contingência completa e as probabilidades conjuntas estão em `saidas/tabelas/q05a_*.csv`. A probabilidade de materializar varia de {pct(min(q5['p_mat_tipo'].values()))} ({min(q5['p_mat_tipo'], key=q5['p_mat_tipo'].get)}) a {pct(max(q5['p_mat_tipo'].values()))} ({max(q5['p_mat_tipo'], key=q5['p_mat_tipo'].get)}). **P(materializou | ransomware) = {f(q5['p_mat_ransom'], 3)}**, mas **P(ransomware | materializou) = {f(q5['p_ransom_mat'], 3)}**. As duas diferem porque têm denominadores diferentes: a primeira divide pelos {q5['contingencia'][5]['total']} ransomwares, a segunda pelas {fmt(q5['contingencia'][6]['materializou'], 0)} perdas. Ransomware materializa muito (CVSS alto), mas é só {pct(q5['p_ransom'])} dos ataques, então é uma fração pequena das perdas. Confundir as duas é o erro de inverter a condição.
+**a) Tipo × materialização.** Contagens, probabilidades conjuntas P(tipo ∩ materialização) e marginais (última coluna e última linha):
+
+{tabela_contingencia()}
+As probabilidades conjuntas somam 1; as marginais da linha "Total" são P(não materializou) e P(materializou). A probabilidade de materializar varia de {pct(min(q5['p_mat_tipo'].values()))} ({min(q5['p_mat_tipo'], key=q5['p_mat_tipo'].get)}) a {pct(max(q5['p_mat_tipo'].values()))} ({max(q5['p_mat_tipo'], key=q5['p_mat_tipo'].get)}). **P(materializou | ransomware) = {f(q5['p_mat_ransom'], 3)}**, mas **P(ransomware | materializou) = {f(q5['p_ransom_mat'], 3)}**. As duas diferem porque têm denominadores diferentes: a primeira divide pelos {q5['contingencia'][5]['total']} ransomwares, a segunda pelas {fmt(q5['contingencia'][6]['materializou'], 0)} perdas. Ransomware materializa muito (CVSS alto), mas é só {pct(q5['p_ransom'])} dos ataques, então é uma fração pequena das perdas. Confundir as duas é o erro de inverter a condição.
 
 **b) SOC e materialização.** P(SOC) = {f(q5['pA_soc'], 3)}, P(materializou) = {f(q5['pB_mat'], 3)} e P(SOC ∩ materializou) = {f(q5['pAB'], 4)}, bem abaixo de P(SOC)·P(materializou) = {f(q5['pA_x_pB'], 4)}. **Os eventos não são independentes**: com SOC, materializam {pct(q5['p_mat_dado_soc'])} dos ataques; sem SOC, {pct(q5['p_mat_dado_sem_soc'])} (qui-quadrado de independência = {f(q5['qui2_indep'], 1)}, p {pv(q5['qui2_indep_p'])}).
 
@@ -291,8 +317,8 @@ O desvio das médias acompanha σ/√n nos três tamanhos (Figura 8). Mas a form
 
 **a) ANOVA.**
 
-{tabela([[r['fonte'], f(r['SQ'], 2), r['gl'], f(r['QM'], 4) if r['QM'] == r['QM'] else "", f(r['F'], 2) if r['F'] == r['F'] else ""] for r in q10['anova']],
-         ["Fonte", "SQ", "g.l.", "QM", "F"])}
+{tabela([[r['fonte'], f(r['SQ'], 2), r['gl'], f(r['QM'], 4) if r['QM'] == r['QM'] else "", f(r['F'], 2) if r['F'] == r['F'] else "", pv(r['p_valor']) if r['p_valor'] == r['p_valor'] else ""] for r in q10['anova']],
+         ["Fonte", "SQ", "g.l.", "QM", "F", "p-valor"])}
 F = {f(q10['F'], 3)} e t(β₁) = {f(q10['t_b1'], 4)}, com t² = {f(q10['t2'], 3)} = F: na regressão simples os dois testes são o mesmo (p {pv(0)}).
 
 **b) IC de β₁.** {f(q10['b1'], 5)} ± {f(q10['t_crit'], 3)} × {f(q10['ep_b1'], 5)} = **[{f(q10['ic_b1'][0], 5)}; {f(q10['ic_b1'][1], 5)}]**. Contém o valor programado 0,02, mas perto do limite superior, coerente com a atenuação por seleção discutida na Q9-d.
@@ -351,12 +377,14 @@ As cinco variáveis de puro ruído **aumentam o R² de treino** (como sempre aco
          ["Mês", "S_m programado", "Estimado", "Estimado sem abril/2025"])}
 O índice de abril sai **{f(q12['indices'][3]['indice_estimado'], 2)}** contra 1,10 programado: com só dois abris na janela da média móvel, a campanha de abril/2025 contamina o índice sazonal. Excluindo esse mês, o índice de abril cai para {f(q12['indices'][3]['indice_sem_abril_2025'], 2)} e o erro absoluto médio dos 12 índices cai de {f(q12['mae_indices'], 3)} para {f(q12['mae_indices_sem'], 3)} (correlação com os S_m de {f(q12['corr_indices'], 2)} para {f(q12['corr_indices_sem'], 2)}). Com só três anos, cada índice se baseia em dois valores e erra cerca de ±0,05.
 
-**c) ACF.** As autocorrelações ficam todas dentro da faixa ±1,96/√36 = ±{f(q12['banda_acf'], 3)}: a maior é {f(max(q12['acf'][1:]), 2)}. A defasagem 1 ({f(q12['acf'][1], 2)}) reflete a tendência, e a defasagem 12 ({f(q12['acf'][12], 2)}) a sazonalidade anual. Com 36 meses a ACF tem pouco poder: a sazonalidade do gerador é real (S_m varia de 0,85 a 1,15), mas o ruído Poisson de cerca de ±9 ataques/mês é do mesmo tamanho que ela.
+**c) ACF.** As autocorrelações ficam todas dentro da faixa ±1,96/√36 = ±{f(q12['banda_acf'], 3)}: a maior é {f(max(q12['acf'][1:]), 2)}. A defasagem 1 ({f(q12['acf'][1], 2)}) reflete a tendência, e a defasagem 12 ({f(q12['acf'][12], 2)}) a sazonalidade anual. Com 36 meses a ACF tem pouco poder: a sazonalidade do gerador é real (S_m varia de 0,85 a 1,15), mas o ruído Poisson de cerca de ±9 ataques/mês é do mesmo tamanho que ela (Figura 13).
 
-{fig('q12b_indices', 'Figura 13 — Índices sazonais estimados (com e sem abril/2025) × programados.', '11cm')}
-**d) Previsão e anomalias.** O modelo dessazonaliza a série com os índices sem abril/2025, ajusta uma tendência linear (+{f(q12['d']['indices_sem_abril_2025']['b1'], 2)} ataque/mês) e ressazonaliza. A previsão para 2026 soma **{fmt(q12['total_2026'], 0)} ataques**, de {fmt(min(r['previsao'] for r in q12['previsao']), 0)} (fevereiro) a {fmt(max(r['previsao'] for r in q12['previsao']), 0)} (novembro), com banda de 95% de ±{fmt(1.96 * q12['sigma_prev'], 0)} ataques/mês (Figura 14). A regra dos 3σ sobre os resíduos **encontra abril/2025**, com resíduo de {f(q12['d']['indices_sem_abril_2025']['z_abril_2025_sigma_sem_ele'], 1)}σ (calculando σ sem o próprio mês) e de {f(q12['d']['indices_todos']['z_abril_2025'], 1)}σ mesmo usando os índices contaminados. **Nenhum falso alarme**: o maior |resíduo| dos demais meses é {f(q12['d']['indices_sem_abril_2025']['z_max_outros'], 1)}σ. Há uma ressalva: uma anomalia infla o próprio σ e o índice sazonal que a deveria revelar, então a detecção é mais robusta com estimativas que excluem o ponto testado.
+{fig('q12c_acf', 'Figura 13 — Função de autocorrelação da série mensal de ataques até a defasagem 12, com a faixa ±1,96/√36.', '11cm')}
 
-{fig('q12d_previsao', 'Figura 14 — Ajuste, previsão de 2026 com banda de 95% e alarme pela regra dos 3σ.', '15cm')}
+{fig('q12b_indices', 'Figura 14 — Índices sazonais estimados (com e sem abril/2025) × programados.', '11cm')}
+**d) Previsão e anomalias.** O modelo dessazonaliza a série com os índices sem abril/2025, ajusta uma tendência linear (+{f(q12['d']['indices_sem_abril_2025']['b1'], 2)} ataque/mês) e ressazonaliza. A previsão para 2026 soma **{fmt(q12['total_2026'], 0)} ataques**, de {fmt(min(r['previsao'] for r in q12['previsao']), 0)} (fevereiro) a {fmt(max(r['previsao'] for r in q12['previsao']), 0)} (novembro), com banda de 95% de ±{fmt(1.96 * q12['sigma_prev'], 0)} ataques/mês (Figura 15). A regra dos 3σ sobre os resíduos **encontra abril/2025**, com resíduo de {f(q12['d']['indices_sem_abril_2025']['z_abril_2025_sigma_sem_ele'], 1)}σ (calculando σ sem o próprio mês) e de {f(q12['d']['indices_todos']['z_abril_2025'], 1)}σ mesmo usando os índices contaminados. **Nenhum falso alarme**: o maior |resíduo| dos demais meses é {f(q12['d']['indices_sem_abril_2025']['z_max_outros'], 1)}σ. Há uma ressalva: uma anomalia infla o próprio σ e o índice sazonal que a deveria revelar, então a detecção é mais robusta com estimativas que excluem o ponto testado.
+
+{fig('q12d_previsao', 'Figura 15 — Ajuste, previsão de 2026 com banda de 95% e alarme pela regra dos 3σ.', '15cm')}
 """)
 
     lg = {r['termo']: r for r in q13['a']}
@@ -388,12 +416,12 @@ A árvore usa CVSS (importância {f(q13['c']['importancias']['cvss'], 2)}), temp
 
 {tabela([[m_, d13[k]['VN'], d13[k]['FP'], d13[k]['FN'], d13[k]['VP'], f(d13[k]['acuracia'], 3), f(d13[k]['precisao'], 3), f(d13[k]['recall'], 3), f(d13[k]['f1'], 3), f(d13[k]['auc'], 3)] for m_, k in [("Logística", "logistica"), ("Árvore", "arvore")]],
          ["Modelo", "VN", "FP", "FN", "VP", "Acurácia", "Precisão", "Recall", "F1", "AUC"])}
-A logística é melhor em quase tudo, e sobretudo na AUC ({f(d13['logistica']['auc'], 3)} contra {f(d13['arvore']['auc'], 3)}; Figura 15). Com profundidade 3 a árvore só produz 8 probabilidades diferentes, e o modelo verdadeiro é ele próprio uma logística. Com limiar 0,5 as duas deixam escapar metade ou mais das perdas (recall {f(d13['logistica']['recall'], 2)} e {f(d13['arvore']['recall'], 2)}).
+A logística é melhor em quase tudo, e sobretudo na AUC ({f(d13['logistica']['auc'], 3)} contra {f(d13['arvore']['auc'], 3)}; Figura 16). Com profundidade 3 a árvore só produz 8 probabilidades diferentes, e o modelo verdadeiro é ele próprio uma logística. Com limiar 0,5 as duas deixam escapar metade ou mais das perdas (recall {f(d13['logistica']['recall'], 2)} e {f(d13['arvore']['recall'], 2)}).
 
-{fig('q13d_roc', 'Figura 15 — Curvas ROC no conjunto de teste (2025).', '8.5cm')}
-**e) Limiar de custo mínimo.** Um falso negativo custa a perda mediana observada em 2023–2024 ({rs(q13['e']['c_fn'])}) e um falso positivo, R$ 3.000. O limiar que minimiza o custo no treino é **{f(q13['e']['limiar_otimo_treino'], 2)}**, próximo do valor teórico C_FP/(C_FP + C_FN) = {f(q13['e']['limiar_teorico'], 3)}. Aplicado em 2025, ele derruba o custo dos erros de {mi(q13['e']['custo_teste_05'], 2)} (limiar 0,5) para **{mi(q13['e']['custo_teste_otimo'], 2)}** (Figura 16): o recall sobe para {f(q13['e']['metricas_otimo']['recall'], 2)} e a precisão cai para {f(q13['e']['metricas_otimo']['precisao'], 2)}, com {q13['e']['metricas_otimo']['FP']} falsos positivos e só {q13['e']['metricas_otimo']['FN']} falsos negativos. É a tensão α × β do cap. 7: baixar o limiar aceita mais erros do Tipo I (alarmes falsos, baratos) para reduzir os do Tipo II (perdas não tratadas, caras). Quando os custos são assimétricos, 0,5 não é neutro: favorece o erro mais caro.
+{fig('q13d_roc', 'Figura 16 — Curvas ROC no conjunto de teste (2025).', '8.5cm')}
+**e) Limiar de custo mínimo.** Um falso negativo custa a perda mediana observada em 2023–2024 ({rs(q13['e']['c_fn'])}) e um falso positivo, R$ 3.000. O limiar que minimiza o custo no treino é **{f(q13['e']['limiar_otimo_treino'], 2)}**, próximo do valor teórico C_FP/(C_FP + C_FN) = {f(q13['e']['limiar_teorico'], 3)}. Aplicado em 2025, ele derruba o custo dos erros de {mi(q13['e']['custo_teste_05'], 2)} (limiar 0,5) para **{mi(q13['e']['custo_teste_otimo'], 2)}** (Figura 17): o recall sobe para {f(q13['e']['metricas_otimo']['recall'], 2)} e a precisão cai para {f(q13['e']['metricas_otimo']['precisao'], 2)}, com {q13['e']['metricas_otimo']['FP']} falsos positivos e só {q13['e']['metricas_otimo']['FN']} falsos negativos. É a tensão α × β do cap. 7: baixar o limiar aceita mais erros do Tipo I (alarmes falsos, baratos) para reduzir os do Tipo II (perdas não tratadas, caras). Quando os custos são assimétricos, 0,5 não é neutro: favorece o erro mais caro.
 
-{fig('q13e_limiar_custo', 'Figura 16 — Custo total dos erros no teste em função do limiar.', '10cm')}
+{fig('q13e_limiar_custo', 'Figura 17 — Custo total dos erros no teste em função do limiar.', '10cm')}
 """)
 
     b0, b1c = q14['b'], q14['b_controles']
@@ -423,7 +451,7 @@ A logística é melhor em quase tudo, e sobretudo na AUC ({f(d13['logistica']['a
           ["CVaR 95%", mi(b0['cvar95'], 2), "Perda média nos 5% piores anos"],
           ["P(perda > R$ 30 mi)", pct(b0['p_acima_30mi']), "Probabilidade de perda relevante"]],
          ["Métrica de risco", "Cenário atual", "Interpretação"], "lrl")}
-{fig('q14b_distribuicao_atual', 'Figura 17 — Distribuição simulada da perda anual de 2026 com média, VaR e CVaR (como na Figura 12.6).', '14cm')}
+{fig('q14b_distribuicao_atual', 'Figura 18 — Distribuição simulada da perda anual de 2026 com média, VaR e CVaR (como na Figura 12.6).', '14cm')}
 A distribuição é quase simétrica: com cerca de {fmt(q14['perdas_ano_atual'], 0)} perdas por ano, a soma de muitas Lognormais já se aproxima da Normal (TCL). Mesmo assim, a cauda direita é mais longa que a esquerda.
 
 **c) Convergência.**
@@ -432,7 +460,7 @@ A distribuição é quase simétrica: com cerca de {fmt(q14['perdas_ano_atual'],
          ["n", "Perda média", "Erro padrão da média", "VaR 95%", "EP anterior / EP atual"], "rrrrr")}
 Cada vez que n quadruplica, o erro padrão cai à metade (razões {f(q14['c'][1]['razao_ep'], 2)}, {f(q14['c'][2]['razao_ep'], 2)}, {f(q14['c'][3]['razao_ep'], 2)}; de 64.000 para 100.000 a razão esperada é √(100/64) = 1,25 e a observada é {f(q14['c'][4]['razao_ep'], 2)}). **O erro cai na proporção 1/√n**, como na Seção 12.3. Com 100.000 réplicas a média tem erro de {rs(q14['c'][4]['ep_media'])}, desprezível frente às incertezas dos modelos.
 
-{fig('q14c_convergencia', 'Figura 18 — Convergência da perda média e do seu erro padrão.', '12cm')}
+{fig('q14c_convergencia', 'Figura 19 — Convergência da perda média e do seu erro padrão.', '12cm')}
 **d) Cenário com controles (patch 95%, treino 12 h e SOC em todas as unidades).** Os modelos foram realimentados assim:
 * **Frequência:** a Q11 prevê {fmt(q14['ataques_ano_ctrl'], 0)} ataques/ano (contra {fmt(q14['ataques_ano_atual'], 0)}).
 * **Materialização e tempo de detecção:** o SOC reduz o tempo, e incorporamos isso reescalando os tempos observados das unidades sem SOC pela razão das médias estimadas (Q7): {f(q14['th_soc'])} h / {f(q14['th_sem'])} h = {f(q14['fator_tempo'], 3)}. A Exponencial é uma família de escala, então multiplicar os tempos por esse fator transforma a distribuição sem SOC na distribuição com SOC. Com esses tempos, soc = 1 e treino = 12, a logística da Q13 dá p̄ = {f(q14['p_medio_ctrl'], 3)} (contra {f(q14['p_medio_atual'], 3)}).
@@ -442,14 +470,14 @@ Resultado: {fmt(q14['perdas_ano_ctrl'], 0)} perdas esperadas por ano, contra {fm
 
 {tabela([[r['metrica'], (mi(r['atual'], 2) if 'P(' not in r['metrica'] else pct(r['atual'])), (mi(r['com_controles'], 2) if 'P(' not in r['metrica'] else pct(r['com_controles'])), (mi(r['reducao'], 2) + f" ({pct(r['reducao_pct'], 0)})" if 'P(' not in r['metrica'] else f"−{fmt(100 * r['reducao'], 1)} p.p.")] for r in q14['d']],
          ["Métrica", "Atual", "Com controles", "Redução"])}
-{fig('q14d_comparacao', 'Figura 19 — Distribuições da perda anual nos dois cenários (como na Figura 12.7).', '14cm')}
+{fig('q14d_comparacao', 'Figura 20 — Distribuições da perda anual nos dois cenários (como na Figura 12.7).', '14cm')}
 **e) Decisão.** Redução média de {mi(e['reducao_media'], 2)} por ano, a um custo de R$ 8 mi: **ROI = ({fmt(e['reducao_media'] / 1e6, 2)} − 8)/8 = {pct(e['roi'], 0)}**. Com números aleatórios comuns (mesmas uniformes e normais nos dois cenários, réplica a réplica), a probabilidade de a perda com controles somada ao custo superar a perda sem controles é **{pct(e['p_pior_com_pacote'], 2)}**: em nenhuma das 100.000 réplicas o pacote deixou a ANDI pior. Mesmo nos 5% de anos menos favoráveis o benefício líquido é de {mi(e['beneficio_p5'], 1)}. O **custo máximo** que ainda se pagaria na média é a própria redução esperada, **{mi(e['custo_maximo'], 1)} por ano**. O pacote também corta a cauda: VaR 95% −{mi(e['reducao_var95'], 1)} e CVaR 95% −{mi(e['reducao_cvar95'], 1)}.
 
 **f) Sensibilidade.**
 
 {tabela([[r['cenario'], mi(r['media_atual'], 1), mi(r['media_controles'], 1), mi(r['beneficio_liquido'], 1), pct(r['roi'], 0), r['decisao']] for r in q14['f']],
          ["Cenário", "Perda média atual", "Com controles", "Benefício líquido", "ROI", "Decisão"])}
-{fig('q14f_tornado', 'Figura 20 — Gráfico de tornado do benefício líquido do pacote.', '11cm')}
+{fig('q14f_tornado', 'Figura 21 — Gráfico de tornado do benefício líquido do pacote.', '11cm')}
 **A decisão não muda em nenhum caso.** O σ da Lognormal é o parâmetro mais influente (benefício entre {mi(min(r['beneficio_liquido'] for r in q14['f'][1:3]), 1)} e {mi(max(r['beneficio_liquido'] for r in q14['f'][1:3]), 1)}), porque a média da Lognormal cresce com e^(σ²/2); a frequência ±10% move o benefício de forma proporcional. Para o pacote deixar de compensar, a redução esperada teria de cair abaixo de R$ 8 mi, cerca de um terço do valor estimado.
 
 **g) Erro de modelo.** Rodando o gerador verdadeiro (Etapas A2–A5 com os parâmetros programados, t = 37 a 48, sem campanha, mesmas 24 unidades) por 10.000 anos:
@@ -459,7 +487,7 @@ Resultado: {fmt(q14['perdas_ano_ctrl'], 0)} perdas esperadas por ano, contra {fm
            (mi(r['gerador_verdadeiro'], 2) if r['metrica'] != 'p_acima_30mi' else pct(r['gerador_verdadeiro'])),
            pct(r['razao_estimado_verdadeiro'] - 1)] for r in g['tabela']],
          ["Métrica", "SMC com modelos estimados", "Gerador verdadeiro", "Diferença"])}
-{fig('q14g_erro_modelo', 'Figura 21 — Perda anual de 2026: modelo estimado × gerador verdadeiro.', '13cm')}
+{fig('q14g_erro_modelo', 'Figura 22 — Perda anual de 2026: modelo estimado × gerador verdadeiro.', '13cm')}
 A SMC estimada acerta bem o centro (média {pct(g['tabela'][0]['razao_estimado_verdadeiro'] - 1)}), mas **subestima a dispersão e a cauda extrema**: desvio-padrão {pct(g['tabela'][2]['razao_estimado_verdadeiro'] - 1)}, VaR 99% {pct(g['tabela'][4]['razao_estimado_verdadeiro'] - 1)} e CVaR 95% {pct(g['tabela'][5]['razao_estimado_verdadeiro'] - 1)}. Os acertos no centro vêm de erros que se compensam:
 * a frequência é superestimada: {fmt(q14['ataques_ano_atual'], 0)} ataques contra {fmt(g['contagens']['ataques_ano'], 0)} verdadeiros (+{pct(q14['ataques_ano_atual'] / g['contagens']['ataques_ano'] - 1, 0)}), porque a tendência da Q11 absorveu a campanha;
 * a materialização é subestimada: {f(q14['p_medio_atual'], 3)} contra {f(g['contagens']['p_medio'], 3)};
@@ -486,8 +514,8 @@ RESPONSAVEL = tg.AUTORES
 
 def interacoes(grupo: int) -> list[dict]:
     """Uma entrada por interação relevante, com os nove campos exigidos pelo enunciado."""
-    def it(data, questao, exig, prompt, resp, verif, erros="", ferramenta=FERRAMENTA):
-        return {"Ferramenta": ferramenta, "Data e responsável": f"{data} · {RESPONSAVEL}",
+    def it(data, questao, exig, prompt, resp, verif, erros="", ferramenta=FERRAMENTA, responsavel=RESPONSAVEL):
+        return {"Ferramenta": ferramenta, "Data e responsável": f"{data} · {responsavel}",
                 "Questão atendida": questao, "Exigência feita à IA": exig, "Prompt": prompt,
                 "Resposta obtida": resp, "Verificação": verif, "Decisão do grupo": "",
                 "Erros da IA": erros or "Nenhum identificado até aqui."}
@@ -548,6 +576,7 @@ def interacoes(grupo: int) -> list[dict]:
         it(**tg.INTERACAO_11),
         it(**tg.INTERACAO_12),
         it(**tg.INTERACAO_13),
+        it(**tg.INTERACAO_14),
     ]
     assert len(lista) == len(tg.DECISOES)
     for d, decisao in zip(lista, tg.DECISOES):
